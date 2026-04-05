@@ -11,11 +11,11 @@ type RobotProps = {
 };
 
 const DRACO_DECODER_PATH = '/draco-gltf/';
-const ROBOT_IDLE_PATH = '/models/robot_cute_idle.glb';
-const ROBOT_RUNNING_PATH = '/models/robot_cute_running.glb';
-const ROBOT_WAVING_PATH = '/models/robot_cute_waving.glb';
-const ROBOT_POINTING_PATH = '/models/robot_cute_pointing.glb';
-const ROBOT_CLAPPING_PATH = '/models/robot_cute_clapping.glb';
+const ROBOT_IDLE_PATH = '/models/robot_animation/robot_cute_idle.glb';
+const ROBOT_RUNNING_PATH = '/models/robot_animation/robot_cute_running.glb';
+const ROBOT_WAVING_PATH = '/models/robot_animation/robot_cute_waving.glb';
+const ROBOT_POINTING_PATH = '/models/robot_animation/robot_cute_pointing.glb';
+const ROBOT_CLAPPING_PATH = '/models/robot_animation/robot_cute_clapping.glb';
 
 type RobotModelProps = RobotProps & {
   path: string;
