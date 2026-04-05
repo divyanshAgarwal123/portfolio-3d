@@ -24,8 +24,8 @@ type RobotHeroProps = {
 };
 
 export default function RobotHero({
-  fallingTransform = { position: [0, 0, -1.2], scale: 0.03 },
-  pointingTransform = { position: [0, 0, -1.2], scale: 0.03 },
+  fallingTransform = { position: [0, 0, -1.2], scale: 0.004 },
+  pointingTransform = { position: [0, 0, -1.2], scale: 0.004 },
   sceneMode = 'auto',
 }: RobotHeroProps) {
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
