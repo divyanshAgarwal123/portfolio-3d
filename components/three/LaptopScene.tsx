@@ -2,18 +2,10 @@
 
 import { ScrollControls, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
-import {
-  RobotClapping,
-  RobotFalling,
-  RobotIdle,
-  RobotPointing,
-  RobotPointingBackwords,
-  RobotRunning,
-  RobotWaving,
-} from './Robot';
+import RobotHero from './RobotHero';
 
 const SCROLL_MOTION_MAX = 0.431;
 
@@ -102,16 +94,9 @@ function ScrollDrivenLaptop({
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      <RobotIdle position={robotIdle.position} scale={robotIdle.scale} />
-      <RobotRunning position={robotRunning.position} scale={robotRunning.scale} />
-      <RobotWaving position={robotWaving.position} scale={robotWaving.scale} />
-      <RobotPointing position={robotPointing.position} scale={robotPointing.scale} />
-      <RobotClapping position={robotClapping.position} scale={robotClapping.scale} />
-      <RobotPointingBackwords
-        position={robotPointingBackwords.position}
-        scale={robotPointingBackwords.scale}
-      />
-      <RobotFalling position={robotFalling.position} scale={robotFalling.scale} />
+      <Suspense fallback={null}>
+        <RobotHero />
+      </Suspense>
     </>
   );
 }
