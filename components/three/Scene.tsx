@@ -98,8 +98,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-44"
         type="range"
-        min={0.001}
-        max={0.008}
+        min={0.002}
+        max={0.02}
         step={0.0001}
         value={value.scale}
         onChange={(event) =>
@@ -178,6 +178,14 @@ export default function Scene() {
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
+  const unifiedHeroScale = Number(((fallingTransform.scale + pointingTransform.scale) / 2).toFixed(4));
+
+  const handleUnifiedHeroScaleChange = (nextScale: number) => {
+    const safeScale = Math.min(Math.max(nextScale, 0.002), 0.02);
+    setFallingTransform((prev) => ({ ...prev, scale: safeScale }));
+    setPointingTransform((prev) => ({ ...prev, scale: safeScale }));
+  };
+
   useEffect(() => {
     if (!canvasWrapRef.current) return;
     canvasWrapRef.current.style.opacity = '0';
@@ -189,6 +197,16 @@ export default function Scene() {
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
       <div className="pointer-events-auto fixed left-4 top-4 z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
         <p className="font-semibold">Hero Robot Test</p>
+        <p className="mt-2 font-medium">Whole Robot Scale: {unifiedHeroScale.toFixed(4)}</p>
+        <input
+          className="mt-1 w-44"
+          type="range"
+          min={0.002}
+          max={0.02}
+          step={0.0001}
+          value={unifiedHeroScale}
+          onChange={(event) => handleUnifiedHeroScaleChange(Number(event.target.value))}
+        />
         <p className="mt-1">Scene: {heroSceneMode}</p>
         <button
           type="button"
