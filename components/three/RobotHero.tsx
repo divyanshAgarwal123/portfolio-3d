@@ -48,7 +48,7 @@ export default function RobotHero() {
   const fallingActionRef = useRef<THREE.AnimationAction | null>(null);
   const pointingActionRef = useRef<THREE.AnimationAction | null>(null);
   const phase = useRef<'falling' | 'landed' | 'switched'>('falling');
-  const fallingDoneRef = useRef(false);
+  const elapsedRef = useRef(0);
   const switchedRef = useRef(false);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
@@ -79,23 +79,14 @@ export default function RobotHero() {
 
     fallingActionRef.current = action;
     action.enabled = true;
-    action.setLoop(THREE.LoopOnce, 1);
-    action.clampWhenFinished = true;
+    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.clampWhenFinished = false;
     action.reset().fadeIn(0.3).play();
 
-    const onFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
-      if (event.action === action) {
-        fallingDoneRef.current = true;
-      }
-    };
-
-    fallingMixer.addEventListener('finished', onFinished);
-
     return () => {
-      fallingMixer.removeEventListener('finished', onFinished);
       action.fadeOut(0.3);
     };
-  }, [fallingActions, fallingMixer]);
+  }, [fallingActions]);
 
   useEffect(() => {
     const names = Object.keys(pointingActions);
@@ -115,6 +106,12 @@ export default function RobotHero() {
   }, [pointingActions]);
 
   useEffect(() => {
+    phase.current = 'falling';
+    elapsedRef.current = 0;
+    switchedRef.current = false;
+    fallOpacityRef.current = 1;
+    pointOpacityRef.current = 0;
+
     if (fallingRef.current) {
       fallingRef.current.position.set(ROBOT_X, FALL_START_Y, ROBOT_Z);
       fallingRef.current.scale.setScalar(ROBOT_SCALE);
@@ -134,14 +131,16 @@ export default function RobotHero() {
 
   useFrame((_, delta) => {
     if (phase.current === 'falling' && fallingRef.current) {
-      fallingRef.current.position.y -= delta * 1.5;
-      if (fallingRef.current.position.y <= LAND_Y) {
-        fallingRef.current.position.y = LAND_Y;
+      elapsedRef.current += delta;
+      const progress = Math.min(elapsedRef.current / 5, 1);
+      fallingRef.current.position.y = THREE.MathUtils.lerp(FALL_START_Y, LAND_Y, progress);
+
+      if (progress >= 1) {
         phase.current = 'landed';
       }
     }
 
-    if (!switchedRef.current && phase.current === 'landed' && fallingDoneRef.current) {
+    if (!switchedRef.current && phase.current === 'landed') {
       switchedRef.current = true;
       phase.current = 'switched';
 
