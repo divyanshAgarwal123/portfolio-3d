@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
+import Robot from './Robot';
 
 const SCROLL_MOTION_MAX = 0.431;
 
@@ -20,6 +21,11 @@ type ScrollDrivenLaptopProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
+  robotScale?: number;
+  robotPosition?: [number, number, number];
+  laptopScale?: number;
+  laptopPosition?: [number, number, number];
+  laptopRotation?: [number, number, number];
 };
 
 function ScrollDrivenLaptop({
@@ -27,6 +33,11 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
+  robotScale = 0.015,
+  robotPosition = [0, -1, -2],
+  laptopScale = 0.04,
+  laptopPosition = [0.01, -0.43, -0.42],
+  laptopRotation = [0, -0.01, 0],
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(0);
@@ -58,13 +69,16 @@ function ScrollDrivenLaptop({
   });
 
   return (
-    <Laptop
-      lidAngle={lidAngle}
-      verticalOffset={verticalOffset}
-      position={testTransform?.position}
-      rotationY={testTransform?.rotationY}
-      modelScale={testTransform?.scale}
-    />
+    <>
+      <Laptop
+        lidAngle={lidAngle}
+        verticalOffset={verticalOffset}
+        position={laptopPosition}
+        rotation={laptopRotation}
+        modelScale={laptopScale}
+      />
+      <Robot scale={robotScale} />
+    </>
   );
 }
 
@@ -73,6 +87,11 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
+  robotScale?: number;
+  robotPosition?: [number, number, number];
+  laptopScale?: number;
+  laptopPosition?: [number, number, number];
+  laptopRotation?: [number, number, number];
 };
 
 export default function LaptopScene({
@@ -80,6 +99,11 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
+  robotScale,
+  robotPosition,
+  laptopScale,
+  laptopPosition,
+  laptopRotation,
 }: LaptopSceneProps) {
   return (
     <ScrollControls pages={4} damping={0.3}>
@@ -88,6 +112,11 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
+        robotScale={robotScale}
+        robotPosition={robotPosition}
+        laptopScale={laptopScale}
+        laptopPosition={laptopPosition}
+        laptopRotation={laptopRotation}
       />
     </ScrollControls>
   );

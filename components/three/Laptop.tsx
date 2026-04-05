@@ -11,6 +11,7 @@ type LaptopProps = {
   lidAngle: number;
   verticalOffset: number;
   position?: [number, number, number];
+  rotation?: [number, number, number];
   rotationY?: number;
   modelScale?: number;
 };
@@ -19,6 +20,7 @@ export default function Laptop({
   lidAngle,
   verticalOffset,
   position = [0.01, -0.43, -0.42],
+  rotation,
   rotationY = -0.01,
   modelScale = 0.04,
 }: LaptopProps) {
@@ -62,7 +64,7 @@ export default function Laptop({
   return (
     <group
       position={[position[0], position[1] + verticalOffset, position[2]]}
-      rotation={[0, rotationY, 0]}
+      rotation={rotation ?? [0, rotationY, 0]}
       dispose={null}
     >
       <group scale={modelScale}>
