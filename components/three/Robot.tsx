@@ -5,8 +5,21 @@ import { useFrame } from '@react-three/fiber';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
+type RobotBehaviorConfig = {
+  runStart: number;
+  runEnd: number;
+  pointStart: number;
+  startX: number;
+  endX: number;
+  y: number;
+  z: number;
+  runFacingY: number;
+  idleFacingY: number;
+};
+
 type RobotProps = {
   scale?: number;
+  behavior?: RobotBehaviorConfig;
 };
 
 const IDLE_MODEL_PATH = '/public/models/robot_cute_idle.glb';
@@ -23,7 +36,20 @@ const ANIM_CLAP = 'robot_clapping';
 
 const DRACO_DECODER_PATH = '/draco-gltf/';
 
-export default function Robot({ scale = 0.025 }: RobotProps) {
+export default function Robot({
+  scale = 0.025,
+  behavior = {
+    runStart: 0.15,
+    runEnd: 0.45,
+    pointStart: 0.65,
+    startX: -4,
+    endX: 0.8,
+    y: -1,
+    z: -1,
+    runFacingY: -1.5,
+    idleFacingY: 0.3,
+  },
+}: RobotProps) {
   const scroll = useScroll();
   const groupRef = useRef<THREE.Group>(null);
   const currentAnim = useRef<string>('');
@@ -123,33 +149,36 @@ export default function Robot({ scale = 0.025 }: RobotProps) {
     if (!group) return;
 
     const offset = scroll.offset;
+    const runStart = Math.min(behavior.runStart, behavior.runEnd);
+    const runEnd = Math.max(behavior.runStart, behavior.runEnd);
+    const pointStart = Math.max(runEnd, behavior.pointStart);
 
     if (!isIntroPlaying.current) {
-      if (offset < 0.15) {
+      if (offset < runStart) {
         switchTo(ANIM_IDLE);
-      } else if (offset < 0.45) {
+      } else if (offset < runEnd) {
         switchTo(ANIM_RUN);
-      } else if (offset < 0.65) {
+      } else if (offset < pointStart) {
         switchTo(ANIM_IDLE);
       } else {
         switchTo(ANIM_POINT);
       }
     }
 
-    let targetX = 0.8;
-    if (offset <= 0.15) {
-      targetX = -4;
-    } else if (offset <= 0.45) {
-      const t = (offset - 0.15) / 0.3;
-      targetX = THREE.MathUtils.lerp(-4, 0.8, t);
+    let targetX = behavior.endX;
+    if (offset <= runStart) {
+      targetX = behavior.startX;
+    } else if (offset <= runEnd) {
+      const t = (offset - runStart) / Math.max(runEnd - runStart, 0.0001);
+      targetX = THREE.MathUtils.lerp(behavior.startX, behavior.endX, t);
     }
 
-    const isRunningWindow = offset >= 0.15 && offset <= 0.45;
-    const targetRotY = isRunningWindow ? -1.5 : 0.3;
+    const isRunningWindow = offset >= runStart && offset <= runEnd;
+    const targetRotY = isRunningWindow ? behavior.runFacingY : behavior.idleFacingY;
 
     group.position.x = THREE.MathUtils.lerp(group.position.x, targetX, 1 - Math.exp(-6 * delta));
-    group.position.y = -1;
-    group.position.z = -1;
+    group.position.y = behavior.y;
+    group.position.z = behavior.z;
     group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, targetRotY, 1 - Math.exp(-8 * delta));
   });
 

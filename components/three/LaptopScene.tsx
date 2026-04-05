@@ -22,10 +22,23 @@ type ScrollDrivenLaptopProps = {
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
   robotScale?: number;
-  robotPosition?: [number, number, number];
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
+  lidClosedAngle?: number;
+  lidOpenAngle?: number;
+  lidScrollEnd?: number;
+  robotBehavior?: {
+    runStart: number;
+    runEnd: number;
+    pointStart: number;
+    startX: number;
+    endX: number;
+    y: number;
+    z: number;
+    runFacingY: number;
+    idleFacingY: number;
+  };
 };
 
 function ScrollDrivenLaptop({
@@ -34,10 +47,13 @@ function ScrollDrivenLaptop({
   testMode = false,
   testTransform,
   robotScale = 0.015,
-  robotPosition = [0, -1, -2],
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
+  lidClosedAngle = -1.59,
+  lidOpenAngle = -0.23,
+  lidScrollEnd = 0.431,
+  robotBehavior,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(0);
@@ -46,9 +62,10 @@ function ScrollDrivenLaptop({
   const previousOffset = useRef(0);
 
   useFrame(() => {
-    const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
-    const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
-    const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
+    const scrollEnd = Math.max(0.001, lidScrollEnd);
+    const motionOffset = THREE.MathUtils.clamp(scroll.offset, 0, scrollEnd);
+    const normalized = THREE.MathUtils.clamp(motionOffset / scrollEnd, 0, 1);
+    const nextAngle = THREE.MathUtils.lerp(lidClosedAngle, lidOpenAngle, normalized);
     setLidAngle(nextAngle);
     setVerticalOffset(0);
 
@@ -77,7 +94,7 @@ function ScrollDrivenLaptop({
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      <Robot scale={robotScale} />
+      <Robot scale={robotScale} behavior={robotBehavior} />
     </>
   );
 }
@@ -88,10 +105,23 @@ type LaptopSceneProps = {
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
   robotScale?: number;
-  robotPosition?: [number, number, number];
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
+  lidClosedAngle?: number;
+  lidOpenAngle?: number;
+  lidScrollEnd?: number;
+  robotBehavior?: {
+    runStart: number;
+    runEnd: number;
+    pointStart: number;
+    startX: number;
+    endX: number;
+    y: number;
+    z: number;
+    runFacingY: number;
+    idleFacingY: number;
+  };
 };
 
 export default function LaptopScene({
@@ -100,10 +130,13 @@ export default function LaptopScene({
   testMode,
   testTransform,
   robotScale,
-  robotPosition,
   laptopScale,
   laptopPosition,
   laptopRotation,
+  lidClosedAngle,
+  lidOpenAngle,
+  lidScrollEnd,
+  robotBehavior,
 }: LaptopSceneProps) {
   return (
     <ScrollControls pages={4} damping={0.3}>
@@ -113,10 +146,13 @@ export default function LaptopScene({
         testMode={testMode}
         testTransform={testTransform}
         robotScale={robotScale}
-        robotPosition={robotPosition}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
+        lidClosedAngle={lidClosedAngle}
+        lidOpenAngle={lidOpenAngle}
+        lidScrollEnd={lidScrollEnd}
+        robotBehavior={robotBehavior}
       />
     </ScrollControls>
   );
