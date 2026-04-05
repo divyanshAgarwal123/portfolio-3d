@@ -2,6 +2,7 @@
 
 import { useAnimations, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import gsap from 'gsap';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
@@ -9,13 +10,23 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const FALL_START_Y = 0.25;
+const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
 const BOUNCE_OFFSET = 0.1;
 const BOUNCE_DURATION = 0.3;
+
+type RobotTransform = {
+  position: [number, number, number];
+  scale: number;
+};
+
+type RobotHeroProps = {
+  fallingTransform?: RobotTransform;
+  pointingTransform?: RobotTransform;
+};
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
   root.traverse((object) => {
@@ -32,7 +43,10 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
   });
 }
 
-export default function RobotHero() {
+export default function RobotHero({
+  fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
+  pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
+}: RobotHeroProps) {
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
   const pointingGltf = useGLTF(POINTING_MODEL_PATH, DRACO_DECODER_PATH);
 
@@ -47,14 +61,30 @@ export default function RobotHero() {
 
   const fallingActionRef = useRef<THREE.AnimationAction | null>(null);
   const pointingActionRef = useRef<THREE.AnimationAction | null>(null);
-  const phase = useRef<'falling' | 'landed' | 'switched'>('falling');
-  const elapsedRef = useRef(0);
+  const phase = useRef<'falling' | 'landed' | 'pointing' | 'switched'>('falling');
+  const fallingDoneRef = useRef(false);
   const switchedRef = useRef(false);
+  const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
 
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
+
+  const startPointingTransition = () => {
+    if (switchedRef.current) return;
+
+    fallingDoneRef.current = true;
+    fallingActionRef.current?.fadeOut(0.15);
+
+    if (pointingRef.current) {
+      pointingRef.current.visible = true;
+      pointingActionRef.current?.reset().fadeIn(0.15).play();
+    }
+
+    switchedRef.current = true;
+    phase.current = 'pointing';
+  };
 
   useEffect(() => {
     fallingScene.traverse((object) => {
@@ -78,15 +108,38 @@ export default function RobotHero() {
     if (!action) return;
 
     fallingActionRef.current = action;
+    fallClipDurationRef.current = action.getClip().duration;
     action.enabled = true;
-    action.setLoop(THREE.LoopRepeat, Infinity);
-    action.clampWhenFinished = false;
+    action.setLoop(THREE.LoopOnce, 1);
+    action.clampWhenFinished = true;
     action.reset().fadeIn(0.3).play();
 
+    if (fallingRef.current) {
+      gsap.to(fallingRef.current.position, {
+        y: pointingTransform.position[1],
+        duration: 5,
+        ease: 'power4.in',
+        onComplete: () => {
+          phase.current = 'landed';
+        },
+      });
+    }
+
+    const onFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
+      if (event.action !== action) return;
+      startPointingTransition();
+    };
+
+    fallingMixer.addEventListener('finished', onFinished);
+
     return () => {
+      fallingMixer.removeEventListener('finished', onFinished);
+      if (fallingRef.current) {
+        gsap.killTweensOf(fallingRef.current.position);
+      }
       action.fadeOut(0.3);
     };
-  }, [fallingActions]);
+  }, [fallingActions, fallingMixer, pointingTransform.position]);
 
   useEffect(() => {
     const names = Object.keys(pointingActions);
@@ -107,14 +160,18 @@ export default function RobotHero() {
 
   useEffect(() => {
     phase.current = 'falling';
-    elapsedRef.current = 0;
+    fallingDoneRef.current = false;
     switchedRef.current = false;
     fallOpacityRef.current = 1;
     pointOpacityRef.current = 0;
 
     if (fallingRef.current) {
-      fallingRef.current.position.set(ROBOT_X, FALL_START_Y, ROBOT_Z);
-      fallingRef.current.scale.setScalar(ROBOT_SCALE);
+      fallingRef.current.position.set(
+        fallingTransform.position[0],
+        fallingTransform.position[1],
+        fallingTransform.position[2],
+      );
+      fallingRef.current.scale.setScalar(fallingTransform.scale);
     }
 
     if (pointingRef.current) {
@@ -127,34 +184,34 @@ export default function RobotHero() {
 
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
-  }, [fallingScene, pointingScene]);
+  }, [fallingScene, pointingScene, fallingTransform]);
 
   useFrame((_, delta) => {
-    if (phase.current === 'falling' && fallingRef.current) {
-      elapsedRef.current += delta;
-      const progress = Math.min(elapsedRef.current / 5, 1);
-      fallingRef.current.position.y = THREE.MathUtils.lerp(FALL_START_Y, LAND_Y, progress);
-
-      if (progress >= 1) {
-        phase.current = 'landed';
-      }
+    if (fallingRef.current) {
+      fallingRef.current.position.x = fallingTransform.position[0];
+      fallingRef.current.position.z = fallingTransform.position[2];
+      fallingRef.current.scale.setScalar(fallingTransform.scale);
     }
 
-    if (!switchedRef.current && phase.current === 'landed') {
-      switchedRef.current = true;
-      phase.current = 'switched';
+    if (pointingRef.current) {
+      pointingRef.current.position.set(
+        pointingTransform.position[0],
+        pointingTransform.position[1],
+        pointingTransform.position[2],
+      );
+      pointingRef.current.scale.setScalar(pointingTransform.scale);
+    }
 
-      fallingActionRef.current?.fadeOut(0.3);
-      if (pointingRef.current) {
-        pointingRef.current.visible = true;
+    if (!switchedRef.current && phase.current === 'landed' && fallingActionRef.current) {
+      const remaining = fallClipDurationRef.current - fallingActionRef.current.time;
+      if (remaining <= 2) {
+        startPointingTransition();
       }
-
-      pointingActionRef.current?.reset().fadeIn(0.3).play();
     }
 
     if (switchedRef.current) {
-      fallOpacityRef.current = Math.max(0, fallOpacityRef.current - delta / 0.3);
-      pointOpacityRef.current = Math.min(1, pointOpacityRef.current + delta / 0.3);
+      fallOpacityRef.current = Math.max(0, fallOpacityRef.current - delta / 0.15);
+      pointOpacityRef.current = Math.min(1, pointOpacityRef.current + delta / 0.15);
 
       setMeshOpacity(fallingScene, fallOpacityRef.current);
       setMeshOpacity(pointingScene, pointOpacityRef.current);
@@ -173,8 +230,8 @@ export default function RobotHero() {
 
       <group
         ref={pointingRef}
-        position={[ROBOT_X, LAND_Y, ROBOT_Z]}
-        scale={[ROBOT_SCALE, ROBOT_SCALE, ROBOT_SCALE]}
+        position={[pointingTransform.position[0], pointingTransform.position[1], pointingTransform.position[2]]}
+        scale={[pointingTransform.scale, pointingTransform.scale, pointingTransform.scale]}
       >
         <primitive object={pointingScene} />
       </group>

@@ -26,11 +26,6 @@ type ScrollDrivenLaptopProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotIdle?: RobotTransform;
-  robotRunning?: RobotTransform;
-  robotWaving?: RobotTransform;
-  robotPointing?: RobotTransform;
-  robotClapping?: RobotTransform;
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
   laptopScale?: number;
@@ -43,13 +38,8 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotIdle = { position: [-1.6, 0.4, -1.2], scale: 0.01 },
-  robotRunning = { position: [-0.8, 0.4, -1.2], scale: 0.01 },
-  robotWaving = { position: [0, 0.4, -1.2], scale: 0.01 },
-  robotPointing = { position: [0.8, 0.4, -1.2], scale: 0.01 },
-  robotClapping = { position: [1.6, 0.4, -1.2], scale: 0.01 },
-  robotPointingBackwords = { position: [-2.4, 0.4, -1.2], scale: 0.01 },
-  robotFalling = { position: [2.4, 0.4, -1.2], scale: 0.01 },
+  robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
+  robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -95,7 +85,10 @@ function ScrollDrivenLaptop({
         modelScale={laptopScale}
       />
       <Suspense fallback={null}>
-        <RobotHero />
+        <RobotHero
+          fallingTransform={robotFalling}
+          pointingTransform={robotPointingBackwords}
+        />
       </Suspense>
     </>
   );
@@ -106,11 +99,6 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotIdle?: RobotTransform;
-  robotRunning?: RobotTransform;
-  robotWaving?: RobotTransform;
-  robotPointing?: RobotTransform;
-  robotClapping?: RobotTransform;
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
   laptopScale?: number;
@@ -123,11 +111,6 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
-  robotIdle,
-  robotRunning,
-  robotWaving,
-  robotPointing,
-  robotClapping,
   robotPointingBackwords,
   robotFalling,
   laptopScale,
@@ -141,11 +124,6 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
-        robotIdle={robotIdle}
-        robotRunning={robotRunning}
-        robotWaving={robotWaving}
-        robotPointing={robotPointing}
-        robotClapping={robotClapping}
         robotPointingBackwords={robotPointingBackwords}
         robotFalling={robotFalling}
         laptopScale={laptopScale}
