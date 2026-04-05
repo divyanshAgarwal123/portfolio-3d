@@ -98,9 +98,9 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-44"
         type="range"
-        min={0.003}
-        max={0.03}
-        step={0.001}
+        min={0.005}
+        max={0.02}
+        step={0.0005}
         value={value.scale}
         onChange={(event) =>
           onChange({
@@ -165,11 +165,11 @@ export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [fallingTransform, setFallingTransform] = useState<RobotHeroTransform>({
     position: [0, 0, -1.2],
-    scale: 0.03,
+    scale: 0.015,
   });
   const [pointingTransform, setPointingTransform] = useState<RobotHeroTransform>({
     position: [0, 0, -1.2],
-    scale: 0.03,
+    scale: 0.015,
   });
   const [heroSceneMode, setHeroSceneMode] = useState<RobotHeroSceneMode>('falling');
   const [laptopScale, setLaptopScale] = useState(0.04);

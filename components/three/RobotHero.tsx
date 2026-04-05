@@ -53,9 +53,11 @@ export default function RobotHero({
 
   const phase = useRef<'falling' | 'pointing' | 'done'>('falling');
   const groupRef = useRef<THREE.Group>(null);
+  const motionRef = useRef<THREE.Group>(null);
   const bounceRef = useRef(0);
   const fallClipRef = useRef('');
   const pointClipRef = useRef('');
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     clonedScene.traverse((object) => {
@@ -94,12 +96,8 @@ export default function RobotHero({
       phase.current = 'falling';
       bounceRef.current = 0;
       Object.values(actions).forEach((action) => action?.stop());
-      if (groupRef.current) {
-        groupRef.current.position.set(
-          fallingTransform.position[0],
-          6 + fallingTransform.position[1],
-          fallingTransform.position[2]
-        );
+      if (motionRef.current) {
+        motionRef.current.position.y = TARGET_Y + 6;
       }
       fallAction?.reset().play();
     };
@@ -117,17 +115,15 @@ export default function RobotHero({
 
     if (sceneMode === 'pointing') {
       Object.values(actions).forEach((action) => action?.stop());
-      if (groupRef.current) {
-        groupRef.current.position.set(
-          pointingTransform.position[0],
-          TARGET_Y + pointingTransform.position[1],
-          pointingTransform.position[2]
-        );
+      if (motionRef.current) {
+        motionRef.current.position.y = TARGET_Y;
       }
       startPointing(false);
     } else {
       startFalling();
     }
+
+    initializedRef.current = true;
 
     const onFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
       if (sceneMode !== 'auto') return;
@@ -143,23 +139,59 @@ export default function RobotHero({
       mixer.removeEventListener('finished', onFinished);
       Object.values(actions).forEach((action) => action?.fadeOut(0.3));
     };
-  }, [actions, mixer, fallingTransform, pointingTransform, sceneMode]);
+  }, [actions, mixer, sceneMode]);
+
+  useEffect(() => {
+    if (!initializedRef.current) return;
+
+    const fallAction = actions[fallClipRef.current];
+    const pointAction = actions[pointClipRef.current];
+
+    if (sceneMode === 'falling') {
+      phase.current = 'falling';
+      bounceRef.current = 0;
+      pointAction?.fadeOut(0.3);
+      fallAction?.reset().fadeIn(0.3).play();
+      if (motionRef.current) {
+        motionRef.current.position.y = TARGET_Y + 6;
+      }
+      return;
+    }
+
+    if (sceneMode === 'pointing') {
+      phase.current = 'pointing';
+      bounceRef.current = 1;
+      fallAction?.fadeOut(0.3);
+      pointAction?.reset().fadeIn(0.3).play();
+      if (motionRef.current) {
+        motionRef.current.position.y = TARGET_Y;
+      }
+      return;
+    }
+
+    phase.current = 'falling';
+    bounceRef.current = 0;
+    pointAction?.fadeOut(0.3);
+    fallAction?.reset().fadeIn(0.3).play();
+    if (motionRef.current) {
+      motionRef.current.position.y = TARGET_Y + 6;
+    }
+  }, [sceneMode, actions]);
 
   useFrame((_, delta) => {
     const group = groupRef.current;
-    if (!group) return;
+    const motion = motionRef.current;
+    if (!group || !motion) return;
 
+    const activeTransform = phase.current === 'falling' ? fallingTransform : pointingTransform;
+    group.position.set(activeTransform.position[0], activeTransform.position[1], activeTransform.position[2]);
     group.rotation.y = Math.PI;
+    group.scale.setScalar(activeTransform.scale);
 
     if (phase.current === 'falling') {
-      group.position.x = fallingTransform.position[0];
-      group.position.z = fallingTransform.position[2];
-      group.scale.setScalar(fallingTransform.scale);
+      motion.position.y = Math.max(TARGET_Y, motion.position.y - delta * 4);
 
-      const landingY = TARGET_Y + fallingTransform.position[1];
-      group.position.y = Math.max(landingY, group.position.y - delta * 4);
-
-      if (group.position.y <= landingY + 0.01 && sceneMode !== 'falling') {
+      if (motion.position.y <= TARGET_Y + 0.01 && sceneMode !== 'falling') {
         const fallAction = actions[fallClipRef.current];
         const pointAction = actions[pointClipRef.current];
         phase.current = 'pointing';
@@ -171,23 +203,20 @@ export default function RobotHero({
       return;
     }
 
-    group.position.x = pointingTransform.position[0];
-    group.position.z = pointingTransform.position[2];
-    group.scale.setScalar(pointingTransform.scale);
-
-    const landingY = TARGET_Y + pointingTransform.position[1];
     if (bounceRef.current < 1) {
-      group.position.y = landingY + Math.sin(bounceRef.current * Math.PI) * 0.15;
+      motion.position.y = TARGET_Y + Math.sin(bounceRef.current * Math.PI) * 0.15;
       bounceRef.current += delta * 3;
       return;
     }
 
-    group.position.y = landingY;
+    motion.position.y = TARGET_Y;
   });
 
   return (
     <group ref={groupRef}>
-      <primitive object={clonedScene} />
+      <group ref={motionRef}>
+        <primitive object={clonedScene} />
+      </group>
     </group>
   );
 }
