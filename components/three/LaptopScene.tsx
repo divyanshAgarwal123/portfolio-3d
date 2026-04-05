@@ -5,7 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
-import { RobotClapping, RobotIdle, RobotPointing, RobotRunning, RobotWaving } from './Robot';
+import RobotHero, { type RobotHeroSceneMode, type RobotHeroTransform } from './RobotHero';
 
 const SCROLL_MOTION_MAX = 0.431;
 
@@ -26,11 +26,9 @@ type ScrollDrivenLaptopProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotIdle?: RobotTransform;
-  robotRunning?: RobotTransform;
-  robotWaving?: RobotTransform;
-  robotPointing?: RobotTransform;
-  robotClapping?: RobotTransform;
+  fallingTransform?: RobotHeroTransform;
+  pointingTransform?: RobotHeroTransform;
+  heroSceneMode?: RobotHeroSceneMode;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -41,11 +39,9 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotIdle = { position: [-1.6, 0.4, -1.2], scale: 0.01 },
-  robotRunning = { position: [-0.8, 0.4, -1.2], scale: 0.01 },
-  robotWaving = { position: [0, 0.4, -1.2], scale: 0.01 },
-  robotPointing = { position: [0.8, 0.4, -1.2], scale: 0.01 },
-  robotClapping = { position: [1.6, 0.4, -1.2], scale: 0.01 },
+  fallingTransform = { position: [0, 0, -1.2], scale: 0.03 },
+  pointingTransform = { position: [0, 0, -1.2], scale: 0.03 },
+  heroSceneMode = 'auto',
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -90,11 +86,11 @@ function ScrollDrivenLaptop({
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      <RobotIdle position={robotIdle.position} scale={robotIdle.scale} />
-      <RobotRunning position={robotRunning.position} scale={robotRunning.scale} />
-      <RobotWaving position={robotWaving.position} scale={robotWaving.scale} />
-      <RobotPointing position={robotPointing.position} scale={robotPointing.scale} />
-      <RobotClapping position={robotClapping.position} scale={robotClapping.scale} />
+      <RobotHero
+        fallingTransform={fallingTransform}
+        pointingTransform={pointingTransform}
+        sceneMode={heroSceneMode}
+      />
     </>
   );
 }
@@ -104,11 +100,9 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotIdle?: RobotTransform;
-  robotRunning?: RobotTransform;
-  robotWaving?: RobotTransform;
-  robotPointing?: RobotTransform;
-  robotClapping?: RobotTransform;
+  fallingTransform?: RobotHeroTransform;
+  pointingTransform?: RobotHeroTransform;
+  heroSceneMode?: RobotHeroSceneMode;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -119,11 +113,9 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
-  robotIdle,
-  robotRunning,
-  robotWaving,
-  robotPointing,
-  robotClapping,
+  fallingTransform,
+  pointingTransform,
+  heroSceneMode,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -135,11 +127,9 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
-        robotIdle={robotIdle}
-        robotRunning={robotRunning}
-        robotWaving={robotWaving}
-        robotPointing={robotPointing}
-        robotClapping={robotClapping}
+        fallingTransform={fallingTransform}
+        pointingTransform={pointingTransform}
+        heroSceneMode={heroSceneMode}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
