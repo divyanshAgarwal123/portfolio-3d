@@ -16,6 +16,8 @@ const ROBOT_RUNNING_PATH = '/models/robot_animation/robot_cute_running.glb';
 const ROBOT_WAVING_PATH = '/models/robot_animation/robot_cute_waving.glb';
 const ROBOT_POINTING_PATH = '/models/robot_animation/robot_cute_pointing.glb';
 const ROBOT_CLAPPING_PATH = '/models/robot_animation/robot_cute_clapping.glb';
+const ROBOT_POINTING_BACKWORDS_PATH = '/models/robot_animation/robot_cute_pointing_backwords.glb';
+const ROBOT_FALLING_PATH = '/models/robot_animation/robot_cute_falling.glb';
 
 type RobotModelProps = RobotProps & {
   path: string;
@@ -80,9 +82,19 @@ export function RobotClapping(props: RobotProps) {
   return <RobotModel {...props} path={ROBOT_CLAPPING_PATH} label="RobotClapping" />;
 }
 
+export function RobotPointingBackwords(props: RobotProps) {
+  return <RobotModel {...props} path={ROBOT_POINTING_BACKWORDS_PATH} label="RobotPointingBackwords" />;
+}
+
+export function RobotFalling(props: RobotProps) {
+  return <RobotModel {...props} path={ROBOT_FALLING_PATH} label="RobotFalling" />;
+}
+
 useGLTF.setDecoderPath(DRACO_DECODER_PATH);
 useGLTF.preload(ROBOT_IDLE_PATH);
 useGLTF.preload(ROBOT_RUNNING_PATH);
 useGLTF.preload(ROBOT_WAVING_PATH);
 useGLTF.preload(ROBOT_POINTING_PATH);
 useGLTF.preload(ROBOT_CLAPPING_PATH);
+useGLTF.preload(ROBOT_POINTING_BACKWORDS_PATH);
+useGLTF.preload(ROBOT_FALLING_PATH);

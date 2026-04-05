@@ -5,7 +5,15 @@ import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
-import RobotHero, { type RobotHeroSceneMode, type RobotHeroTransform } from './RobotHero';
+import {
+  RobotClapping,
+  RobotFalling,
+  RobotIdle,
+  RobotPointing,
+  RobotPointingBackwords,
+  RobotRunning,
+  RobotWaving,
+} from './Robot';
 
 const SCROLL_MOTION_MAX = 0.431;
 
@@ -26,9 +34,13 @@ type ScrollDrivenLaptopProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  fallingTransform?: RobotHeroTransform;
-  pointingTransform?: RobotHeroTransform;
-  heroSceneMode?: RobotHeroSceneMode;
+  robotIdle?: RobotTransform;
+  robotRunning?: RobotTransform;
+  robotWaving?: RobotTransform;
+  robotPointing?: RobotTransform;
+  robotClapping?: RobotTransform;
+  robotPointingBackwords?: RobotTransform;
+  robotFalling?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -39,9 +51,13 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  fallingTransform = { position: [0, 0, -1.2], scale: 0.0006 },
-  pointingTransform = { position: [0, 0, -1.2], scale: 0.0006 },
-  heroSceneMode = 'auto',
+  robotIdle = { position: [-1.6, 0.4, -1.2], scale: 0.01 },
+  robotRunning = { position: [-0.8, 0.4, -1.2], scale: 0.01 },
+  robotWaving = { position: [0, 0.4, -1.2], scale: 0.01 },
+  robotPointing = { position: [0.8, 0.4, -1.2], scale: 0.01 },
+  robotClapping = { position: [1.6, 0.4, -1.2], scale: 0.01 },
+  robotPointingBackwords = { position: [-2.4, 0.4, -1.2], scale: 0.01 },
+  robotFalling = { position: [2.4, 0.4, -1.2], scale: 0.01 },
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -86,11 +102,16 @@ function ScrollDrivenLaptop({
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      <RobotHero
-        fallingTransform={fallingTransform}
-        pointingTransform={pointingTransform}
-        sceneMode={heroSceneMode}
+      <RobotIdle position={robotIdle.position} scale={robotIdle.scale} />
+      <RobotRunning position={robotRunning.position} scale={robotRunning.scale} />
+      <RobotWaving position={robotWaving.position} scale={robotWaving.scale} />
+      <RobotPointing position={robotPointing.position} scale={robotPointing.scale} />
+      <RobotClapping position={robotClapping.position} scale={robotClapping.scale} />
+      <RobotPointingBackwords
+        position={robotPointingBackwords.position}
+        scale={robotPointingBackwords.scale}
       />
+      <RobotFalling position={robotFalling.position} scale={robotFalling.scale} />
     </>
   );
 }
@@ -100,9 +121,13 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  fallingTransform?: RobotHeroTransform;
-  pointingTransform?: RobotHeroTransform;
-  heroSceneMode?: RobotHeroSceneMode;
+  robotIdle?: RobotTransform;
+  robotRunning?: RobotTransform;
+  robotWaving?: RobotTransform;
+  robotPointing?: RobotTransform;
+  robotClapping?: RobotTransform;
+  robotPointingBackwords?: RobotTransform;
+  robotFalling?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -113,9 +138,13 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
-  fallingTransform,
-  pointingTransform,
-  heroSceneMode,
+  robotIdle,
+  robotRunning,
+  robotWaving,
+  robotPointing,
+  robotClapping,
+  robotPointingBackwords,
+  robotFalling,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -127,9 +156,13 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
-        fallingTransform={fallingTransform}
-        pointingTransform={pointingTransform}
-        heroSceneMode={heroSceneMode}
+        robotIdle={robotIdle}
+        robotRunning={robotRunning}
+        robotWaving={robotWaving}
+        robotPointing={robotPointing}
+        robotClapping={robotClapping}
+        robotPointingBackwords={robotPointingBackwords}
+        robotFalling={robotFalling}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}

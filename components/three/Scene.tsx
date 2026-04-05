@@ -3,11 +3,15 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import LaptopScene from './LaptopScene';
-import { type RobotHeroSceneMode, type RobotHeroTransform } from './RobotHero';
 
 type CameraPOVSyncProps = {
   position: [number, number, number];
   fov: number;
+};
+
+type RobotTransform = {
+  position: [number, number, number];
+  scale: number;
 };
 
 function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
@@ -43,9 +47,13 @@ function WireframeFloors() {
 }
 
 type SceneContentProps = {
-  fallingTransform: RobotHeroTransform;
-  pointingTransform: RobotHeroTransform;
-  heroSceneMode: RobotHeroSceneMode;
+  robotIdle: RobotTransform;
+  robotRunning: RobotTransform;
+  robotWaving: RobotTransform;
+  robotPointing: RobotTransform;
+  robotClapping: RobotTransform;
+  robotPointingBackwords: RobotTransform;
+  robotFalling: RobotTransform;
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
@@ -54,9 +62,13 @@ type SceneContentProps = {
 };
 
 function SceneContent({
-  fallingTransform,
-  pointingTransform,
-  heroSceneMode,
+  robotIdle,
+  robotRunning,
+  robotWaving,
+  robotPointing,
+  robotClapping,
+  robotPointingBackwords,
+  robotFalling,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -68,9 +80,13 @@ function SceneContent({
       <Lighting />
       <WireframeFloors />
       <LaptopScene
-        fallingTransform={fallingTransform}
-        pointingTransform={pointingTransform}
-        heroSceneMode={heroSceneMode}
+        robotIdle={robotIdle}
+        robotRunning={robotRunning}
+        robotWaving={robotWaving}
+        robotPointing={robotPointing}
+        robotClapping={robotClapping}
+        robotPointingBackwords={robotPointingBackwords}
+        robotFalling={robotFalling}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
@@ -86,21 +102,21 @@ function LoadingFallback() {
 
 type RobotControlPanelProps = {
   label: string;
-  value: RobotHeroTransform;
-  onChange: (next: RobotHeroTransform) => void;
+  value: RobotTransform;
+  onChange: (next: RobotTransform) => void;
 };
 
 function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   return (
     <>
       <p className="mt-3 font-semibold">{label}</p>
-      <p className="mt-1">Scale: {value.scale.toFixed(4)}</p>
+      <p className="mt-1">Scale: {value.scale.toFixed(3)}</p>
       <input
         className="mt-1 w-44"
         type="range"
-        min={0.0001}
-        max={0.02}
-        step={0.0001}
+        min={0.003}
+        max={0.03}
+        step={0.001}
         value={value.scale}
         onChange={(event) =>
           onChange({
@@ -163,28 +179,21 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
 
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const [fallingTransform, setFallingTransform] = useState<RobotHeroTransform>({
-    position: [0, 0, -1.2],
-    scale: 0.0006,
+  const [robotIdle, setRobotIdle] = useState<RobotTransform>({ position: [-1.6, 0.4, -1.2], scale: 0.01 });
+  const [robotRunning, setRobotRunning] = useState<RobotTransform>({ position: [-0.8, 0.4, -1.2], scale: 0.01 });
+  const [robotWaving, setRobotWaving] = useState<RobotTransform>({ position: [0, 0.4, -1.2], scale: 0.01 });
+  const [robotPointing, setRobotPointing] = useState<RobotTransform>({ position: [0.8, 0.4, -1.2], scale: 0.01 });
+  const [robotClapping, setRobotClapping] = useState<RobotTransform>({ position: [1.6, 0.4, -1.2], scale: 0.01 });
+  const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
+    position: [-2.4, 0.4, -1.2],
+    scale: 0.01,
   });
-  const [pointingTransform, setPointingTransform] = useState<RobotHeroTransform>({
-    position: [0, 0, -1.2],
-    scale: 0.0006,
-  });
-  const [heroSceneMode, setHeroSceneMode] = useState<RobotHeroSceneMode>('falling');
+  const [robotFalling, setRobotFalling] = useState<RobotTransform>({ position: [2.4, 0.4, -1.2], scale: 0.01 });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
-
-  const unifiedHeroScale = Number(((fallingTransform.scale + pointingTransform.scale) / 2).toFixed(4));
-
-  const handleUnifiedHeroScaleChange = (nextScale: number) => {
-    const safeScale = Math.min(Math.max(nextScale, 0.0001), 0.02);
-    setFallingTransform((prev) => ({ ...prev, scale: safeScale }));
-    setPointingTransform((prev) => ({ ...prev, scale: safeScale }));
-  };
 
   useEffect(() => {
     if (!canvasWrapRef.current) return;
@@ -196,30 +205,18 @@ export default function Scene() {
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
       <div className="pointer-events-auto fixed left-4 top-4 z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
-        <p className="font-semibold">Hero Robot Test</p>
-        <p className="mt-2 font-medium">Whole Robot Scale: {unifiedHeroScale.toFixed(4)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={0.0001}
-          max={0.02}
-          step={0.0001}
-          value={unifiedHeroScale}
-          onChange={(event) => handleUnifiedHeroScaleChange(Number(event.target.value))}
+        <p className="font-semibold">Robots</p>
+        <RobotControlPanel label="RobotIdle" value={robotIdle} onChange={setRobotIdle} />
+        <RobotControlPanel label="RobotRunning" value={robotRunning} onChange={setRobotRunning} />
+        <RobotControlPanel label="RobotWaving" value={robotWaving} onChange={setRobotWaving} />
+        <RobotControlPanel label="RobotPointing" value={robotPointing} onChange={setRobotPointing} />
+        <RobotControlPanel label="RobotClapping" value={robotClapping} onChange={setRobotClapping} />
+        <RobotControlPanel
+          label="RobotPointingBackwords"
+          value={robotPointingBackwords}
+          onChange={setRobotPointingBackwords}
         />
-        <p className="mt-1">Scene: {heroSceneMode}</p>
-        <button
-          type="button"
-          className="mt-2 rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-800"
-          onClick={() =>
-            setHeroSceneMode((prev) => (prev === 'falling' ? 'pointing' : prev === 'pointing' ? 'auto' : 'falling'))
-          }
-        >
-          Play Next Scene
-        </button>
-
-        <RobotControlPanel label="Falling Robot" value={fallingTransform} onChange={setFallingTransform} />
-        <RobotControlPanel label="Pointing Robot" value={pointingTransform} onChange={setPointingTransform} />
+        <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
 
         <p className="mt-4 font-semibold">Laptop</p>
         <p className="mt-1">Scale: {laptopScale.toFixed(3)}</p>
@@ -363,9 +360,13 @@ export default function Scene() {
           }}
         >
           <SceneContent
-            fallingTransform={fallingTransform}
-            pointingTransform={pointingTransform}
-            heroSceneMode={heroSceneMode}
+            robotIdle={robotIdle}
+            robotRunning={robotRunning}
+            robotWaving={robotWaving}
+            robotPointing={robotPointing}
+            robotClapping={robotClapping}
+            robotPointingBackwords={robotPointingBackwords}
+            robotFalling={robotFalling}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
