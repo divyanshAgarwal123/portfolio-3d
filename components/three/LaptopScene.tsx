@@ -5,7 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
-import Robot from './Robot';
+import { RobotClapping, RobotIdle, RobotPointing, RobotRunning, RobotWaving } from './Robot';
 
 const SCROLL_MOTION_MAX = 0.431;
 
@@ -16,34 +16,24 @@ type LaptopTestTransform = {
   lidAngle: number;
 };
 
+type RobotTransform = {
+  position: [number, number, number];
+  scale: number;
+};
+
 type ScrollDrivenLaptopProps = {
   onScrollChange?: (offset: number) => void;
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robots?: Array<{
-    id: string;
-    scale: number;
-    position: [number, number, number];
-    rotationY: number;
-    behavior: {
-      runStart: number;
-      runEnd: number;
-      pointStart: number;
-      startX: number;
-      endX: number;
-      y: number;
-      z: number;
-      runFacingY: number;
-      idleFacingY: number;
-    };
-  }>;
+  robotIdle?: RobotTransform;
+  robotRunning?: RobotTransform;
+  robotWaving?: RobotTransform;
+  robotPointing?: RobotTransform;
+  robotClapping?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
-  lidClosedAngle?: number;
-  lidOpenAngle?: number;
-  lidScrollEnd?: number;
 };
 
 function ScrollDrivenLaptop({
@@ -51,27 +41,29 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robots = [],
+  robotIdle = { position: [-4, 2, 0], scale: 0.025 },
+  robotRunning = { position: [-2, 2, 0], scale: 0.025 },
+  robotWaving = { position: [0, 2, 0], scale: 0.025 },
+  robotPointing = { position: [2, 2, 0], scale: 0.025 },
+  robotClapping = { position: [4, 2, 0], scale: 0.025 },
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
-  lidClosedAngle = -1.59,
-  lidOpenAngle = -0.23,
-  lidScrollEnd = 0.431,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
-  const [lidAngle, setLidAngle] = useState(0);
-  const [verticalOffset, setVerticalOffset] = useState(0);
+  const [lidAngle, setLidAngle] = useState(-1.59);
   const lastReportedOffset = useRef(-1);
   const previousOffset = useRef(0);
+  const previousLidAngle = useRef(-1.59);
 
   useFrame(() => {
-    const scrollEnd = Math.max(0.001, lidScrollEnd);
-    const motionOffset = THREE.MathUtils.clamp(scroll.offset, 0, scrollEnd);
-    const normalized = THREE.MathUtils.clamp(motionOffset / scrollEnd, 0, 1);
-    const nextAngle = THREE.MathUtils.lerp(lidClosedAngle, lidOpenAngle, normalized);
-    setLidAngle(nextAngle);
-    setVerticalOffset(0);
+    const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
+    const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
+    const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
+    if (Math.abs(nextAngle - previousLidAngle.current) > 0.0005) {
+      previousLidAngle.current = nextAngle;
+      setLidAngle(nextAngle);
+    }
 
     if (onScrollDirectionChange) {
       const delta = scroll.offset - previousOffset.current;
@@ -93,20 +85,16 @@ function ScrollDrivenLaptop({
     <>
       <Laptop
         lidAngle={lidAngle}
-        verticalOffset={verticalOffset}
+        verticalOffset={0}
         position={laptopPosition}
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      {robots.map((robot) => (
-        <Robot
-          key={robot.id}
-          scale={robot.scale}
-          position={robot.position}
-          rotationY={robot.rotationY}
-          behavior={robot.behavior}
-        />
-      ))}
+      <RobotIdle position={robotIdle.position} scale={robotIdle.scale} />
+      <RobotRunning position={robotRunning.position} scale={robotRunning.scale} />
+      <RobotWaving position={robotWaving.position} scale={robotWaving.scale} />
+      <RobotPointing position={robotPointing.position} scale={robotPointing.scale} />
+      <RobotClapping position={robotClapping.position} scale={robotClapping.scale} />
     </>
   );
 }
@@ -116,29 +104,14 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robots?: Array<{
-    id: string;
-    scale: number;
-    position: [number, number, number];
-    rotationY: number;
-    behavior: {
-      runStart: number;
-      runEnd: number;
-      pointStart: number;
-      startX: number;
-      endX: number;
-      y: number;
-      z: number;
-      runFacingY: number;
-      idleFacingY: number;
-    };
-  }>;
+  robotIdle?: RobotTransform;
+  robotRunning?: RobotTransform;
+  robotWaving?: RobotTransform;
+  robotPointing?: RobotTransform;
+  robotClapping?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
-  lidClosedAngle?: number;
-  lidOpenAngle?: number;
-  lidScrollEnd?: number;
 };
 
 export default function LaptopScene({
@@ -146,13 +119,14 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
-  robots,
+  robotIdle,
+  robotRunning,
+  robotWaving,
+  robotPointing,
+  robotClapping,
   laptopScale,
   laptopPosition,
   laptopRotation,
-  lidClosedAngle,
-  lidOpenAngle,
-  lidScrollEnd,
 }: LaptopSceneProps) {
   return (
     <ScrollControls pages={4} damping={0.3}>
@@ -161,13 +135,14 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
-        robots={robots}
+        robotIdle={robotIdle}
+        robotRunning={robotRunning}
+        robotWaving={robotWaving}
+        robotPointing={robotPointing}
+        robotClapping={robotClapping}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
-        lidClosedAngle={lidClosedAngle}
-        lidOpenAngle={lidOpenAngle}
-        lidScrollEnd={lidScrollEnd}
       />
     </ScrollControls>
   );
