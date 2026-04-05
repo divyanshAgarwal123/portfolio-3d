@@ -19,6 +19,8 @@ type RobotBehaviorConfig = {
 
 type RobotProps = {
   scale?: number;
+  position?: [number, number, number];
+  rotationY?: number;
   behavior?: RobotBehaviorConfig;
 };
 
@@ -38,14 +40,16 @@ const DRACO_DECODER_PATH = '/draco-gltf/';
 
 export default function Robot({
   scale = 0.025,
+  position = [0, 0, 0],
+  rotationY = 0,
   behavior = {
     runStart: 0.15,
     runEnd: 0.45,
     pointStart: 0.65,
     startX: -4,
     endX: 0.8,
-    y: -1,
-    z: -1,
+    y: 0,
+    z: 0,
     runFacingY: -1.5,
     idleFacingY: 0.3,
   },
@@ -174,11 +178,15 @@ export default function Robot({
     }
 
     const isRunningWindow = offset >= runStart && offset <= runEnd;
-    const targetRotY = isRunningWindow ? behavior.runFacingY : behavior.idleFacingY;
+    const targetRotY = rotationY + (isRunningWindow ? behavior.runFacingY : behavior.idleFacingY);
 
-    group.position.x = THREE.MathUtils.lerp(group.position.x, targetX, 1 - Math.exp(-6 * delta));
-    group.position.y = behavior.y;
-    group.position.z = behavior.z;
+    group.position.x = THREE.MathUtils.lerp(
+      group.position.x,
+      position[0] + targetX,
+      1 - Math.exp(-6 * delta)
+    );
+    group.position.y = position[1];
+    group.position.z = position[2];
     group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, targetRotY, 1 - Math.exp(-8 * delta));
   });
 

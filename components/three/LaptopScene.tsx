@@ -21,24 +21,29 @@ type ScrollDrivenLaptopProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotScale?: number;
+  robots?: Array<{
+    id: string;
+    scale: number;
+    position: [number, number, number];
+    rotationY: number;
+    behavior: {
+      runStart: number;
+      runEnd: number;
+      pointStart: number;
+      startX: number;
+      endX: number;
+      y: number;
+      z: number;
+      runFacingY: number;
+      idleFacingY: number;
+    };
+  }>;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
   lidClosedAngle?: number;
   lidOpenAngle?: number;
   lidScrollEnd?: number;
-  robotBehavior?: {
-    runStart: number;
-    runEnd: number;
-    pointStart: number;
-    startX: number;
-    endX: number;
-    y: number;
-    z: number;
-    runFacingY: number;
-    idleFacingY: number;
-  };
 };
 
 function ScrollDrivenLaptop({
@@ -46,14 +51,13 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotScale = 0.015,
+  robots = [],
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
   lidClosedAngle = -1.59,
   lidOpenAngle = -0.23,
   lidScrollEnd = 0.431,
-  robotBehavior,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(0);
@@ -94,7 +98,15 @@ function ScrollDrivenLaptop({
         rotation={laptopRotation}
         modelScale={laptopScale}
       />
-      <Robot scale={robotScale} behavior={robotBehavior} />
+      {robots.map((robot) => (
+        <Robot
+          key={robot.id}
+          scale={robot.scale}
+          position={robot.position}
+          rotationY={robot.rotationY}
+          behavior={robot.behavior}
+        />
+      ))}
     </>
   );
 }
@@ -104,24 +116,29 @@ type LaptopSceneProps = {
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
   testMode?: boolean;
   testTransform?: LaptopTestTransform;
-  robotScale?: number;
+  robots?: Array<{
+    id: string;
+    scale: number;
+    position: [number, number, number];
+    rotationY: number;
+    behavior: {
+      runStart: number;
+      runEnd: number;
+      pointStart: number;
+      startX: number;
+      endX: number;
+      y: number;
+      z: number;
+      runFacingY: number;
+      idleFacingY: number;
+    };
+  }>;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
   lidClosedAngle?: number;
   lidOpenAngle?: number;
   lidScrollEnd?: number;
-  robotBehavior?: {
-    runStart: number;
-    runEnd: number;
-    pointStart: number;
-    startX: number;
-    endX: number;
-    y: number;
-    z: number;
-    runFacingY: number;
-    idleFacingY: number;
-  };
 };
 
 export default function LaptopScene({
@@ -129,14 +146,13 @@ export default function LaptopScene({
   onScrollDirectionChange,
   testMode,
   testTransform,
-  robotScale,
+  robots,
   laptopScale,
   laptopPosition,
   laptopRotation,
   lidClosedAngle,
   lidOpenAngle,
   lidScrollEnd,
-  robotBehavior,
 }: LaptopSceneProps) {
   return (
     <ScrollControls pages={4} damping={0.3}>
@@ -145,14 +161,13 @@ export default function LaptopScene({
         onScrollDirectionChange={onScrollDirectionChange}
         testMode={testMode}
         testTransform={testTransform}
-        robotScale={robotScale}
+        robots={robots}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
         lidClosedAngle={lidClosedAngle}
         lidOpenAngle={lidOpenAngle}
         lidScrollEnd={lidScrollEnd}
-        robotBehavior={robotBehavior}
       />
     </ScrollControls>
   );

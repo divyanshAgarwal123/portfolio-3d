@@ -51,19 +51,28 @@ function WireframeFloors() {
   );
 }
 
+type RobotBehavior = {
+  runStart: number;
+  runEnd: number;
+  pointStart: number;
+  startX: number;
+  endX: number;
+  y: number;
+  z: number;
+  runFacingY: number;
+  idleFacingY: number;
+};
+
+type RobotConfig = {
+  id: string;
+  scale: number;
+  position: [number, number, number];
+  rotationY: number;
+  behavior: RobotBehavior;
+};
+
 type SceneContentProps = {
-  robotScale: number;
-  robotBehavior: {
-    runStart: number;
-    runEnd: number;
-    pointStart: number;
-    startX: number;
-    endX: number;
-    y: number;
-    z: number;
-    runFacingY: number;
-    idleFacingY: number;
-  };
+  robots: RobotConfig[];
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
@@ -80,8 +89,7 @@ type SceneContentProps = {
 };
 
 function SceneContent({
-  robotScale,
-  robotBehavior,
+  robots,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -105,8 +113,7 @@ function SceneContent({
       />
       <WireframeFloors />
       <LaptopScene
-        robotScale={robotScale}
-        robotBehavior={robotBehavior}
+        robots={robots}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
@@ -130,18 +137,59 @@ function LoadingFallback() {
 
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const [robotScale, setRobotScale] = useState(0.04);
-  const [robotBehavior, setRobotBehavior] = useState({
-    runStart: 0.15,
-    runEnd: 0.45,
-    pointStart: 0.65,
-    startX: -4,
-    endX: 0.8,
-    y: -1,
-    z: -1,
-    runFacingY: -1.5,
-    idleFacingY: 0.3,
-  });
+  const [robots, setRobots] = useState<RobotConfig[]>([
+    {
+      id: 'Robot 1',
+      scale: 0.04,
+      position: [-0.4, -0.95, -1.4],
+      rotationY: 0,
+      behavior: {
+        runStart: 0.15,
+        runEnd: 0.45,
+        pointStart: 0.65,
+        startX: -2,
+        endX: 0.7,
+        y: 0,
+        z: 0,
+        runFacingY: -1.4,
+        idleFacingY: 0.35,
+      },
+    },
+    {
+      id: 'Robot 2',
+      scale: 0.04,
+      position: [0.5, -0.95, -1.9],
+      rotationY: 0,
+      behavior: {
+        runStart: 0.2,
+        runEnd: 0.5,
+        pointStart: 0.7,
+        startX: -1.5,
+        endX: 0.4,
+        y: 0,
+        z: 0,
+        runFacingY: -1.3,
+        idleFacingY: 0.2,
+      },
+    },
+    {
+      id: 'Robot 3',
+      scale: 0.04,
+      position: [1.2, -0.95, -2.3],
+      rotationY: 0,
+      behavior: {
+        runStart: 0.24,
+        runEnd: 0.58,
+        pointStart: 0.78,
+        startX: -1.1,
+        endX: 0.3,
+        y: 0,
+        z: 0,
+        runFacingY: -1.1,
+        idleFacingY: 0.15,
+      },
+    },
+  ]);
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
@@ -165,127 +213,256 @@ export default function Scene() {
 
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
-      <div className="pointer-events-auto fixed left-4 top-4 z-50 rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
-        <p className="font-semibold">Robot</p>
-        <p className="mt-1">Scale: {robotScale.toFixed(3)}</p>
-        <input
-          className="mt-2 w-44"
-          type="range"
-          min={0.005}
-          max={0.08}
-          step={0.001}
-          value={robotScale}
-          onChange={(event) => setRobotScale(Number(event.target.value))}
-        />
-        <p className="mt-3 font-semibold">Robot Motion</p>
-        <p className="mt-1">Run start: {robotBehavior.runStart.toFixed(3)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={0}
-          max={1}
-          step={0.001}
-          value={robotBehavior.runStart}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, runStart: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Run end: {robotBehavior.runEnd.toFixed(3)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={0}
-          max={1}
-          step={0.001}
-          value={robotBehavior.runEnd}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, runEnd: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Point start: {robotBehavior.pointStart.toFixed(3)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={0}
-          max={1}
-          step={0.001}
-          value={robotBehavior.pointStart}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, pointStart: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Start X: {robotBehavior.startX.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-10}
-          max={3}
-          step={0.01}
-          value={robotBehavior.startX}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, startX: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">End X: {robotBehavior.endX.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-3}
-          max={5}
-          step={0.01}
-          value={robotBehavior.endX}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, endX: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Y: {robotBehavior.y.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-3}
-          max={3}
-          step={0.01}
-          value={robotBehavior.y}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, y: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Z: {robotBehavior.z.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-10}
-          max={3}
-          step={0.01}
-          value={robotBehavior.z}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, z: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Run facing Y: {robotBehavior.runFacingY.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-3.14}
-          max={3.14}
-          step={0.01}
-          value={robotBehavior.runFacingY}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, runFacingY: Number(event.target.value) }))
-          }
-        />
-        <p className="mt-2">Idle facing Y: {robotBehavior.idleFacingY.toFixed(2)}</p>
-        <input
-          className="mt-1 w-44"
-          type="range"
-          min={-3.14}
-          max={3.14}
-          step={0.01}
-          value={robotBehavior.idleFacingY}
-          onChange={(event) =>
-            setRobotBehavior((prev) => ({ ...prev, idleFacingY: Number(event.target.value) }))
-          }
-        />
+      <div className="pointer-events-auto fixed left-4 top-4 z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
+        {robots.map((robot, index) => (
+          <div key={robot.id} className="mb-4 border-b border-neutral-200 pb-4 last:mb-0 last:border-b-0 last:pb-0">
+            <p className="font-semibold">{robot.id}</p>
+            <p className="mt-1">Scale: {robot.scale.toFixed(3)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={0.005}
+              max={0.08}
+              step={0.001}
+              value={robot.scale}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index ? { ...item, scale: Number(event.target.value) } : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">X: {robot.position[0].toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-4}
+              max={4}
+              step={0.01}
+              value={robot.position[0]}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          position: [Number(event.target.value), item.position[1], item.position[2]],
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Y: {robot.position[1].toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3}
+              max={3}
+              step={0.01}
+              value={robot.position[1]}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          position: [item.position[0], Number(event.target.value), item.position[2]],
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Z: {robot.position[2].toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-8}
+              max={-0.2}
+              step={0.01}
+              value={robot.position[2]}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          position: [item.position[0], item.position[1], Number(event.target.value)],
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Base rot Y: {robot.rotationY.toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3.14}
+              max={3.14}
+              step={0.01}
+              value={robot.rotationY}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index ? { ...item, rotationY: Number(event.target.value) } : item
+                  )
+                )
+              }
+            />
+
+            <p className="mt-2 font-semibold">Motion</p>
+            <p className="mt-1">Run start: {robot.behavior.runStart.toFixed(3)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={0}
+              max={1}
+              step={0.001}
+              value={robot.behavior.runStart}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, runStart: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Run end: {robot.behavior.runEnd.toFixed(3)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={0}
+              max={1}
+              step={0.001}
+              value={robot.behavior.runEnd}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, runEnd: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Point start: {robot.behavior.pointStart.toFixed(3)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={0}
+              max={1}
+              step={0.001}
+              value={robot.behavior.pointStart}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, pointStart: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Start X: {robot.behavior.startX.toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3}
+              max={3}
+              step={0.01}
+              value={robot.behavior.startX}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, startX: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">End X: {robot.behavior.endX.toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3}
+              max={3}
+              step={0.01}
+              value={robot.behavior.endX}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, endX: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Run facing Y: {robot.behavior.runFacingY.toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3.14}
+              max={3.14}
+              step={0.01}
+              value={robot.behavior.runFacingY}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, runFacingY: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+            <p className="mt-2">Idle facing Y: {robot.behavior.idleFacingY.toFixed(2)}</p>
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-3.14}
+              max={3.14}
+              step={0.01}
+              value={robot.behavior.idleFacingY}
+              onChange={(event) =>
+                setRobots((prev) =>
+                  prev.map((item, itemIndex) =>
+                    itemIndex === index
+                      ? {
+                          ...item,
+                          behavior: { ...item.behavior, idleFacingY: Number(event.target.value) },
+                        }
+                      : item
+                  )
+                )
+              }
+            />
+          </div>
+        ))}
 
         <p className="mt-4 font-semibold">Laptop</p>
         <p className="mt-1">Scale: {laptopScale.toFixed(3)}</p>
@@ -539,8 +716,7 @@ export default function Scene() {
           }}
         >
           <SceneContent
-            robotScale={robotScale}
-            robotBehavior={robotBehavior}
+            robots={robots}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
