@@ -24,8 +24,8 @@ type RobotHeroProps = {
 };
 
 export default function RobotHero({
-  fallingTransform = { position: [0, 0, -1.2], scale: 0.004 },
-  pointingTransform = { position: [0, 0, -1.2], scale: 0.004 },
+  fallingTransform = { position: [0, 0, -1.2], scale: 0.0006 },
+  pointingTransform = { position: [0, 0, -1.2], scale: 0.0006 },
   sceneMode = 'auto',
 }: RobotHeroProps) {
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
@@ -197,8 +197,8 @@ export default function RobotHero({
     const y = Number.isFinite(activeTransform.position[1]) ? activeTransform.position[1] : 0;
     const z = Number.isFinite(activeTransform.position[2]) ? activeTransform.position[2] : -1.2;
     const safeScale = THREE.MathUtils.clamp(
-      Number.isFinite(activeTransform.scale) ? activeTransform.scale : 0.004,
-      0.002,
+      Number.isFinite(activeTransform.scale) ? activeTransform.scale : 0.0006,
+      0.0001,
       0.03,
     );
 

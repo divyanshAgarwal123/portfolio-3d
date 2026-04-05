@@ -94,11 +94,11 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   return (
     <>
       <p className="mt-3 font-semibold">{label}</p>
-      <p className="mt-1">Scale: {value.scale.toFixed(3)}</p>
+      <p className="mt-1">Scale: {value.scale.toFixed(4)}</p>
       <input
         className="mt-1 w-44"
         type="range"
-        min={0.002}
+        min={0.0001}
         max={0.02}
         step={0.0001}
         value={value.scale}
@@ -165,11 +165,11 @@ export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [fallingTransform, setFallingTransform] = useState<RobotHeroTransform>({
     position: [0, 0, -1.2],
-    scale: 0.004,
+    scale: 0.0006,
   });
   const [pointingTransform, setPointingTransform] = useState<RobotHeroTransform>({
     position: [0, 0, -1.2],
-    scale: 0.004,
+    scale: 0.0006,
   });
   const [heroSceneMode, setHeroSceneMode] = useState<RobotHeroSceneMode>('falling');
   const [laptopScale, setLaptopScale] = useState(0.04);
@@ -181,7 +181,7 @@ export default function Scene() {
   const unifiedHeroScale = Number(((fallingTransform.scale + pointingTransform.scale) / 2).toFixed(4));
 
   const handleUnifiedHeroScaleChange = (nextScale: number) => {
-    const safeScale = Math.min(Math.max(nextScale, 0.002), 0.02);
+    const safeScale = Math.min(Math.max(nextScale, 0.0001), 0.02);
     setFallingTransform((prev) => ({ ...prev, scale: safeScale }));
     setPointingTransform((prev) => ({ ...prev, scale: safeScale }));
   };
@@ -201,7 +201,7 @@ export default function Scene() {
         <input
           className="mt-1 w-44"
           type="range"
-          min={0.002}
+          min={0.0001}
           max={0.02}
           step={0.0001}
           value={unifiedHeroScale}
