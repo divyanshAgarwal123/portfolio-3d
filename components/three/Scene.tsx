@@ -97,6 +97,20 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <p className="mt-3 font-semibold">{label}</p>
       <p className="mt-1">Scale: {value.scale.toFixed(3)}</p>
       <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={0.003}
+        max={0.03}
+        step={0.001}
+        value={value.scale}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            scale: Number(event.target.value),
+          })
+        }
+      />
+      <input
         className="mt-1 w-44"
         type="range"
         min={0.003}
@@ -112,6 +126,20 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       />
 
       <p className="mt-2">X: {value.position[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-8}
+        max={8}
+        step={0.01}
+        value={value.position[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [Number(event.target.value), value.position[1], value.position[2]],
+          })
+        }
+      />
       <input
         className="mt-1 w-44"
         type="range"
@@ -129,6 +157,20 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
 
       <p className="mt-2">Y: {value.position[1].toFixed(2)}</p>
       <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-5}
+        max={6}
+        step={0.01}
+        value={value.position[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], Number(event.target.value), value.position[2]],
+          })
+        }
+      />
+      <input
         className="mt-1 w-44"
         type="range"
         min={-5}
@@ -144,6 +186,20 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       />
 
       <p className="mt-2">Z: {value.position[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-8}
+        max={4}
+        step={0.01}
+        value={value.position[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], value.position[1], Number(event.target.value)],
+          })
+        }
+      />
       <input
         className="mt-1 w-44"
         type="range"
@@ -165,7 +221,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
-    position: [0, -0.36, 0.49],
+    position: [0.004, -0.36, 0.56],
     scale: 0.03,
   });
   const [robotFalling, setRobotFalling] = useState<RobotTransform>({ position: [0, 0.3, 0.49], scale: 0.03 });
