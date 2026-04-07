@@ -88,7 +88,6 @@ function ScrollDrivenLaptop({
         <RobotHero
           fallingTransform={robotFalling}
           pointingTransform={robotPointingBackwords}
-          scrollOffset={scroll.offset}
         />
       </Suspense>
     </>
