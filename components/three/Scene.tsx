@@ -51,8 +51,8 @@ type SceneContentProps = {
   robotFalling: RobotTransform;
   robotWalking: RobotTransform;
   robotClimbingToLaptop: RobotTransform;
-  robotStandingToSitting: RobotTransform;
   robotCutelySitting: RobotTransform;
+  robotStandingToSitting: RobotTransform;
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
@@ -65,8 +65,8 @@ function SceneContent({
   robotFalling,
   robotWalking,
   robotClimbingToLaptop,
-  robotStandingToSitting,
   robotCutelySitting,
+  robotStandingToSitting,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -82,8 +82,8 @@ function SceneContent({
         robotFalling={robotFalling}
         robotWalking={robotWalking}
         robotClimbingToLaptop={robotClimbingToLaptop}
-        robotStandingToSitting={robotStandingToSitting}
         robotCutelySitting={robotCutelySitting}
+        robotStandingToSitting={robotStandingToSitting}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
@@ -245,11 +245,11 @@ export default function Scene() {
     position: [0.004, -0.36, 0.56],
     scale: 0.03,
   });
-  const [robotStandingToSitting, setRobotStandingToSitting] = useState<RobotTransform>({
+  const [robotCutelySitting, setRobotCutelySitting] = useState<RobotTransform>({
     position: [0.004, -0.36, 0.56],
     scale: 0.03,
   });
-  const [robotCutelySitting, setRobotCutelySitting] = useState<RobotTransform>({
+  const [robotStandingToSitting, setRobotStandingToSitting] = useState<RobotTransform>({
     position: [0.004, -0.36, 0.56],
     scale: 0.03,
   });
@@ -277,9 +277,17 @@ export default function Scene() {
           onChange={setRobotPointingBackwords}
         />
         <RobotControlPanel label="RobotWalkingTexting" value={robotWalking} onChange={setRobotWalking} />
-        <RobotControlPanel label="RobotClimbingToLaptop" value={robotClimbingToLaptop} onChange={setRobotClimbingToLaptop} />
-        <RobotControlPanel label="RobotStandingToSitting" value={robotStandingToSitting} onChange={setRobotStandingToSitting} />
+        <RobotControlPanel
+          label="RobotClimbingToLaptop"
+          value={robotClimbingToLaptop}
+          onChange={setRobotClimbingToLaptop}
+        />
         <RobotControlPanel label="RobotCutelySitting" value={robotCutelySitting} onChange={setRobotCutelySitting} />
+        <RobotControlPanel
+          label="RobotStandingToSitting"
+          value={robotStandingToSitting}
+          onChange={setRobotStandingToSitting}
+        />
       </div>
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
@@ -295,8 +303,8 @@ export default function Scene() {
             robotFalling={robotFalling}
             robotWalking={robotWalking}
             robotClimbingToLaptop={robotClimbingToLaptop}
-            robotStandingToSitting={robotStandingToSitting}
             robotCutelySitting={robotCutelySitting}
+            robotStandingToSitting={robotStandingToSitting}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
