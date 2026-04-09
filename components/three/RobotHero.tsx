@@ -4,6 +4,7 @@ import { useAnimations, useGLTF, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { useEffect, useMemo, useRef } from 'react';
+import type { RefObject } from 'react';
 import * as THREE from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 
@@ -41,7 +42,7 @@ type RobotHeroProps = {
   standingToSittingTransform?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
-  heroStartEnabled?: boolean;
+  climbingStartReady?: boolean;
 };
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
@@ -68,7 +69,7 @@ export default function RobotHero({
   standingToSittingTransform = { position: [0.46, 0.35, -0.68], scale: 0.087 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
-  heroStartEnabled = true,
+  climbingStartReady = true,
 }: RobotHeroProps) {
   const scroll = useScroll();
 
@@ -118,6 +119,7 @@ export default function RobotHero({
   const climbingPhaseStartedRef = useRef(false);
   const manualClimbingStageRef = useRef<-1 | 0 | 1 | 2>(-1);
   const runningTweenRef = useRef<gsap.core.Tween | null>(null);
+  const sceneBlendTweenRef = useRef<gsap.core.Tween | null>(null);
   const climbingSequenceCleanupRef = useRef<(() => void) | null>(null);
   const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
@@ -130,6 +132,47 @@ export default function RobotHero({
   const climbingToLaptopRef = useRef<THREE.Group>(null);
   const cutelySittingRef = useRef<THREE.Group>(null);
   const standingToSittingRef = useRef<THREE.Group>(null);
+
+  const stopSceneBlendTween = () => {
+    sceneBlendTweenRef.current?.kill();
+    sceneBlendTweenRef.current = null;
+  };
+
+  const crossfadeScenes = (
+    fromRef: RefObject<THREE.Group>,
+    fromScene: THREE.Object3D,
+    toRef: RefObject<THREE.Group>,
+    toScene: THREE.Object3D,
+    duration = 0.35,
+  ) => {
+    stopSceneBlendTween();
+
+    if (toRef.current) {
+      toRef.current.visible = true;
+    }
+    setMeshOpacity(toScene, 0);
+    setMeshOpacity(fromScene, 1);
+
+    const blendState = { from: 1, to: 0 };
+    sceneBlendTweenRef.current = gsap.to(blendState, {
+      from: 0,
+      to: 1,
+      duration,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        setMeshOpacity(fromScene, blendState.from);
+        setMeshOpacity(toScene, blendState.to);
+      },
+      onComplete: () => {
+        if (fromRef.current) {
+          fromRef.current.visible = false;
+        }
+        setMeshOpacity(fromScene, 0);
+        setMeshOpacity(toScene, 1);
+        sceneBlendTweenRef.current = null;
+      },
+    });
+  };
 
   const playManualClimbingStage = (stage: 0 | 1 | 2) => {
     const climbAction = climbingToLaptopActionRef.current;
@@ -192,21 +235,19 @@ export default function RobotHero({
     const standAction = standingToSittingActionRef.current;
     if (!climbAction || !standAction) return;
 
-    climbAction.fadeOut(0.2);
-    if (climbingToLaptopRef.current) {
-      climbingToLaptopRef.current.visible = false;
-    }
-    setMeshOpacity(climbingToLaptopScene, 0);
-
-    if (standingToSittingRef.current) {
-      standingToSittingRef.current.visible = true;
-    }
-    setMeshOpacity(standingToSittingScene, 1);
-
     standAction.enabled = true;
     standAction.setLoop(manualClimbingSequence ? THREE.LoopRepeat : THREE.LoopOnce, manualClimbingSequence ? Infinity : 1);
     standAction.clampWhenFinished = true;
-    standAction.reset().fadeIn(0.2).play();
+    standAction.reset().fadeIn(0.35).play();
+    climbAction.fadeOut(0.35);
+
+    crossfadeScenes(
+      climbingToLaptopRef,
+      climbingToLaptopScene,
+      standingToSittingRef,
+      standingToSittingScene,
+      0.35,
+    );
   };
 
   const transitionToSittingPhase = () => {
@@ -214,21 +255,19 @@ export default function RobotHero({
     const sitAction = cutelySittingActionRef.current;
     if (!standAction || !sitAction) return;
 
-    standAction.fadeOut(0.2);
-    if (standingToSittingRef.current) {
-      standingToSittingRef.current.visible = false;
-    }
-    setMeshOpacity(standingToSittingScene, 0);
-
-    if (cutelySittingRef.current) {
-      cutelySittingRef.current.visible = true;
-    }
-    setMeshOpacity(cutelySittingScene, 1);
-
     sitAction.enabled = true;
     sitAction.setLoop(THREE.LoopRepeat, Infinity);
     sitAction.clampWhenFinished = true;
-    sitAction.reset().fadeIn(0.2).play();
+    sitAction.reset().fadeIn(0.35).play();
+    standAction.fadeOut(0.35);
+
+    crossfadeScenes(
+      standingToSittingRef,
+      standingToSittingScene,
+      cutelySittingRef,
+      cutelySittingScene,
+      0.35,
+    );
   };
 
   const startPointingTransition = () => {
@@ -426,8 +465,6 @@ export default function RobotHero({
   ]);
 
   useEffect(() => {
-    if (!heroStartEnabled) return;
-
     const names = Object.keys(fallingActions);
     console.log('Falling clips:', names);
 
@@ -466,7 +503,7 @@ export default function RobotHero({
       }
       action.fadeOut(0.3);
     };
-  }, [fallingActions, fallingMixer, pointingTransform.position, heroStartEnabled]);
+  }, [fallingActions, fallingMixer, pointingTransform.position]);
 
   useEffect(() => {
     const names = Object.keys(pointingActions);
@@ -562,6 +599,7 @@ export default function RobotHero({
     manualClimbingStageRef.current = -1;
     runningTweenRef.current?.kill();
     climbingSequenceCleanupRef.current?.();
+    stopSceneBlendTween();
     climbingSequenceCleanupRef.current = null;
     runningTweenRef.current = null;
     fallOpacityRef.current = 1;
@@ -622,10 +660,10 @@ export default function RobotHero({
     }
 
     if (fallingRef.current) {
-      fallingRef.current.visible = heroStartEnabled;
+      fallingRef.current.visible = true;
     }
 
-    setMeshOpacity(fallingScene, heroStartEnabled ? 1 : 0);
+    setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
     setMeshOpacity(climbingToLaptopScene, 0);
@@ -638,13 +676,13 @@ export default function RobotHero({
     climbingToLaptopScene,
     cutelySittingScene,
     standingToSittingScene,
-    heroStartEnabled,
   ]);
 
   useEffect(() => {
     return () => {
       runningTweenRef.current?.kill();
       climbingSequenceCleanupRef.current?.();
+      stopSceneBlendTween();
       climbingSequenceCleanupRef.current = null;
       runningTweenRef.current = null;
     };
@@ -737,6 +775,7 @@ export default function RobotHero({
       !climbingPhaseStartedRef.current
       && scroll.offset >= CLIMBING_SCROLL_THRESHOLD
       && phase.current === 'running'
+      && climbingStartReady
     ) {
       startClimbingSequence();
     }

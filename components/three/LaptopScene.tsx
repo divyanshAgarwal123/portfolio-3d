@@ -34,7 +34,6 @@ type ScrollDrivenLaptopProps = {
   robotStandingToSitting?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
-  heroStartEnabled?: boolean;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -53,21 +52,54 @@ function ScrollDrivenLaptop({
   robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
-  heroStartEnabled = true,
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(-1.59);
+  const [climbingStartReady, setClimbingStartReady] = useState(false);
   const lastReportedOffset = useRef(-1);
   const previousOffset = useRef(0);
   const previousLidAngle = useRef(-1.59);
+  const lidOpenDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lidOpenArmedRef = useRef(false);
+  const climbingReadyRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      if (lidOpenDelayRef.current) {
+        clearTimeout(lidOpenDelayRef.current);
+        lidOpenDelayRef.current = null;
+      }
+    };
+  }, []);
 
   useFrame(() => {
     const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
     const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
+
+    if (normalized >= 0.999) {
+      if (!lidOpenArmedRef.current) {
+        lidOpenArmedRef.current = true;
+        lidOpenDelayRef.current = setTimeout(() => {
+          climbingReadyRef.current = true;
+          setClimbingStartReady(true);
+        }, 1000);
+      }
+    } else {
+      lidOpenArmedRef.current = false;
+      if (lidOpenDelayRef.current) {
+        clearTimeout(lidOpenDelayRef.current);
+        lidOpenDelayRef.current = null;
+      }
+      if (climbingReadyRef.current) {
+        climbingReadyRef.current = false;
+        setClimbingStartReady(false);
+      }
+    }
+
     if (Math.abs(nextAngle - previousLidAngle.current) > 0.0005) {
       previousLidAngle.current = nextAngle;
       setLidAngle(nextAngle);
@@ -108,41 +140,13 @@ function ScrollDrivenLaptop({
           standingToSittingTransform={robotStandingToSitting}
           manualClimbingSequence={manualClimbingSequence}
           climbingSequenceStep={climbingSequenceStep}
-          heroStartEnabled={heroStartEnabled}
+          climbingStartReady={climbingStartReady}
         />
       </Suspense>
     </>
   );
 }
 
-type StartGateProps = {
-  onReady: () => void;
-};
-
-function StartGate({ onReady }: StartGateProps) {
-  const scroll = useScroll();
-  const holdElapsedRef = useRef(0);
-  const startedRef = useRef(false);
-
-  useFrame((_, delta) => {
-    if (startedRef.current) return;
-
-    const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
-    const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
-
-    if (normalized >= 0.999) {
-      holdElapsedRef.current += delta;
-      if (holdElapsedRef.current >= 1) {
-        startedRef.current = true;
-        onReady();
-      }
-    } else {
-      holdElapsedRef.current = 0;
-    }
-  });
-
-  return null;
-}
 
 type LaptopSceneProps = {
   onScrollChange?: (offset: number) => void;
@@ -179,11 +183,8 @@ export default function LaptopScene({
   laptopPosition,
   laptopRotation,
 }: LaptopSceneProps) {
-  const [heroStartEnabled, setHeroStartEnabled] = useState(false);
-
   return (
     <ScrollControls pages={4} damping={0.3}>
-      <StartGate onReady={() => setHeroStartEnabled(true)} />
       <ScrollDrivenLaptop
         onScrollChange={onScrollChange}
         onScrollDirectionChange={onScrollDirectionChange}
@@ -197,7 +198,6 @@ export default function LaptopScene({
         robotStandingToSitting={robotStandingToSitting}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
-        heroStartEnabled={heroStartEnabled}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
