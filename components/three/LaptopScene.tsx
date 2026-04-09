@@ -29,6 +29,9 @@ type ScrollDrivenLaptopProps = {
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
   robotWalking?: RobotTransform;
+  robotClimbingToLaptop?: RobotTransform;
+  robotStandingToSitting?: RobotTransform;
+  robotCutelySitting?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -42,6 +45,9 @@ function ScrollDrivenLaptop({
   robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
   robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
   robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  robotClimbingToLaptop = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  robotStandingToSitting = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  robotCutelySitting = { position: [0.004, -0.36, 0.56], scale: 0.03 },
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -91,6 +97,9 @@ function ScrollDrivenLaptop({
           fallingTransform={robotFalling}
           pointingTransform={robotPointingBackwords}
           runningTransform={robotWalking}
+          climbingTransform={robotClimbingToLaptop}
+          standingToSittingTransform={robotStandingToSitting}
+          cutelySittingTransform={robotCutelySitting}
         />
       </Suspense>
     </>
@@ -105,6 +114,9 @@ type LaptopSceneProps = {
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
   robotWalking?: RobotTransform;
+  robotClimbingToLaptop?: RobotTransform;
+  robotStandingToSitting?: RobotTransform;
+  robotCutelySitting?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -118,6 +130,9 @@ export default function LaptopScene({
   robotPointingBackwords,
   robotFalling,
   robotWalking,
+  robotClimbingToLaptop,
+  robotStandingToSitting,
+  robotCutelySitting,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -132,6 +147,9 @@ export default function LaptopScene({
         robotPointingBackwords={robotPointingBackwords}
         robotFalling={robotFalling}
         robotWalking={robotWalking}
+        robotClimbingToLaptop={robotClimbingToLaptop}
+        robotStandingToSitting={robotStandingToSitting}
+        robotCutelySitting={robotCutelySitting}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}

@@ -11,6 +11,9 @@ const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
 const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
+const CLIMBING_MODEL_PATH = '/models/robot_animation/robot_climbing_to_laptop.glb';
+const STANDING_TO_SITTING_MODEL_PATH = '/models/robot_animation/robot_standing_to_sitting.glb';
+const CUTELY_SITTING_MODEL_PATH = '/models/robot_animation/robot_cutely_sitting.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
@@ -32,6 +35,9 @@ type RobotHeroProps = {
   fallingTransform?: RobotTransform;
   pointingTransform?: RobotTransform;
   runningTransform?: RobotTransform;
+  climbingTransform?: RobotTransform;
+  standingToSittingTransform?: RobotTransform;
+  cutelySittingTransform?: RobotTransform;
 };
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
@@ -53,16 +59,25 @@ export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
   pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
   runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
+  climbingTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  standingToSittingTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  cutelySittingTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
 }: RobotHeroProps) {
   const scroll = useScroll();
 
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
   const pointingGltf = useGLTF(POINTING_MODEL_PATH, DRACO_DECODER_PATH);
   const runningGltf = useGLTF(RUNNING_MODEL_PATH, DRACO_DECODER_PATH);
+  const climbingGltf = useGLTF(CLIMBING_MODEL_PATH, DRACO_DECODER_PATH);
+  const standingToSittingGltf = useGLTF(STANDING_TO_SITTING_MODEL_PATH, DRACO_DECODER_PATH);
+  const cutelySittingGltf = useGLTF(CUTELY_SITTING_MODEL_PATH, DRACO_DECODER_PATH);
 
   const fallingScene = useMemo(() => clone(fallingGltf.scene), [fallingGltf.scene]);
   const pointingScene = useMemo(() => clone(pointingGltf.scene), [pointingGltf.scene]);
   const runningScene = useMemo(() => clone(runningGltf.scene), [runningGltf.scene]);
+  const climbingScene = useMemo(() => clone(climbingGltf.scene), [climbingGltf.scene]);
+  const standingToSittingScene = useMemo(() => clone(standingToSittingGltf.scene), [standingToSittingGltf.scene]);
+  const cutelySittingScene = useMemo(() => clone(cutelySittingGltf.scene), [cutelySittingGltf.scene]);
 
   const { actions: fallingActions, mixer: fallingMixer } = useAnimations(
     fallingGltf.animations,
@@ -70,6 +85,9 @@ export default function RobotHero({
   );
   const { actions: pointingActions } = useAnimations(pointingGltf.animations, pointingScene);
   const { actions: runningActions } = useAnimations(runningGltf.animations, runningScene);
+  const { actions: climbingActions } = useAnimations(climbingGltf.animations, climbingScene);
+  const { actions: standingToSittingActions } = useAnimations(standingToSittingGltf.animations, standingToSittingScene);
+  const { actions: cutelySittingActions } = useAnimations(cutelySittingGltf.animations, cutelySittingScene);
 
   const fallingActionRef = useRef<THREE.AnimationAction | null>(null);
   const pointingActionRef = useRef<THREE.AnimationAction | null>(null);
@@ -87,6 +105,9 @@ export default function RobotHero({
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
   const runningRef = useRef<THREE.Group>(null);
+  const climbingRef = useRef<THREE.Group>(null);
+  const standingToSittingRef = useRef<THREE.Group>(null);
+  const cutelySittingRef = useRef<THREE.Group>(null);
 
   const startPointingTransition = () => {
     if (switchedRef.current) return;
@@ -173,7 +194,32 @@ export default function RobotHero({
         object.frustumCulled = false;
       }
     });
-  }, [fallingScene, pointingScene, runningScene]);
+
+    climbingScene.traverse((object) => {
+      if ((object as { isMesh?: boolean }).isMesh) {
+        object.frustumCulled = false;
+      }
+    });
+
+    standingToSittingScene.traverse((object) => {
+      if ((object as { isMesh?: boolean }).isMesh) {
+        object.frustumCulled = false;
+      }
+    });
+
+    cutelySittingScene.traverse((object) => {
+      if ((object as { isMesh?: boolean }).isMesh) {
+        object.frustumCulled = false;
+      }
+    });
+  }, [
+    fallingScene,
+    pointingScene,
+    runningScene,
+    climbingScene,
+    standingToSittingScene,
+    cutelySittingScene,
+  ]);
 
   useEffect(() => {
     const names = Object.keys(fallingActions);
@@ -251,6 +297,51 @@ export default function RobotHero({
   }, [runningActions]);
 
   useEffect(() => {
+    const names = Object.keys(climbingActions);
+    console.log('Climbing clips:', names);
+    const action = climbingActions[names[0]];
+    if (!action) return;
+    action.enabled = true;
+    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.clampWhenFinished = true;
+    action.reset().fadeIn(0.2).play();
+
+    return () => {
+      action.fadeOut(0.2);
+    };
+  }, [climbingActions]);
+
+  useEffect(() => {
+    const names = Object.keys(standingToSittingActions);
+    console.log('StandingToSitting clips:', names);
+    const action = standingToSittingActions[names[0]];
+    if (!action) return;
+    action.enabled = true;
+    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.clampWhenFinished = true;
+    action.reset().fadeIn(0.2).play();
+
+    return () => {
+      action.fadeOut(0.2);
+    };
+  }, [standingToSittingActions]);
+
+  useEffect(() => {
+    const names = Object.keys(cutelySittingActions);
+    console.log('CutelySitting clips:', names);
+    const action = cutelySittingActions[names[0]];
+    if (!action) return;
+    action.enabled = true;
+    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.clampWhenFinished = true;
+    action.reset().fadeIn(0.2).play();
+
+    return () => {
+      action.fadeOut(0.2);
+    };
+  }, [cutelySittingActions]);
+
+  useEffect(() => {
     phase.current = 'falling';
     fallingDoneRef.current = false;
     switchedRef.current = false;
@@ -325,6 +416,33 @@ export default function RobotHero({
       }
     }
 
+    if (climbingRef.current) {
+      climbingRef.current.position.set(
+        climbingTransform.position[0],
+        climbingTransform.position[1],
+        climbingTransform.position[2],
+      );
+      climbingRef.current.scale.setScalar(climbingTransform.scale);
+    }
+
+    if (standingToSittingRef.current) {
+      standingToSittingRef.current.position.set(
+        standingToSittingTransform.position[0],
+        standingToSittingTransform.position[1],
+        standingToSittingTransform.position[2],
+      );
+      standingToSittingRef.current.scale.setScalar(standingToSittingTransform.scale);
+    }
+
+    if (cutelySittingRef.current) {
+      cutelySittingRef.current.position.set(
+        cutelySittingTransform.position[0],
+        cutelySittingTransform.position[1],
+        cutelySittingTransform.position[2],
+      );
+      cutelySittingRef.current.scale.setScalar(cutelySittingTransform.scale);
+    }
+
     if (!switchedRef.current && phase.current === 'landed' && fallingActionRef.current) {
       const remaining = fallClipDurationRef.current - fallingActionRef.current.time;
       if (remaining <= 2) {
@@ -383,6 +501,42 @@ export default function RobotHero({
       >
         <primitive object={runningScene} />
       </group>
+
+      <group
+        ref={climbingRef}
+        position={[climbingTransform.position[0], climbingTransform.position[1], climbingTransform.position[2]]}
+        scale={[climbingTransform.scale, climbingTransform.scale, climbingTransform.scale]}
+      >
+        <primitive object={climbingScene} />
+      </group>
+
+      <group
+        ref={standingToSittingRef}
+        position={[
+          standingToSittingTransform.position[0],
+          standingToSittingTransform.position[1],
+          standingToSittingTransform.position[2],
+        ]}
+        scale={[
+          standingToSittingTransform.scale,
+          standingToSittingTransform.scale,
+          standingToSittingTransform.scale,
+        ]}
+      >
+        <primitive object={standingToSittingScene} />
+      </group>
+
+      <group
+        ref={cutelySittingRef}
+        position={[
+          cutelySittingTransform.position[0],
+          cutelySittingTransform.position[1],
+          cutelySittingTransform.position[2],
+        ]}
+        scale={[cutelySittingTransform.scale, cutelySittingTransform.scale, cutelySittingTransform.scale]}
+      >
+        <primitive object={cutelySittingScene} />
+      </group>
     </>
   );
 }
@@ -391,3 +545,6 @@ useGLTF.setDecoderPath(DRACO_DECODER_PATH);
 useGLTF.preload(FALLING_MODEL_PATH);
 useGLTF.preload(POINTING_MODEL_PATH);
 useGLTF.preload(RUNNING_MODEL_PATH);
+useGLTF.preload(CLIMBING_MODEL_PATH);
+useGLTF.preload(STANDING_TO_SITTING_MODEL_PATH);
+useGLTF.preload(CUTELY_SITTING_MODEL_PATH);
