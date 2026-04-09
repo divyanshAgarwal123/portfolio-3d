@@ -112,7 +112,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
         min={0.003}
-        max={0.03}
+        max={0.2}
         step={0.001}
         value={value.scale}
         onChange={(event) =>
@@ -126,7 +126,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         className="mt-1 w-44"
         type="range"
         min={0.003}
-        max={0.03}
+        max={0.2}
         step={0.001}
         value={value.scale}
         onChange={(event) =>
