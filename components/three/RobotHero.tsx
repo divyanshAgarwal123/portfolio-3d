@@ -10,15 +10,19 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const CLAPPING_MODEL_PATH = '/models/robot_cute_clapping.glb';
+const RUNNING_MODEL_PATH = '/models/robot_cute_running.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
-const CLAP_SCROLL_THRESHOLD = 0.04;
-const TURN_DURATION = 0.35;
-const POINTING_TO_CLAP_FADE = 0.2;
+const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
+const RUNNING_SCALE = 0.03;
+const RUNNING_TARGET_Z = -1.08;
+const RUNNING_SCROLL_THRESHOLD = 0.04;
+const RUNNING_Z_DAMPING = 4.5;
+
+type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running';
 
 type RobotTransform = {
   position: [number, number, number];
@@ -50,39 +54,37 @@ export default function RobotHero({
   pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
 }: RobotHeroProps) {
   const scroll = useScroll();
+
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
   const pointingGltf = useGLTF(POINTING_MODEL_PATH, DRACO_DECODER_PATH);
-  const clappingGltf = useGLTF(CLAPPING_MODEL_PATH, DRACO_DECODER_PATH);
+  const runningGltf = useGLTF(RUNNING_MODEL_PATH, DRACO_DECODER_PATH);
 
   const fallingScene = useMemo(() => clone(fallingGltf.scene), [fallingGltf.scene]);
   const pointingScene = useMemo(() => clone(pointingGltf.scene), [pointingGltf.scene]);
-  const clappingScene = useMemo(() => clone(clappingGltf.scene), [clappingGltf.scene]);
+  const runningScene = useMemo(() => clone(runningGltf.scene), [runningGltf.scene]);
 
   const { actions: fallingActions, mixer: fallingMixer } = useAnimations(
     fallingGltf.animations,
     fallingScene,
   );
   const { actions: pointingActions } = useAnimations(pointingGltf.animations, pointingScene);
-  const { actions: clappingActions } = useAnimations(clappingGltf.animations, clappingScene);
+  const { actions: runningActions } = useAnimations(runningGltf.animations, runningScene);
 
   const fallingActionRef = useRef<THREE.AnimationAction | null>(null);
   const pointingActionRef = useRef<THREE.AnimationAction | null>(null);
-  const clappingActionRef = useRef<THREE.AnimationAction | null>(null);
-  const phase = useRef<'falling' | 'landed' | 'pointing' | 'turning' | 'clapping'>('falling');
+  const runningActionRef = useRef<THREE.AnimationAction | null>(null);
+  const phase = useRef<HeroPhase>('falling');
   const fallingDoneRef = useRef(false);
   const switchedRef = useRef(false);
-  const clapTriggeredRef = useRef(false);
+  const runningSwapStartedRef = useRef(false);
   const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
-  const clapOpacityRef = useRef(0);
-  const turnProgressRef = useRef(0);
-  const turnStartYawRef = useRef(0);
-  const turnTargetYawRef = useRef(0);
+  const runOpacityRef = useRef(0);
 
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
-  const clappingRef = useRef<THREE.Group>(null);
+  const runningRef = useRef<THREE.Group>(null);
 
   const startPointingTransition = () => {
     if (switchedRef.current) return;
@@ -97,29 +99,29 @@ export default function RobotHero({
 
     switchedRef.current = true;
     phase.current = 'pointing';
-    console.log('[RobotHero] phase -> pointing');
+    console.debug('[RobotHero] phase -> pointing');
   };
 
-  const startClappingTransition = () => {
-    if (clapTriggeredRef.current) return;
-    if (!pointingRef.current) return;
+  const startRunningTransition = () => {
+    if (runningSwapStartedRef.current) return;
+    if (phase.current !== 'pointing') return;
 
-    clapTriggeredRef.current = true;
-    phase.current = 'turning';
-    turnProgressRef.current = 0;
-    turnStartYawRef.current = pointingRef.current.rotation.y;
-    turnTargetYawRef.current = turnStartYawRef.current + Math.PI;
-    clapOpacityRef.current = 0;
+    runningSwapStartedRef.current = true;
+    phase.current = 'runningTransition';
+    console.debug('[RobotHero] phase -> runningTransition (threshold reached)');
 
-    if (clappingRef.current) {
-      clappingRef.current.visible = true;
-      clappingRef.current.rotation.y = turnStartYawRef.current;
+    if (runningRef.current) {
+      runningRef.current.visible = true;
+      runningRef.current.position.set(
+        RUNNING_START_POSITION[0],
+        RUNNING_START_POSITION[1],
+        RUNNING_START_POSITION[2],
+      );
+      runningRef.current.scale.setScalar(RUNNING_SCALE);
     }
 
-    clappingActionRef.current?.reset().fadeIn(POINTING_TO_CLAP_FADE).play();
-    pointingActionRef.current?.fadeOut(POINTING_TO_CLAP_FADE);
-
-    console.log('[RobotHero] phase -> turning');
+    runningActionRef.current?.reset().fadeIn(0.25).play();
+    pointingActionRef.current?.fadeOut(0.25);
   };
 
   useEffect(() => {
@@ -135,12 +137,12 @@ export default function RobotHero({
       }
     });
 
-    clappingScene.traverse((object) => {
+    runningScene.traverse((object) => {
       if ((object as { isMesh?: boolean }).isMesh) {
         object.frustumCulled = false;
       }
     });
-  }, [fallingScene, pointingScene, clappingScene]);
+  }, [fallingScene, pointingScene, runningScene]);
 
   useEffect(() => {
     const names = Object.keys(fallingActions);
@@ -185,7 +187,7 @@ export default function RobotHero({
 
   useEffect(() => {
     const names = Object.keys(pointingActions);
-    console.log('[RobotHero] PointingBack clips:', names);
+    console.log('PointingBack clips:', names);
 
     const action = pointingActions[names[0]];
     if (!action) return;
@@ -201,13 +203,13 @@ export default function RobotHero({
   }, [pointingActions]);
 
   useEffect(() => {
-    const names = Object.keys(clappingActions);
-    console.log('[RobotHero] Clapping clips:', names);
+    const names = Object.keys(runningActions);
+    console.log('Running clips:', names);
 
-    const action = clappingActions[names[0]];
+    const action = runningActions[names[0]];
     if (!action) return;
 
-    clappingActionRef.current = action;
+    runningActionRef.current = action;
     action.enabled = true;
     action.setLoop(THREE.LoopRepeat, Infinity);
     action.clampWhenFinished = true;
@@ -215,19 +217,16 @@ export default function RobotHero({
     return () => {
       action.fadeOut(0.3);
     };
-  }, [clappingActions]);
+  }, [runningActions]);
 
   useEffect(() => {
     phase.current = 'falling';
     fallingDoneRef.current = false;
     switchedRef.current = false;
-    clapTriggeredRef.current = false;
+    runningSwapStartedRef.current = false;
     fallOpacityRef.current = 1;
     pointOpacityRef.current = 0;
-    clapOpacityRef.current = 0;
-    turnProgressRef.current = 0;
-    turnStartYawRef.current = 0;
-    turnTargetYawRef.current = 0;
+    runOpacityRef.current = 0;
 
     if (fallingRef.current) {
       fallingRef.current.position.set(
@@ -240,12 +239,16 @@ export default function RobotHero({
 
     if (pointingRef.current) {
       pointingRef.current.visible = false;
-      pointingRef.current.rotation.y = 0;
     }
 
-    if (clappingRef.current) {
-      clappingRef.current.visible = false;
-      clappingRef.current.rotation.y = 0;
+    if (runningRef.current) {
+      runningRef.current.visible = false;
+      runningRef.current.position.set(
+        RUNNING_START_POSITION[0],
+        RUNNING_START_POSITION[1],
+        RUNNING_START_POSITION[2],
+      );
+      runningRef.current.scale.setScalar(RUNNING_SCALE);
     }
 
     if (fallingRef.current) {
@@ -254,10 +257,8 @@ export default function RobotHero({
 
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
-    setMeshOpacity(clappingScene, 0);
-
-    console.log('[RobotHero] phase -> falling');
-  }, [fallingScene, pointingScene, clappingScene, fallingTransform]);
+    setMeshOpacity(runningScene, 0);
+  }, [fallingScene, pointingScene, runningScene, fallingTransform]);
 
   useFrame((_, delta) => {
     if (fallingRef.current) {
@@ -275,13 +276,10 @@ export default function RobotHero({
       pointingRef.current.scale.setScalar(pointingTransform.scale);
     }
 
-    if (clappingRef.current) {
-      clappingRef.current.position.set(
-        pointingTransform.position[0],
-        pointingTransform.position[1],
-        pointingTransform.position[2],
-      );
-      clappingRef.current.scale.setScalar(pointingTransform.scale);
+    if (runningRef.current) {
+      runningRef.current.position.x = RUNNING_START_POSITION[0];
+      runningRef.current.position.y = RUNNING_START_POSITION[1];
+      runningRef.current.scale.setScalar(RUNNING_SCALE);
     }
 
     if (!switchedRef.current && phase.current === 'landed' && fallingActionRef.current) {
@@ -291,21 +289,9 @@ export default function RobotHero({
       }
     }
 
-    if (
-      switchedRef.current &&
-      !clapTriggeredRef.current &&
-      phase.current === 'pointing' &&
-      scroll.offset >= CLAP_SCROLL_THRESHOLD
-    ) {
-      console.log(`[RobotHero] scroll threshold reached: ${scroll.offset.toFixed(3)} >= ${CLAP_SCROLL_THRESHOLD}`);
-      startClappingTransition();
-    }
-
     if (switchedRef.current) {
       fallOpacityRef.current = Math.max(0, fallOpacityRef.current - delta / 0.15);
-      if (!clapTriggeredRef.current) {
-        pointOpacityRef.current = Math.min(1, pointOpacityRef.current + delta / 0.15);
-      }
+      pointOpacityRef.current = Math.min(1, pointOpacityRef.current + delta / 0.15);
 
       setMeshOpacity(fallingScene, fallOpacityRef.current);
       setMeshOpacity(pointingScene, pointOpacityRef.current);
@@ -315,34 +301,37 @@ export default function RobotHero({
       }
     }
 
-    if (clapTriggeredRef.current && phase.current === 'turning') {
-      turnProgressRef.current = Math.min(1, turnProgressRef.current + delta / TURN_DURATION);
-      const easedTurn = THREE.MathUtils.smootherstep(turnProgressRef.current, 0, 1);
-      const yaw = THREE.MathUtils.lerp(turnStartYawRef.current, turnTargetYawRef.current, easedTurn);
+    if (!runningSwapStartedRef.current && phase.current === 'pointing') {
+      const isDownwardScroll = scroll.delta > 0;
+      if (isDownwardScroll && scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
+        startRunningTransition();
+      }
+    }
 
-      if (pointingRef.current) pointingRef.current.rotation.y = yaw;
-      if (clappingRef.current) clappingRef.current.rotation.y = yaw;
-
-      pointOpacityRef.current = Math.max(0, pointOpacityRef.current - delta / POINTING_TO_CLAP_FADE);
-      clapOpacityRef.current = Math.min(1, clapOpacityRef.current + delta / POINTING_TO_CLAP_FADE);
+    if (phase.current === 'runningTransition') {
+      pointOpacityRef.current = Math.max(0, pointOpacityRef.current - delta / 0.25);
+      runOpacityRef.current = Math.min(1, runOpacityRef.current + delta / 0.25);
 
       setMeshOpacity(pointingScene, pointOpacityRef.current);
-      setMeshOpacity(clappingScene, clapOpacityRef.current);
+      setMeshOpacity(runningScene, runOpacityRef.current);
 
       if (pointOpacityRef.current <= 0.001 && pointingRef.current) {
         pointingRef.current.visible = false;
       }
 
-      if (turnProgressRef.current >= 1) {
-        phase.current = 'clapping';
-        if (clappingRef.current) clappingRef.current.rotation.y = turnTargetYawRef.current;
-        console.log('[RobotHero] phase -> clapping');
+      if (runOpacityRef.current >= 0.999) {
+        phase.current = 'running';
+        console.debug('[RobotHero] phase -> running');
       }
     }
 
-    if (phase.current === 'clapping') {
-      setMeshOpacity(clappingScene, 1);
-      if (clappingRef.current) clappingRef.current.visible = true;
+    if (phase.current === 'running' && runningRef.current) {
+      runningRef.current.position.z = THREE.MathUtils.damp(
+        runningRef.current.position.z,
+        RUNNING_TARGET_Z,
+        RUNNING_Z_DAMPING,
+        delta,
+      );
     }
   });
 
@@ -361,11 +350,11 @@ export default function RobotHero({
       </group>
 
       <group
-        ref={clappingRef}
-        position={[pointingTransform.position[0], pointingTransform.position[1], pointingTransform.position[2]]}
-        scale={[pointingTransform.scale, pointingTransform.scale, pointingTransform.scale]}
+        ref={runningRef}
+        position={[RUNNING_START_POSITION[0], RUNNING_START_POSITION[1], RUNNING_START_POSITION[2]]}
+        scale={[RUNNING_SCALE, RUNNING_SCALE, RUNNING_SCALE]}
       >
-        <primitive object={clappingScene} />
+        <primitive object={runningScene} />
       </group>
     </>
   );
@@ -374,4 +363,4 @@ export default function RobotHero({
 useGLTF.setDecoderPath(DRACO_DECODER_PATH);
 useGLTF.preload(FALLING_MODEL_PATH);
 useGLTF.preload(POINTING_MODEL_PATH);
-useGLTF.preload(CLAPPING_MODEL_PATH);
+useGLTF.preload(RUNNING_MODEL_PATH);
