@@ -17,6 +17,8 @@ const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
 const RUNNING_TARGET_Z = -1.08;
+const RUNNING_BASE_Z = 0.56;
+const RUNNING_TRAVEL_Z = RUNNING_TARGET_Z - RUNNING_BASE_Z;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_Z_DAMPING = 4.5;
 
@@ -272,7 +274,7 @@ export default function RobotHero({
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
-  }, [fallingScene, pointingScene, runningScene, fallingTransform, runningTransform]);
+  }, [fallingScene, pointingScene, runningScene]);
 
   useFrame((_, delta) => {
     if (fallingRef.current) {
@@ -329,9 +331,10 @@ export default function RobotHero({
     }
 
     if (phase.current === 'running' && runningRef.current) {
+      const dynamicRunningTargetZ = runningTransform.position[2] + RUNNING_TRAVEL_Z;
       runningRef.current.position.z = THREE.MathUtils.damp(
         runningRef.current.position.z,
-        RUNNING_TARGET_Z,
+        dynamicRunningTargetZ,
         RUNNING_Z_DAMPING,
         delta,
       );
