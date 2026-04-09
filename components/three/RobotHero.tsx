@@ -60,9 +60,9 @@ export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
   pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
   runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
-  climbingToLaptopTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
-  cutelySittingTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
-  standingToSittingTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
+  climbingToLaptopTransform = { position: [0.46, 0.27, -0.73], scale: 0.087 },
+  cutelySittingTransform = { position: [0.46, 0.34, -0.66], scale: 0.087 },
+  standingToSittingTransform = { position: [0.46, 0.34, -0.71], scale: 0.087 },
 }: RobotHeroProps) {
   const scroll = useScroll();
 
