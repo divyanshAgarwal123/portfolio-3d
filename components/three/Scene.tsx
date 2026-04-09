@@ -249,15 +249,15 @@ export default function Scene() {
     scale: 0.03,
   });
   const [robotClimbingToLaptop, setRobotClimbingToLaptop] = useState<RobotTransform>({
-    position: [0.46, 0.27, -0.73],
+    position: [0.46, 0.26, -0.73],
     scale: 0.087,
   });
   const [robotCutelySitting, setRobotCutelySitting] = useState<RobotTransform>({
-    position: [0.46, 0.34, -0.66],
+    position: [0.46, 0.33, -0.69],
     scale: 0.087,
   });
   const [robotStandingToSitting, setRobotStandingToSitting] = useState<RobotTransform>({
-    position: [0.46, 0.34, -0.71],
+    position: [0.46, 0.35, -0.68],
     scale: 0.087,
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
