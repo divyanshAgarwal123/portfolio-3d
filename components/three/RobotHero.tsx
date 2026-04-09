@@ -10,7 +10,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
+const RUNNING_MODEL_PATH = '/models/robot_animation/robot_cute_running.glb';
 const CLIMBING_TO_LAPTOP_MODEL_PATH = '/models/robot_animation/robot_climbing_to_laptop.glb';
 const CUTELY_SITTING_MODEL_PATH = '/models/robot_animation/robot_cutely_sitting.glb';
 const STANDING_TO_SITTING_MODEL_PATH = '/models/robot_animation/robot_standing_to_sitting.glb';
