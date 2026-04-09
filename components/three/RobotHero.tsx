@@ -10,14 +10,12 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const RUNNING_MODEL_PATH = '/models/robot_cute_running.glb';
+const RUNNING_MODEL_PATH = '/models/robot_animation/robot_cute_running.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
-const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
-const RUNNING_SCALE = 0.03;
 const RUNNING_TARGET_Z = -1.08;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_Z_DAMPING = 4.5;
@@ -77,6 +75,7 @@ export default function RobotHero({
   const fallingDoneRef = useRef(false);
   const switchedRef = useRef(false);
   const runningSwapStartedRef = useRef(false);
+  const passedRunningThresholdRef = useRef(false);
   const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
@@ -113,11 +112,11 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = true;
       runningRef.current.position.set(
-        RUNNING_START_POSITION[0],
-        RUNNING_START_POSITION[1],
-        RUNNING_START_POSITION[2],
+        pointingTransform.position[0],
+        pointingTransform.position[1],
+        pointingTransform.position[2],
       );
-      runningRef.current.scale.setScalar(RUNNING_SCALE);
+      runningRef.current.scale.setScalar(pointingTransform.scale);
     }
 
     runningActionRef.current?.reset().fadeIn(0.25).play();
@@ -224,6 +223,7 @@ export default function RobotHero({
     fallingDoneRef.current = false;
     switchedRef.current = false;
     runningSwapStartedRef.current = false;
+    passedRunningThresholdRef.current = false;
     fallOpacityRef.current = 1;
     pointOpacityRef.current = 0;
     runOpacityRef.current = 0;
@@ -244,11 +244,11 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = false;
       runningRef.current.position.set(
-        RUNNING_START_POSITION[0],
-        RUNNING_START_POSITION[1],
-        RUNNING_START_POSITION[2],
+        pointingTransform.position[0],
+        pointingTransform.position[1],
+        pointingTransform.position[2],
       );
-      runningRef.current.scale.setScalar(RUNNING_SCALE);
+      runningRef.current.scale.setScalar(pointingTransform.scale);
     }
 
     if (fallingRef.current) {
@@ -258,7 +258,7 @@ export default function RobotHero({
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
-  }, [fallingScene, pointingScene, runningScene, fallingTransform]);
+  }, [fallingScene, pointingScene, runningScene, fallingTransform, pointingTransform]);
 
   useFrame((_, delta) => {
     if (fallingRef.current) {
@@ -277,9 +277,13 @@ export default function RobotHero({
     }
 
     if (runningRef.current) {
-      runningRef.current.position.x = RUNNING_START_POSITION[0];
-      runningRef.current.position.y = RUNNING_START_POSITION[1];
-      runningRef.current.scale.setScalar(RUNNING_SCALE);
+      runningRef.current.position.x = pointingTransform.position[0];
+      runningRef.current.position.y = pointingTransform.position[1];
+      runningRef.current.scale.setScalar(pointingTransform.scale);
+    }
+
+    if (scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
+      passedRunningThresholdRef.current = true;
     }
 
     if (!switchedRef.current && phase.current === 'landed' && fallingActionRef.current) {
@@ -303,7 +307,7 @@ export default function RobotHero({
 
     if (!runningSwapStartedRef.current && phase.current === 'pointing') {
       const isDownwardScroll = scroll.delta > 0;
-      if (isDownwardScroll && scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
+      if (passedRunningThresholdRef.current && (isDownwardScroll || scroll.offset >= RUNNING_SCROLL_THRESHOLD)) {
         startRunningTransition();
       }
     }
@@ -351,8 +355,8 @@ export default function RobotHero({
 
       <group
         ref={runningRef}
-        position={[RUNNING_START_POSITION[0], RUNNING_START_POSITION[1], RUNNING_START_POSITION[2]]}
-        scale={[RUNNING_SCALE, RUNNING_SCALE, RUNNING_SCALE]}
+        position={[pointingTransform.position[0], pointingTransform.position[1], pointingTransform.position[2]]}
+        scale={[pointingTransform.scale, pointingTransform.scale, pointingTransform.scale]}
       >
         <primitive object={runningScene} />
       </group>
