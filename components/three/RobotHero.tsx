@@ -41,6 +41,7 @@ type RobotHeroProps = {
   standingToSittingTransform?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
+  heroStartEnabled?: boolean;
 };
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
@@ -67,6 +68,7 @@ export default function RobotHero({
   standingToSittingTransform = { position: [0.46, 0.35, -0.68], scale: 0.087 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
+  heroStartEnabled = true,
 }: RobotHeroProps) {
   const scroll = useScroll();
 
@@ -424,6 +426,8 @@ export default function RobotHero({
   ]);
 
   useEffect(() => {
+    if (!heroStartEnabled) return;
+
     const names = Object.keys(fallingActions);
     console.log('Falling clips:', names);
 
@@ -462,7 +466,7 @@ export default function RobotHero({
       }
       action.fadeOut(0.3);
     };
-  }, [fallingActions, fallingMixer, pointingTransform.position]);
+  }, [fallingActions, fallingMixer, pointingTransform.position, heroStartEnabled]);
 
   useEffect(() => {
     const names = Object.keys(pointingActions);
@@ -618,10 +622,10 @@ export default function RobotHero({
     }
 
     if (fallingRef.current) {
-      fallingRef.current.visible = true;
+      fallingRef.current.visible = heroStartEnabled;
     }
 
-    setMeshOpacity(fallingScene, 1);
+    setMeshOpacity(fallingScene, heroStartEnabled ? 1 : 0);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
     setMeshOpacity(climbingToLaptopScene, 0);
@@ -634,6 +638,7 @@ export default function RobotHero({
     climbingToLaptopScene,
     cutelySittingScene,
     standingToSittingScene,
+    heroStartEnabled,
   ]);
 
   useEffect(() => {
