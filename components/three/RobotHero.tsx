@@ -16,11 +16,7 @@ const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
-const RUNNING_TARGET_Z = -1.08;
-const RUNNING_BASE_Z = 0.56;
-const RUNNING_TRAVEL_Z = RUNNING_TARGET_Z - RUNNING_BASE_Z;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
-const RUNNING_Z_DAMPING = 4.5;
 
 type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running';
 
@@ -295,10 +291,8 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.position.x = runningTransform.position[0];
       runningRef.current.position.y = runningTransform.position[1];
+      runningRef.current.position.z = runningTransform.position[2];
       runningRef.current.scale.setScalar(runningTransform.scale);
-      if (!runningSwapStartedRef.current) {
-        runningRef.current.position.z = runningTransform.position[2];
-      }
     }
 
     if (scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
@@ -330,15 +324,6 @@ export default function RobotHero({
       }
     }
 
-    if (phase.current === 'running' && runningRef.current) {
-      const dynamicRunningTargetZ = runningTransform.position[2] + RUNNING_TRAVEL_Z;
-      runningRef.current.position.z = THREE.MathUtils.damp(
-        runningRef.current.position.z,
-        dynamicRunningTargetZ,
-        RUNNING_Z_DAMPING,
-        delta,
-      );
-    }
   });
 
   return (
