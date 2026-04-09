@@ -89,6 +89,7 @@ export default function RobotHero({
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
   const runningRef = useRef<THREE.Group>(null);
+  const runningVisualOffsetRef = useRef<THREE.Group>(null);
   const runningMoveTweenRef = useRef<gsap.core.Tween | null>(null);
   const hidePointingCallRef = useRef<gsap.core.Tween | null>(null);
 
@@ -174,6 +175,22 @@ export default function RobotHero({
       }
     });
   }, [fallingScene, pointingScene, runningScene]);
+
+  useEffect(() => {
+    // Align running model's visual anchor to pointing model so same world Z feels identical.
+    const pointingBounds = new THREE.Box3().setFromObject(pointingScene);
+    const runningBounds = new THREE.Box3().setFromObject(runningScene);
+    const pointingCenter = new THREE.Vector3();
+    const runningCenter = new THREE.Vector3();
+    pointingBounds.getCenter(pointingCenter);
+    runningBounds.getCenter(runningCenter);
+
+    const centerDeltaZ = runningCenter.z - pointingCenter.z;
+    if (runningVisualOffsetRef.current) {
+      runningVisualOffsetRef.current.position.z = -centerDeltaZ;
+      console.debug('[RobotHero] Running anchor z offset:', -centerDeltaZ);
+    }
+  }, [pointingScene, runningScene]);
 
   useEffect(() => {
     const names = Object.keys(fallingActions);
@@ -376,7 +393,9 @@ export default function RobotHero({
         position={[RUNNING_START_POSITION[0], RUNNING_START_POSITION[1], RUNNING_START_POSITION[2]]}
         scale={[RUNNING_SCALE, RUNNING_SCALE, RUNNING_SCALE]}
       >
-        <primitive object={runningScene} />
+        <group ref={runningVisualOffsetRef}>
+          <primitive object={runningScene} />
+        </group>
       </group>
     </>
   );
