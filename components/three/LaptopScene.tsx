@@ -28,6 +28,7 @@ type ScrollDrivenLaptopProps = {
   testTransform?: LaptopTestTransform;
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
+  robotWalking?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -40,6 +41,7 @@ function ScrollDrivenLaptop({
   testTransform,
   robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
   robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
+  robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03 },
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -88,6 +90,7 @@ function ScrollDrivenLaptop({
         <RobotHero
           fallingTransform={robotFalling}
           pointingTransform={robotPointingBackwords}
+          runningTransform={robotWalking}
         />
       </Suspense>
     </>
@@ -101,6 +104,7 @@ type LaptopSceneProps = {
   testTransform?: LaptopTestTransform;
   robotPointingBackwords?: RobotTransform;
   robotFalling?: RobotTransform;
+  robotWalking?: RobotTransform;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -113,6 +117,7 @@ export default function LaptopScene({
   testTransform,
   robotPointingBackwords,
   robotFalling,
+  robotWalking,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -126,6 +131,7 @@ export default function LaptopScene({
         testTransform={testTransform}
         robotPointingBackwords={robotPointingBackwords}
         robotFalling={robotFalling}
+        robotWalking={robotWalking}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}

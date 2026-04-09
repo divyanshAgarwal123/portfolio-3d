@@ -30,6 +30,7 @@ type RobotTransform = {
 type RobotHeroProps = {
   fallingTransform?: RobotTransform;
   pointingTransform?: RobotTransform;
+  runningTransform?: RobotTransform;
 };
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
@@ -50,6 +51,7 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
 export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
   pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
+  runningTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
 }: RobotHeroProps) {
   const scroll = useScroll();
 
@@ -103,24 +105,36 @@ export default function RobotHero({
 
   const startRunningTransition = () => {
     if (runningSwapStartedRef.current) return;
-    if (phase.current !== 'pointing') return;
 
     runningSwapStartedRef.current = true;
-    phase.current = 'runningTransition';
-    console.debug('[RobotHero] phase -> runningTransition (threshold reached)');
+    phase.current = 'running';
+    console.debug('[RobotHero] phase -> running (threshold reached)');
+
+    fallingActionRef.current?.fadeOut(0.15);
+    pointingActionRef.current?.fadeOut(0.15);
+    if (fallingRef.current) {
+      gsap.killTweensOf(fallingRef.current.position);
+      fallingRef.current.visible = false;
+    }
+    if (pointingRef.current) {
+      pointingRef.current.visible = false;
+    }
+    setMeshOpacity(fallingScene, 0);
+    setMeshOpacity(pointingScene, 0);
 
     if (runningRef.current) {
       runningRef.current.visible = true;
       runningRef.current.position.set(
-        pointingTransform.position[0],
-        pointingTransform.position[1],
-        pointingTransform.position[2],
+        runningTransform.position[0],
+        runningTransform.position[1],
+        runningTransform.position[2],
       );
-      runningRef.current.scale.setScalar(pointingTransform.scale);
+      runningRef.current.scale.setScalar(runningTransform.scale);
     }
 
+    runOpacityRef.current = 1;
+    setMeshOpacity(runningScene, 1);
     runningActionRef.current?.reset().fadeIn(0.25).play();
-    pointingActionRef.current?.fadeOut(0.25);
   };
 
   useEffect(() => {
@@ -244,11 +258,11 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = false;
       runningRef.current.position.set(
-        pointingTransform.position[0],
-        pointingTransform.position[1],
-        pointingTransform.position[2],
+        runningTransform.position[0],
+        runningTransform.position[1],
+        runningTransform.position[2],
       );
-      runningRef.current.scale.setScalar(pointingTransform.scale);
+      runningRef.current.scale.setScalar(runningTransform.scale);
     }
 
     if (fallingRef.current) {
@@ -258,7 +272,7 @@ export default function RobotHero({
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
-  }, [fallingScene, pointingScene, runningScene, fallingTransform, pointingTransform]);
+  }, [fallingScene, pointingScene, runningScene, fallingTransform, runningTransform]);
 
   useFrame((_, delta) => {
     if (fallingRef.current) {
@@ -277,9 +291,12 @@ export default function RobotHero({
     }
 
     if (runningRef.current) {
-      runningRef.current.position.x = pointingTransform.position[0];
-      runningRef.current.position.y = pointingTransform.position[1];
-      runningRef.current.scale.setScalar(pointingTransform.scale);
+      runningRef.current.position.x = runningTransform.position[0];
+      runningRef.current.position.y = runningTransform.position[1];
+      runningRef.current.scale.setScalar(runningTransform.scale);
+      if (!runningSwapStartedRef.current) {
+        runningRef.current.position.z = runningTransform.position[2];
+      }
     }
 
     if (scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
@@ -305,27 +322,9 @@ export default function RobotHero({
       }
     }
 
-    if (!runningSwapStartedRef.current && phase.current === 'pointing') {
-      const isDownwardScroll = scroll.delta > 0;
-      if (passedRunningThresholdRef.current && (isDownwardScroll || scroll.offset >= RUNNING_SCROLL_THRESHOLD)) {
+    if (!runningSwapStartedRef.current) {
+      if (passedRunningThresholdRef.current) {
         startRunningTransition();
-      }
-    }
-
-    if (phase.current === 'runningTransition') {
-      pointOpacityRef.current = Math.max(0, pointOpacityRef.current - delta / 0.25);
-      runOpacityRef.current = Math.min(1, runOpacityRef.current + delta / 0.25);
-
-      setMeshOpacity(pointingScene, pointOpacityRef.current);
-      setMeshOpacity(runningScene, runOpacityRef.current);
-
-      if (pointOpacityRef.current <= 0.001 && pointingRef.current) {
-        pointingRef.current.visible = false;
-      }
-
-      if (runOpacityRef.current >= 0.999) {
-        phase.current = 'running';
-        console.debug('[RobotHero] phase -> running');
       }
     }
 
@@ -355,8 +354,8 @@ export default function RobotHero({
 
       <group
         ref={runningRef}
-        position={[pointingTransform.position[0], pointingTransform.position[1], pointingTransform.position[2]]}
-        scale={[pointingTransform.scale, pointingTransform.scale, pointingTransform.scale]}
+        position={[runningTransform.position[0], runningTransform.position[1], runningTransform.position[2]]}
+        scale={[runningTransform.scale, runningTransform.scale, runningTransform.scale]}
       >
         <primitive object={runningScene} />
       </group>

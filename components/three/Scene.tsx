@@ -49,6 +49,7 @@ function WireframeFloors() {
 type SceneContentProps = {
   robotPointingBackwords: RobotTransform;
   robotFalling: RobotTransform;
+  robotWalking: RobotTransform;
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
@@ -59,6 +60,7 @@ type SceneContentProps = {
 function SceneContent({
   robotPointingBackwords,
   robotFalling,
+  robotWalking,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -72,6 +74,7 @@ function SceneContent({
       <LaptopScene
         robotPointingBackwords={robotPointingBackwords}
         robotFalling={robotFalling}
+        robotWalking={robotWalking}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
@@ -225,6 +228,10 @@ export default function Scene() {
     scale: 0.03,
   });
   const [robotFalling, setRobotFalling] = useState<RobotTransform>({ position: [0, 0.3, 0.49], scale: 0.03 });
+  const [robotWalking, setRobotWalking] = useState<RobotTransform>({
+    position: [0.004, -0.36, 0.56],
+    scale: 0.03,
+  });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
@@ -248,6 +255,7 @@ export default function Scene() {
           value={robotPointingBackwords}
           onChange={setRobotPointingBackwords}
         />
+        <RobotControlPanel label="RobotWalkingTexting" value={robotWalking} onChange={setRobotWalking} />
       </div>
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
@@ -261,6 +269,7 @@ export default function Scene() {
           <SceneContent
             robotPointingBackwords={robotPointingBackwords}
             robotFalling={robotFalling}
+            robotWalking={robotWalking}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
