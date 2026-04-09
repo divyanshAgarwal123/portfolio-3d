@@ -10,18 +10,18 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
+const RUNNING_MODEL_PATH = '/public/models/robot_cute_running.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
-const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
-const RUNNING_SCALE = 0.03;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
+const RUNNING_START_X = 0.004;
+const RUNNING_START_Y = -0.36;
+const RUNNING_START_Z = 0.56;
+const RUNNING_SCALE = 0.03;
 const RUNNING_END_Z = -1.08;
-const RUNNING_MOVE_DURATION = 2.8;
-const RUNNING_CLIP_NAME = '';
 
 type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running';
 
@@ -54,7 +54,7 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
 export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
   pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
-  runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
+  runningTransform = { position: [0.004, -0.36, 0.56], scale: 0.03 },
 }: RobotHeroProps) {
   const scroll = useScroll();
 
@@ -81,6 +81,8 @@ export default function RobotHero({
   const switchedRef = useRef(false);
   const runningSwapStartedRef = useRef(false);
   const passedRunningThresholdRef = useRef(false);
+  const runningTweenRef = useRef<gsap.core.Tween | null>(null);
+  const hidePointingRef = useRef<gsap.core.Tween | null>(null);
   const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
@@ -89,9 +91,6 @@ export default function RobotHero({
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
   const runningRef = useRef<THREE.Group>(null);
-  const runningVisualOffsetRef = useRef<THREE.Group>(null);
-  const runningMoveTweenRef = useRef<gsap.core.Tween | null>(null);
-  const hidePointingCallRef = useRef<gsap.core.Tween | null>(null);
 
   const startPointingTransition = () => {
     if (switchedRef.current) return;
@@ -111,22 +110,15 @@ export default function RobotHero({
 
   const startRunningTransition = () => {
     if (runningSwapStartedRef.current) return;
+    if (phase.current !== 'pointing') return;
 
     runningSwapStartedRef.current = true;
     phase.current = 'running';
     console.debug('[RobotHero] phase -> running (threshold reached)');
 
-    pointingActionRef.current?.fadeOut(0.25);
-    gsap.to(pointOpacityRef, {
-      current: 0,
-      duration: 0.25,
-      ease: 'power2.out',
-      onUpdate: () => {
-        setMeshOpacity(pointingScene, pointOpacityRef.current);
-      },
-    });
-    hidePointingCallRef.current?.kill();
-    hidePointingCallRef.current = gsap.delayedCall(0.25, () => {
+    pointingActionRef.current?.fadeOut(0.2);
+    hidePointingRef.current?.kill();
+    hidePointingRef.current = gsap.delayedCall(0.2, () => {
       if (pointingRef.current) {
         pointingRef.current.visible = false;
       }
@@ -135,25 +127,25 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = true;
       runningRef.current.position.set(
-        RUNNING_START_POSITION[0],
-        RUNNING_START_POSITION[1],
-        RUNNING_START_POSITION[2],
+        RUNNING_START_X,
+        RUNNING_START_Y,
+        RUNNING_START_Z,
       );
       runningRef.current.scale.setScalar(RUNNING_SCALE);
+
+      runningTweenRef.current?.kill();
+      gsap.killTweensOf(runningRef.current.position);
+      runningTweenRef.current = gsap.to(runningRef.current.position, {
+        z: RUNNING_END_Z,
+        duration: 3,
+        ease: 'none',
+      });
     }
 
     runOpacityRef.current = 1;
     setMeshOpacity(runningScene, 1);
-    runningActionRef.current?.reset().fadeIn(0.25).play();
-
-    if (runningRef.current) {
-      runningMoveTweenRef.current?.kill();
-      runningMoveTweenRef.current = gsap.to(runningRef.current.position, {
-        z: RUNNING_END_Z,
-        duration: RUNNING_MOVE_DURATION,
-        ease: 'none',
-      });
-    }
+    runningActionRef.current?.setLoop(THREE.LoopRepeat, Infinity);
+    runningActionRef.current?.reset().fadeIn(0.2).play();
   };
 
   useEffect(() => {
@@ -175,22 +167,6 @@ export default function RobotHero({
       }
     });
   }, [fallingScene, pointingScene, runningScene]);
-
-  useEffect(() => {
-    // Align running model's visual anchor to pointing model so same world Z feels identical.
-    const pointingBounds = new THREE.Box3().setFromObject(pointingScene);
-    const runningBounds = new THREE.Box3().setFromObject(runningScene);
-    const pointingCenter = new THREE.Vector3();
-    const runningCenter = new THREE.Vector3();
-    pointingBounds.getCenter(pointingCenter);
-    runningBounds.getCenter(runningCenter);
-
-    const centerDeltaZ = runningCenter.z - pointingCenter.z;
-    if (runningVisualOffsetRef.current) {
-      runningVisualOffsetRef.current.position.z = -centerDeltaZ;
-      console.debug('[RobotHero] Running anchor z offset:', -centerDeltaZ);
-    }
-  }, [pointingScene, runningScene]);
 
   useEffect(() => {
     const names = Object.keys(fallingActions);
@@ -254,12 +230,7 @@ export default function RobotHero({
     const names = Object.keys(runningActions);
     console.log('Running clips:', names);
 
-    const resolvedClipName = RUNNING_CLIP_NAME && runningActions[RUNNING_CLIP_NAME]
-      ? RUNNING_CLIP_NAME
-      : names[0];
-    console.log('[RobotHero] Running clip selected:', resolvedClipName);
-
-    const action = runningActions[resolvedClipName];
+    const action = runningActions[names[0]];
     if (!action) return;
 
     runningActionRef.current = action;
@@ -271,6 +242,16 @@ export default function RobotHero({
       action.fadeOut(0.3);
     };
   }, [runningActions]);
+
+  useEffect(() => {
+    return () => {
+      runningTweenRef.current?.kill();
+      hidePointingRef.current?.kill();
+      if (runningRef.current) {
+        gsap.killTweensOf(runningRef.current.position);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     phase.current = 'falling';
@@ -298,9 +279,9 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = false;
       runningRef.current.position.set(
-        RUNNING_START_POSITION[0],
-        RUNNING_START_POSITION[1],
-        RUNNING_START_POSITION[2],
+        RUNNING_START_X,
+        RUNNING_START_Y,
+        RUNNING_START_Z,
       );
       runningRef.current.scale.setScalar(RUNNING_SCALE);
     }
@@ -331,9 +312,12 @@ export default function RobotHero({
     }
 
     if (runningRef.current) {
-      runningRef.current.position.x = RUNNING_START_POSITION[0];
-      runningRef.current.position.y = RUNNING_START_POSITION[1];
       runningRef.current.scale.setScalar(RUNNING_SCALE);
+      if (!runningSwapStartedRef.current) {
+        runningRef.current.position.x = RUNNING_START_X;
+        runningRef.current.position.y = RUNNING_START_Y;
+        runningRef.current.position.z = RUNNING_START_Z;
+      }
     }
 
     if (scroll.offset >= RUNNING_SCROLL_THRESHOLD) {
@@ -359,20 +343,11 @@ export default function RobotHero({
       }
     }
 
-    if (!runningSwapStartedRef.current && phase.current === 'pointing') {
-      if (passedRunningThresholdRef.current) {
-        startRunningTransition();
-      }
+    if (scroll.offset >= RUNNING_SCROLL_THRESHOLD && phase.current === 'pointing') {
+      startRunningTransition();
     }
 
   });
-
-  useEffect(() => {
-    return () => {
-      runningMoveTweenRef.current?.kill();
-      hidePointingCallRef.current?.kill();
-    };
-  }, []);
 
   return (
     <>
@@ -390,12 +365,10 @@ export default function RobotHero({
 
       <group
         ref={runningRef}
-        position={[RUNNING_START_POSITION[0], RUNNING_START_POSITION[1], RUNNING_START_POSITION[2]]}
+        position={[RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z]}
         scale={[RUNNING_SCALE, RUNNING_SCALE, RUNNING_SCALE]}
       >
-        <group ref={runningVisualOffsetRef}>
-          <primitive object={runningScene} />
-        </group>
+        <primitive object={runningScene} />
       </group>
     </>
   );
