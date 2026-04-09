@@ -10,7 +10,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const RUNNING_MODEL_PATH = '/public/models/robot_cute_running.glb';
+const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
@@ -119,7 +119,9 @@ export default function RobotHero({
       fallingRef.current.visible = false;
     }
     setMeshOpacity(fallingScene, 0);
-    setMeshOpacity(pointingScene, 0);
+    pointOpacityRef.current = 1;
+    runOpacityRef.current = 0;
+    setMeshOpacity(pointingScene, 1);
 
     if (pointingRef.current) {
       gsap.to({}, {
@@ -149,8 +151,7 @@ export default function RobotHero({
       });
     }
 
-    runOpacityRef.current = 1;
-    setMeshOpacity(runningScene, 1);
+    setMeshOpacity(runningScene, 0);
     runningActionRef.current?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.2).play();
   };
 
@@ -331,7 +332,7 @@ export default function RobotHero({
       }
     }
 
-    if (switchedRef.current) {
+    if (switchedRef.current && phase.current !== 'running') {
       fallOpacityRef.current = Math.max(0, fallOpacityRef.current - delta / 0.15);
       pointOpacityRef.current = Math.min(1, pointOpacityRef.current + delta / 0.15);
 
@@ -340,6 +341,18 @@ export default function RobotHero({
 
       if (fallOpacityRef.current <= 0.001 && fallingRef.current) {
         fallingRef.current.visible = false;
+      }
+    }
+
+    if (phase.current === 'running') {
+      pointOpacityRef.current = Math.max(0, pointOpacityRef.current - delta / 0.2);
+      runOpacityRef.current = Math.min(1, runOpacityRef.current + delta / 0.2);
+
+      setMeshOpacity(pointingScene, pointOpacityRef.current);
+      setMeshOpacity(runningScene, runOpacityRef.current);
+
+      if (pointOpacityRef.current <= 0.001 && pointingRef.current) {
+        pointingRef.current.visible = false;
       }
     }
 
