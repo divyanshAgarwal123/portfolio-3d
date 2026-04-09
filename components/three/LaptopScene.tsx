@@ -32,6 +32,8 @@ type ScrollDrivenLaptopProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
+  manualClimbingSequence?: boolean;
+  climbingSequenceStep?: number;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -48,6 +50,8 @@ function ScrollDrivenLaptop({
   robotClimbingToLaptop = { position: [0.46, 0.27, -0.73], scale: 0.087 },
   robotCutelySitting = { position: [0.46, 0.34, -0.66], scale: 0.087 },
   robotStandingToSitting = { position: [0.46, 0.34, -0.71], scale: 0.087 },
+  manualClimbingSequence = false,
+  climbingSequenceStep = 0,
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
@@ -100,6 +104,8 @@ function ScrollDrivenLaptop({
           climbingToLaptopTransform={robotClimbingToLaptop}
           cutelySittingTransform={robotCutelySitting}
           standingToSittingTransform={robotStandingToSitting}
+          manualClimbingSequence={manualClimbingSequence}
+          climbingSequenceStep={climbingSequenceStep}
         />
       </Suspense>
     </>
@@ -117,6 +123,8 @@ type LaptopSceneProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
+  manualClimbingSequence?: boolean;
+  climbingSequenceStep?: number;
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
@@ -133,6 +141,8 @@ export default function LaptopScene({
   robotClimbingToLaptop,
   robotCutelySitting,
   robotStandingToSitting,
+  manualClimbingSequence,
+  climbingSequenceStep,
   laptopScale,
   laptopPosition,
   laptopRotation,
@@ -150,6 +160,8 @@ export default function LaptopScene({
         robotClimbingToLaptop={robotClimbingToLaptop}
         robotCutelySitting={robotCutelySitting}
         robotStandingToSitting={robotStandingToSitting}
+        manualClimbingSequence={manualClimbingSequence}
+        climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}

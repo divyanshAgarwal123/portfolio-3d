@@ -39,6 +39,8 @@ type RobotHeroProps = {
   climbingToLaptopTransform?: RobotTransform;
   cutelySittingTransform?: RobotTransform;
   standingToSittingTransform?: RobotTransform;
+  manualClimbingSequence?: boolean;
+  climbingSequenceStep?: number;
 };
 
 function setMeshOpacity(root: THREE.Object3D, opacity: number) {
@@ -63,6 +65,8 @@ export default function RobotHero({
   climbingToLaptopTransform = { position: [0.46, 0.27, -0.73], scale: 0.087 },
   cutelySittingTransform = { position: [0.46, 0.34, -0.66], scale: 0.087 },
   standingToSittingTransform = { position: [0.46, 0.34, -0.71], scale: 0.087 },
+  manualClimbingSequence = false,
+  climbingSequenceStep = 0,
 }: RobotHeroProps) {
   const scroll = useScroll();
 
@@ -110,6 +114,7 @@ export default function RobotHero({
   const switchedRef = useRef(false);
   const runningSwapStartedRef = useRef(false);
   const climbingPhaseStartedRef = useRef(false);
+  const manualClimbingStageRef = useRef<-1 | 0 | 1 | 2>(-1);
   const runningTweenRef = useRef<gsap.core.Tween | null>(null);
   const climbingSequenceCleanupRef = useRef<(() => void) | null>(null);
   const fallClipDurationRef = useRef(0);
@@ -123,6 +128,50 @@ export default function RobotHero({
   const climbingToLaptopRef = useRef<THREE.Group>(null);
   const cutelySittingRef = useRef<THREE.Group>(null);
   const standingToSittingRef = useRef<THREE.Group>(null);
+
+  const transitionToStandingPhase = () => {
+    const climbAction = climbingToLaptopActionRef.current;
+    const standAction = standingToSittingActionRef.current;
+    if (!climbAction || !standAction) return;
+
+    climbAction.fadeOut(0.2);
+    if (climbingToLaptopRef.current) {
+      climbingToLaptopRef.current.visible = false;
+    }
+    setMeshOpacity(climbingToLaptopScene, 0);
+
+    if (standingToSittingRef.current) {
+      standingToSittingRef.current.visible = true;
+    }
+    setMeshOpacity(standingToSittingScene, 1);
+
+    standAction.enabled = true;
+    standAction.setLoop(manualClimbingSequence ? THREE.LoopRepeat : THREE.LoopOnce, manualClimbingSequence ? Infinity : 1);
+    standAction.clampWhenFinished = true;
+    standAction.reset().fadeIn(0.2).play();
+  };
+
+  const transitionToSittingPhase = () => {
+    const standAction = standingToSittingActionRef.current;
+    const sitAction = cutelySittingActionRef.current;
+    if (!standAction || !sitAction) return;
+
+    standAction.fadeOut(0.2);
+    if (standingToSittingRef.current) {
+      standingToSittingRef.current.visible = false;
+    }
+    setMeshOpacity(standingToSittingScene, 0);
+
+    if (cutelySittingRef.current) {
+      cutelySittingRef.current.visible = true;
+    }
+    setMeshOpacity(cutelySittingScene, 1);
+
+    sitAction.enabled = true;
+    sitAction.setLoop(THREE.LoopRepeat, Infinity);
+    sitAction.clampWhenFinished = true;
+    sitAction.reset().fadeIn(0.2).play();
+  };
 
   const startPointingTransition = () => {
     if (switchedRef.current) return;
@@ -229,48 +278,27 @@ export default function RobotHero({
     setMeshOpacity(cutelySittingScene, 0);
 
     climbAction.enabled = true;
-    climbAction.setLoop(THREE.LoopOnce, 1);
+    climbAction.setLoop(manualClimbingSequence ? THREE.LoopRepeat : THREE.LoopOnce, manualClimbingSequence ? Infinity : 1);
     climbAction.clampWhenFinished = true;
     climbAction.reset().fadeIn(0.2).play();
+
+    if (manualClimbingSequence) {
+      manualClimbingStageRef.current = 0;
+      return;
+    }
+
+    manualClimbingStageRef.current = -1;
 
     const onClimbFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
       if (event.action !== climbAction) return;
 
-      climbAction.fadeOut(0.2);
-      if (climbingToLaptopRef.current) {
-        climbingToLaptopRef.current.visible = false;
-      }
-      setMeshOpacity(climbingToLaptopScene, 0);
-
-      if (standingToSittingRef.current) {
-        standingToSittingRef.current.visible = true;
-      }
-      setMeshOpacity(standingToSittingScene, 1);
-
-      standAction.enabled = true;
-      standAction.setLoop(THREE.LoopOnce, 1);
-      standAction.clampWhenFinished = true;
-      standAction.reset().fadeIn(0.2).play();
+      transitionToStandingPhase();
     };
 
     const onStandFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
       if (event.action !== standAction) return;
 
-      standAction.fadeOut(0.2);
-      if (standingToSittingRef.current) {
-        standingToSittingRef.current.visible = false;
-      }
-      setMeshOpacity(standingToSittingScene, 0);
-
-      if (cutelySittingRef.current) {
-        cutelySittingRef.current.visible = true;
-      }
-      setMeshOpacity(cutelySittingScene, 1);
-
-      sitAction.enabled = true;
-      sitAction.setLoop(THREE.LoopRepeat, Infinity);
-      sitAction.clampWhenFinished = true;
-      sitAction.reset().fadeIn(0.2).play();
+      transitionToSittingPhase();
     };
 
     climbingToLaptopMixer.addEventListener('finished', onClimbFinished);
@@ -281,6 +309,22 @@ export default function RobotHero({
       standingToSittingMixer.removeEventListener('finished', onStandFinished);
     };
   };
+
+  useEffect(() => {
+    if (!manualClimbingSequence) return;
+    if (phase.current !== 'climbing') return;
+
+    if (climbingSequenceStep >= 1 && manualClimbingStageRef.current === 0) {
+      transitionToStandingPhase();
+      manualClimbingStageRef.current = 1;
+      return;
+    }
+
+    if (climbingSequenceStep >= 2 && manualClimbingStageRef.current === 1) {
+      transitionToSittingPhase();
+      manualClimbingStageRef.current = 2;
+    }
+  }, [manualClimbingSequence, climbingSequenceStep]);
 
   useEffect(() => {
     fallingScene.traverse((object) => {
@@ -459,6 +503,7 @@ export default function RobotHero({
     switchedRef.current = false;
     runningSwapStartedRef.current = false;
     climbingPhaseStartedRef.current = false;
+    manualClimbingStageRef.current = -1;
     runningTweenRef.current?.kill();
     climbingSequenceCleanupRef.current?.();
     climbingSequenceCleanupRef.current = null;
