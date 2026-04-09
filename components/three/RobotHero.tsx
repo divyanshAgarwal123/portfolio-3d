@@ -15,6 +15,7 @@ const RUNNING_START_X = 0.004;
 const RUNNING_START_Y = -0.36;
 const RUNNING_START_Z = 0.56;
 const RUNNING_END_Z = -1.08;
+const RUNNING_MODEL_Z_OFFSET = 1.63;
 const RUNNING_Z_DURATION = 3.5;
 const POINT_FADE_DURATION = 0.2;
 const RUN_FADE_DURATION = 0.2;
@@ -129,7 +130,11 @@ export default function RobotHero({
 
     if (runningRef.current) {
       runningRef.current.visible = true;
-      runningRef.current.position.set(RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z);
+      runningRef.current.position.set(
+        RUNNING_START_X,
+        RUNNING_START_Y,
+        RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
+      );
     }
     setMeshOpacity(runningScene, 1);
 
@@ -141,7 +146,7 @@ export default function RobotHero({
 
     if (runningRef.current) {
       gsap.to(runningRef.current.position, {
-        z: RUNNING_END_Z,
+        z: RUNNING_END_Z + RUNNING_MODEL_Z_OFFSET,
         duration: RUNNING_Z_DURATION,
         ease: RUN_EASE,
       });
@@ -266,7 +271,11 @@ export default function RobotHero({
 
     if (runningRef.current) {
       runningRef.current.visible = false;
-      runningRef.current.position.set(RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z);
+      runningRef.current.position.set(
+        RUNNING_START_X,
+        RUNNING_START_Y,
+        RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
+      );
       runningRef.current.scale.setScalar(0.03);
     }
 
@@ -282,7 +291,11 @@ export default function RobotHero({
   useEffect(() => {
     if (!runningRef.current) return;
     runningRef.current.visible = false;
-    runningRef.current.position.set(RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z);
+    runningRef.current.position.set(
+      RUNNING_START_X,
+      RUNNING_START_Y,
+      RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
+    );
     runningRef.current.scale.setScalar(0.03);
   }, []);
 
@@ -354,7 +367,7 @@ export default function RobotHero({
 
       <group
         ref={runningRef}
-        position={[RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z]}
+        position={[RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET]}
         scale={[0.03, 0.03, 0.03]}
       >
         <primitive object={runningScene} />
