@@ -17,7 +17,7 @@ const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
-const RUNNING_END_Z = 1.15;
+const RUNNING_END_Z = 2.16;
 const RUNNING_Z_DAMPING = 4.5;
 
 type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running';
