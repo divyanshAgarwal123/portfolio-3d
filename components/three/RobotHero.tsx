@@ -131,10 +131,11 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = true;
       runningRef.current.position.set(
-        RUNNING_START_X,
-        RUNNING_START_Y,
-        RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
+        runningTransform.position[0],
+        runningTransform.position[1],
+        runningTransform.position[2] + RUNNING_MODEL_Z_OFFSET,
       );
+      runningRef.current.scale.setScalar(runningTransform.scale);
     }
     setMeshOpacity(runningScene, 1);
 
@@ -272,11 +273,11 @@ export default function RobotHero({
     if (runningRef.current) {
       runningRef.current.visible = false;
       runningRef.current.position.set(
-        RUNNING_START_X,
-        RUNNING_START_Y,
-        RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
+        runningTransform.position[0],
+        runningTransform.position[1],
+        runningTransform.position[2] + RUNNING_MODEL_Z_OFFSET,
       );
-      runningRef.current.scale.setScalar(0.03);
+      runningRef.current.scale.setScalar(runningTransform.scale);
     }
 
     if (fallingRef.current) {
@@ -287,17 +288,6 @@ export default function RobotHero({
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
   }, [fallingScene, pointingScene, runningScene]);
-
-  useEffect(() => {
-    if (!runningRef.current) return;
-    runningRef.current.visible = false;
-    runningRef.current.position.set(
-      RUNNING_START_X,
-      RUNNING_START_Y,
-      RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET,
-    );
-    runningRef.current.scale.setScalar(0.03);
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -321,6 +311,16 @@ export default function RobotHero({
         pointingTransform.position[2],
       );
       pointingRef.current.scale.setScalar(pointingTransform.scale);
+    }
+
+    if (runningRef.current) {
+      runningRef.current.position.x = runningTransform.position[0];
+      runningRef.current.position.y = runningTransform.position[1];
+      runningRef.current.scale.setScalar(runningTransform.scale);
+
+      if (phase.current !== 'running') {
+        runningRef.current.position.z = runningTransform.position[2] + RUNNING_MODEL_Z_OFFSET;
+      }
     }
 
     void delta;
@@ -367,8 +367,12 @@ export default function RobotHero({
 
       <group
         ref={runningRef}
-        position={[RUNNING_START_X, RUNNING_START_Y, RUNNING_START_Z + RUNNING_MODEL_Z_OFFSET]}
-        scale={[0.03, 0.03, 0.03]}
+        position={[
+          runningTransform.position[0],
+          runningTransform.position[1],
+          runningTransform.position[2] + RUNNING_MODEL_Z_OFFSET,
+        ]}
+        scale={[runningTransform.scale, runningTransform.scale, runningTransform.scale]}
       >
         <primitive object={runningScene} />
       </group>
