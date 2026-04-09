@@ -2,7 +2,7 @@
 
 import { ScrollControls, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import Laptop from './Laptop';
 import RobotHero from './RobotHero';

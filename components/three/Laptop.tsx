@@ -75,5 +75,4 @@ export default function Laptop({
 }
 
 useGLTF.setDecoderPath(DRACO_DECODER_PATH);
-useGLTF.preload('/public/models/laptop.glb');
 useGLTF.preload(MODEL_PATH);
