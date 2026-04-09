@@ -284,6 +284,13 @@ export default function Scene() {
             <button
               type="button"
               className="rounded border border-neutral-300 bg-white px-2 py-1"
+              onClick={() => setClimbingSequenceStep((prev) => Math.max(prev - 1, 0))}
+            >
+              Previous Scene
+            </button>
+            <button
+              type="button"
+              className="rounded border border-neutral-300 bg-white px-2 py-1"
               onClick={() => setClimbingSequenceStep((prev) => Math.min(prev + 1, 2))}
             >
               Next Scene
