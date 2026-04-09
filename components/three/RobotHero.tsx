@@ -10,7 +10,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
 const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
-const RUNNING_MODEL_PATH = '/models/robot_animation/robot_cute_running.glb?v=20260410';
+const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
 const CLIMBING_TO_LAPTOP_MODEL_PATH = '/models/robot_animation/robot_climbing_to_laptop.glb';
 const CUTELY_SITTING_MODEL_PATH = '/models/robot_animation/robot_cutely_sitting.glb';
 const STANDING_TO_SITTING_MODEL_PATH = '/models/robot_animation/robot_standing_to_sitting.glb';
@@ -23,8 +23,9 @@ const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
 const RUNNING_SCALE = 0.03;
 const RUNNING_TARGET_Z = 1.08;
+const CLIMBING_SCROLL_THRESHOLD = 0.60;
 
-type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running';
+type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running' | 'climbing';
 
 type RobotTransform = {
   position: [number, number, number];
@@ -85,9 +86,15 @@ export default function RobotHero({
   );
   const { actions: pointingActions } = useAnimations(pointingGltf.animations, pointingScene);
   const { actions: runningActions } = useAnimations(runningGltf.animations, runningScene);
-  const { actions: climbingToLaptopActions } = useAnimations(climbingToLaptopGltf.animations, climbingToLaptopScene);
-  const { actions: cutelySittingActions } = useAnimations(cutelySittingGltf.animations, cutelySittingScene);
-  const { actions: standingToSittingActions } = useAnimations(
+  const { actions: climbingToLaptopActions, mixer: climbingToLaptopMixer } = useAnimations(
+    climbingToLaptopGltf.animations,
+    climbingToLaptopScene,
+  );
+  const { actions: cutelySittingActions, mixer: cutelySittingMixer } = useAnimations(
+    cutelySittingGltf.animations,
+    cutelySittingScene,
+  );
+  const { actions: standingToSittingActions, mixer: standingToSittingMixer } = useAnimations(
     standingToSittingGltf.animations,
     standingToSittingScene,
   );
@@ -102,7 +109,9 @@ export default function RobotHero({
   const fallingDoneRef = useRef(false);
   const switchedRef = useRef(false);
   const runningSwapStartedRef = useRef(false);
+  const climbingPhaseStartedRef = useRef(false);
   const runningTweenRef = useRef<gsap.core.Tween | null>(null);
+  const climbingSequenceCleanupRef = useRef<(() => void) | null>(null);
   const fallClipDurationRef = useRef(0);
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
@@ -180,6 +189,97 @@ export default function RobotHero({
 
     setMeshOpacity(runningScene, 0);
     runningActionRef.current?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.2).play();
+  };
+
+  const startClimbingSequence = () => {
+    if (climbingPhaseStartedRef.current) return;
+    if (phase.current !== 'running') return;
+
+    const climbAction = climbingToLaptopActionRef.current;
+    const standAction = standingToSittingActionRef.current;
+    const sitAction = cutelySittingActionRef.current;
+    if (!climbAction || !standAction || !sitAction) return;
+
+    phase.current = 'climbing';
+    climbingPhaseStartedRef.current = true;
+    console.debug('[RobotHero] phase -> climbing (threshold reached)');
+
+    runningTweenRef.current?.kill();
+    runningTweenRef.current = null;
+    runningActionRef.current?.fadeOut(0.2);
+
+    if (runningRef.current) {
+      runningRef.current.visible = false;
+    }
+    setMeshOpacity(runningScene, 0);
+    runOpacityRef.current = 0;
+
+    if (climbingToLaptopRef.current) {
+      climbingToLaptopRef.current.visible = true;
+    }
+    if (standingToSittingRef.current) {
+      standingToSittingRef.current.visible = false;
+    }
+    if (cutelySittingRef.current) {
+      cutelySittingRef.current.visible = false;
+    }
+
+    setMeshOpacity(climbingToLaptopScene, 1);
+    setMeshOpacity(standingToSittingScene, 0);
+    setMeshOpacity(cutelySittingScene, 0);
+
+    climbAction.enabled = true;
+    climbAction.setLoop(THREE.LoopOnce, 1);
+    climbAction.clampWhenFinished = true;
+    climbAction.reset().fadeIn(0.2).play();
+
+    const onClimbFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
+      if (event.action !== climbAction) return;
+
+      climbAction.fadeOut(0.2);
+      if (climbingToLaptopRef.current) {
+        climbingToLaptopRef.current.visible = false;
+      }
+      setMeshOpacity(climbingToLaptopScene, 0);
+
+      if (standingToSittingRef.current) {
+        standingToSittingRef.current.visible = true;
+      }
+      setMeshOpacity(standingToSittingScene, 1);
+
+      standAction.enabled = true;
+      standAction.setLoop(THREE.LoopOnce, 1);
+      standAction.clampWhenFinished = true;
+      standAction.reset().fadeIn(0.2).play();
+    };
+
+    const onStandFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
+      if (event.action !== standAction) return;
+
+      standAction.fadeOut(0.2);
+      if (standingToSittingRef.current) {
+        standingToSittingRef.current.visible = false;
+      }
+      setMeshOpacity(standingToSittingScene, 0);
+
+      if (cutelySittingRef.current) {
+        cutelySittingRef.current.visible = true;
+      }
+      setMeshOpacity(cutelySittingScene, 1);
+
+      sitAction.enabled = true;
+      sitAction.setLoop(THREE.LoopRepeat, Infinity);
+      sitAction.clampWhenFinished = true;
+      sitAction.reset().fadeIn(0.2).play();
+    };
+
+    climbingToLaptopMixer.addEventListener('finished', onClimbFinished);
+    standingToSittingMixer.addEventListener('finished', onStandFinished);
+
+    climbingSequenceCleanupRef.current = () => {
+      climbingToLaptopMixer.removeEventListener('finished', onClimbFinished);
+      standingToSittingMixer.removeEventListener('finished', onStandFinished);
+    };
   };
 
   useEffect(() => {
@@ -311,9 +411,8 @@ export default function RobotHero({
 
     climbingToLaptopActionRef.current = action;
     action.enabled = true;
-    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.setLoop(THREE.LoopOnce, 1);
     action.clampWhenFinished = true;
-    action.reset().fadeIn(0.2).play();
 
     return () => {
       action.fadeOut(0.2);
@@ -331,7 +430,6 @@ export default function RobotHero({
     action.enabled = true;
     action.setLoop(THREE.LoopRepeat, Infinity);
     action.clampWhenFinished = true;
-    action.reset().fadeIn(0.2).play();
 
     return () => {
       action.fadeOut(0.2);
@@ -347,9 +445,8 @@ export default function RobotHero({
 
     standingToSittingActionRef.current = action;
     action.enabled = true;
-    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.setLoop(THREE.LoopOnce, 1);
     action.clampWhenFinished = true;
-    action.reset().fadeIn(0.2).play();
 
     return () => {
       action.fadeOut(0.2);
@@ -361,7 +458,10 @@ export default function RobotHero({
     fallingDoneRef.current = false;
     switchedRef.current = false;
     runningSwapStartedRef.current = false;
+    climbingPhaseStartedRef.current = false;
     runningTweenRef.current?.kill();
+    climbingSequenceCleanupRef.current?.();
+    climbingSequenceCleanupRef.current = null;
     runningTweenRef.current = null;
     fallOpacityRef.current = 1;
     pointOpacityRef.current = 0;
@@ -391,7 +491,7 @@ export default function RobotHero({
     }
 
     if (climbingToLaptopRef.current) {
-      climbingToLaptopRef.current.visible = true;
+      climbingToLaptopRef.current.visible = false;
       climbingToLaptopRef.current.position.set(
         climbingToLaptopTransform.position[0],
         climbingToLaptopTransform.position[1],
@@ -401,7 +501,7 @@ export default function RobotHero({
     }
 
     if (cutelySittingRef.current) {
-      cutelySittingRef.current.visible = true;
+      cutelySittingRef.current.visible = false;
       cutelySittingRef.current.position.set(
         cutelySittingTransform.position[0],
         cutelySittingTransform.position[1],
@@ -411,7 +511,7 @@ export default function RobotHero({
     }
 
     if (standingToSittingRef.current) {
-      standingToSittingRef.current.visible = true;
+      standingToSittingRef.current.visible = false;
       standingToSittingRef.current.position.set(
         standingToSittingTransform.position[0],
         standingToSittingTransform.position[1],
@@ -427,9 +527,9 @@ export default function RobotHero({
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
-    setMeshOpacity(climbingToLaptopScene, 1);
-    setMeshOpacity(cutelySittingScene, 1);
-    setMeshOpacity(standingToSittingScene, 1);
+    setMeshOpacity(climbingToLaptopScene, 0);
+    setMeshOpacity(cutelySittingScene, 0);
+    setMeshOpacity(standingToSittingScene, 0);
   }, [
     fallingScene,
     pointingScene,
@@ -445,6 +545,8 @@ export default function RobotHero({
   useEffect(() => {
     return () => {
       runningTweenRef.current?.kill();
+      climbingSequenceCleanupRef.current?.();
+      climbingSequenceCleanupRef.current = null;
       runningTweenRef.current = null;
     };
   }, []);
@@ -530,6 +632,14 @@ export default function RobotHero({
       if (pointOpacityRef.current <= 0.001 && pointingRef.current) {
         pointingRef.current.visible = false;
       }
+    }
+
+    if (
+      !climbingPhaseStartedRef.current
+      && scroll.offset >= CLIMBING_SCROLL_THRESHOLD
+      && phase.current === 'running'
+    ) {
+      startClimbingSequence();
     }
 
     if (!runningSwapStartedRef.current && scroll.offset >= RUNNING_SCROLL_THRESHOLD && phase.current === 'pointing') {
