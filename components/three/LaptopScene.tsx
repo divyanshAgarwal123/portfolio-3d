@@ -4,6 +4,7 @@ import { ScrollControls, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import BackgroundRobotArm from './BackgroundRobotArm';
 import Laptop from './Laptop';
 import RobotHero from './RobotHero';
 
@@ -32,7 +33,7 @@ type ScrollDrivenLaptopProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
-  basicRobotArm?: RobotTransform;
+  backgroundRobotArm?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -51,7 +52,7 @@ function ScrollDrivenLaptop({
   robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087 },
   robotCutelySitting = { position: [0.46, 0.33, -0.69], scale: 0.087 },
   robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087 },
-  basicRobotArm = { position: [0.0, -0.36, 0.56], scale: 0.03 },
+  backgroundRobotArm = { position: [0, -0.36, 0.56], scale: 0.002 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   laptopScale = 0.04,
@@ -140,7 +141,6 @@ function ScrollDrivenLaptop({
           climbingToLaptopTransform={robotClimbingToLaptop}
           cutelySittingTransform={robotCutelySitting}
           standingToSittingTransform={robotStandingToSitting}
-          basicRobotArmTransform={basicRobotArm}
           manualClimbingSequence={manualClimbingSequence}
           climbingSequenceStep={climbingSequenceStep}
           climbingStartReady={climbingStartReady}
@@ -162,7 +162,7 @@ type LaptopSceneProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
-  basicRobotArm?: RobotTransform;
+  backgroundRobotArm?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -181,7 +181,7 @@ export default function LaptopScene({
   robotClimbingToLaptop,
   robotCutelySitting,
   robotStandingToSitting,
-  basicRobotArm,
+  backgroundRobotArm,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -189,25 +189,30 @@ export default function LaptopScene({
   laptopRotation,
 }: LaptopSceneProps) {
   return (
-    <ScrollControls pages={4} damping={0.3}>
-      <ScrollDrivenLaptop
-        onScrollChange={onScrollChange}
-        onScrollDirectionChange={onScrollDirectionChange}
-        testMode={testMode}
-        testTransform={testTransform}
-        robotPointingBackwords={robotPointingBackwords}
-        robotFalling={robotFalling}
-        robotWalking={robotWalking}
-        robotClimbingToLaptop={robotClimbingToLaptop}
-        robotCutelySitting={robotCutelySitting}
-        robotStandingToSitting={robotStandingToSitting}
-        basicRobotArm={basicRobotArm}
-        manualClimbingSequence={manualClimbingSequence}
-        climbingSequenceStep={climbingSequenceStep}
-        laptopScale={laptopScale}
-        laptopPosition={laptopPosition}
-        laptopRotation={laptopRotation}
-      />
-    </ScrollControls>
+    <>
+      <Suspense fallback={null}>
+        <BackgroundRobotArm transform={backgroundRobotArm} />
+      </Suspense>
+      <ScrollControls pages={4} damping={0.3}>
+        <ScrollDrivenLaptop
+          onScrollChange={onScrollChange}
+          onScrollDirectionChange={onScrollDirectionChange}
+          testMode={testMode}
+          testTransform={testTransform}
+          robotPointingBackwords={robotPointingBackwords}
+          robotFalling={robotFalling}
+          robotWalking={robotWalking}
+          robotClimbingToLaptop={robotClimbingToLaptop}
+          robotCutelySitting={robotCutelySitting}
+          robotStandingToSitting={robotStandingToSitting}
+          backgroundRobotArm={backgroundRobotArm}
+          manualClimbingSequence={manualClimbingSequence}
+          climbingSequenceStep={climbingSequenceStep}
+          laptopScale={laptopScale}
+          laptopPosition={laptopPosition}
+          laptopRotation={laptopRotation}
+        />
+      </ScrollControls>
+    </>
   );
 }

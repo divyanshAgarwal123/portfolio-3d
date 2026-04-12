@@ -53,7 +53,7 @@ type SceneContentProps = {
   robotClimbingToLaptop: RobotTransform;
   robotCutelySitting: RobotTransform;
   robotStandingToSitting: RobotTransform;
-  basicRobotArm: RobotTransform;
+  backgroundRobotArm: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
@@ -70,7 +70,7 @@ function SceneContent({
   robotClimbingToLaptop,
   robotCutelySitting,
   robotStandingToSitting,
-  basicRobotArm,
+  backgroundRobotArm,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -90,7 +90,7 @@ function SceneContent({
         robotClimbingToLaptop={robotClimbingToLaptop}
         robotCutelySitting={robotCutelySitting}
         robotStandingToSitting={robotStandingToSitting}
-        basicRobotArm={basicRobotArm}
+        backgroundRobotArm={backgroundRobotArm}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
@@ -239,6 +239,138 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   );
 }
 
+type BackgroundRobotArmControlPanelProps = {
+  value: RobotTransform;
+  onChange: (next: RobotTransform) => void;
+};
+
+function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmControlPanelProps) {
+  return (
+    <>
+      <p className="mt-3 font-semibold">BackgroundRobotArm</p>
+      <p className="mt-1">Scale: {value.scale.toFixed(4)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={0}
+        max={0.1}
+        step={0.0001}
+        value={value.scale}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            scale: Number(event.target.value),
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={0}
+        max={0.1}
+        step={0.0001}
+        value={value.scale}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            scale: Number(event.target.value),
+          })
+        }
+      />
+
+      <p className="mt-2">X: {value.position[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [Number(event.target.value), value.position[1], value.position[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [Number(event.target.value), value.position[1], value.position[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Y: {value.position[1].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], Number(event.target.value), value.position[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], Number(event.target.value), value.position[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Z: {value.position[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], value.position[1], Number(event.target.value)],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-20}
+        max={20}
+        step={0.01}
+        value={value.position[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], value.position[1], Number(event.target.value)],
+          })
+        }
+      />
+    </>
+  );
+}
+
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
@@ -262,9 +394,9 @@ export default function Scene() {
     position: [0.46, 0.35, -0.68],
     scale: 0.087,
   });
-  const [basicRobotArm, setBasicRobotArm] = useState<RobotTransform>({
+  const [backgroundRobotArm, setBackgroundRobotArm] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
-    scale: 0.03,
+    scale: 0.002,
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
@@ -301,7 +433,7 @@ export default function Scene() {
           value={robotStandingToSitting}
           onChange={setRobotStandingToSitting}
         />
-        <RobotControlPanel label="BasicRobotArm" value={basicRobotArm} onChange={setBasicRobotArm} />
+        <BackgroundRobotArmControlPanel value={backgroundRobotArm} onChange={setBackgroundRobotArm} />
       </div>
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
@@ -319,7 +451,7 @@ export default function Scene() {
             robotClimbingToLaptop={robotClimbingToLaptop}
             robotCutelySitting={robotCutelySitting}
             robotStandingToSitting={robotStandingToSitting}
-            basicRobotArm={basicRobotArm}
+            backgroundRobotArm={backgroundRobotArm}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
