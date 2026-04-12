@@ -238,9 +238,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
 
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const [climbingSequenceStep, setClimbingSequenceStep] = useState(0);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
-    position: [0.004, -0.36, 0.56],
+    position: [0, -0.36, 0.56],
     scale: 0.03,
   });
   const [robotFalling, setRobotFalling] = useState<RobotTransform>({ position: [0, 0.3, 0.49], scale: 0.03 });
@@ -277,33 +276,6 @@ export default function Scene() {
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
       <div className="pointer-events-auto fixed left-4 top-4 z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
         <p className="font-semibold">Robots</p>
-        <div className="mt-2 rounded border border-neutral-300 bg-neutral-50 p-2">
-          <p className="font-semibold">Climbing Sequence Debug</p>
-          <p className="mt-1">Current Step: {climbingSequenceStep}</p>
-          <div className="mt-2 flex gap-2">
-            <button
-              type="button"
-              className="rounded border border-neutral-300 bg-white px-2 py-1"
-              onClick={() => setClimbingSequenceStep((prev) => Math.max(prev - 1, 0))}
-            >
-              Previous Scene
-            </button>
-            <button
-              type="button"
-              className="rounded border border-neutral-300 bg-white px-2 py-1"
-              onClick={() => setClimbingSequenceStep((prev) => Math.min(prev + 1, 2))}
-            >
-              Next Scene
-            </button>
-            <button
-              type="button"
-              className="rounded border border-neutral-300 bg-white px-2 py-1"
-              onClick={() => setClimbingSequenceStep(0)}
-            >
-              Reset
-            </button>
-          </div>
-        </div>
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
           label="RobotPointingBackwords"
@@ -344,8 +316,6 @@ export default function Scene() {
             laptopRotation={laptopRotation}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}
-            manualClimbingSequence
-            climbingSequenceStep={climbingSequenceStep}
           />
         </Canvas>
       </Suspense>

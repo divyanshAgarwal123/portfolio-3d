@@ -44,7 +44,7 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
+  robotPointingBackwords = { position: [0, -0.36, 0.56], scale: 0.03 },
   robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
   robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03 },
   robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087 },

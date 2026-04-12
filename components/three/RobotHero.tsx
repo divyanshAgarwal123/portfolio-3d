@@ -10,7 +10,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
-const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
+const POINTING_MODEL_PATH = '/models/basic_robot_arm.glb';
 const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
 const CLIMBING_TO_LAPTOP_MODEL_PATH = '/models/robot_animation/robot_climbing_to_laptop.glb';
 const CUTELY_SITTING_MODEL_PATH = '/models/robot_animation/robot_cutely_sitting.glb';
@@ -62,7 +62,7 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
 
 export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
-  pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
+  pointingTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
   runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
   climbingToLaptopTransform = { position: [0.46, 0.26, -0.73], scale: 0.087 },
   cutelySittingTransform = { position: [0.46, 0.33, -0.69], scale: 0.087 },
