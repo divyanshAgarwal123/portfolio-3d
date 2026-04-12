@@ -18,7 +18,7 @@ type BackgroundRobotArmProps = {
 };
 
 export default function BackgroundRobotArm({
-  transform = { position: [0, -0.36, 0.56], scale: 0.002 },
+  transform = { position: [0.9, -0.36, -0.44], scale: 0.0003 },
 }: BackgroundRobotArmProps) {
   const gltf = useGLTF(ROBOT_ARM_MODEL_PATH, DRACO_DECODER_PATH);
   const armScene = useMemo(() => clone(gltf.scene), [gltf.scene]);

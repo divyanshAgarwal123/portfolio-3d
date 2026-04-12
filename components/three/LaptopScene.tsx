@@ -52,7 +52,7 @@ function ScrollDrivenLaptop({
   robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087 },
   robotCutelySitting = { position: [0.46, 0.33, -0.69], scale: 0.087 },
   robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087 },
-  backgroundRobotArm = { position: [0, -0.36, 0.56], scale: 0.002 },
+  backgroundRobotArm = { position: [0.9, -0.36, -0.44], scale: 0.0003 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   laptopScale = 0.04,

@@ -395,8 +395,8 @@ export default function Scene() {
     scale: 0.087,
   });
   const [backgroundRobotArm, setBackgroundRobotArm] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.002,
+    position: [0.9, -0.36, -0.44],
+    scale: 0.0003,
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
