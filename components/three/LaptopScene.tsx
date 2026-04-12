@@ -32,6 +32,7 @@ type ScrollDrivenLaptopProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
+  basicRobotArm?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -44,12 +45,13 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotPointingBackwords = { position: [0, -0.36, 0.56], scale: 0.03 },
+  robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
   robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
   robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03 },
   robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087 },
   robotCutelySitting = { position: [0.46, 0.33, -0.69], scale: 0.087 },
   robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087 },
+  basicRobotArm = { position: [0.0, -0.36, 0.56], scale: 0.03 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   laptopScale = 0.04,
@@ -138,6 +140,7 @@ function ScrollDrivenLaptop({
           climbingToLaptopTransform={robotClimbingToLaptop}
           cutelySittingTransform={robotCutelySitting}
           standingToSittingTransform={robotStandingToSitting}
+          basicRobotArmTransform={basicRobotArm}
           manualClimbingSequence={manualClimbingSequence}
           climbingSequenceStep={climbingSequenceStep}
           climbingStartReady={climbingStartReady}
@@ -159,6 +162,7 @@ type LaptopSceneProps = {
   robotClimbingToLaptop?: RobotTransform;
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
+  basicRobotArm?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -177,6 +181,7 @@ export default function LaptopScene({
   robotClimbingToLaptop,
   robotCutelySitting,
   robotStandingToSitting,
+  basicRobotArm,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -196,6 +201,7 @@ export default function LaptopScene({
         robotClimbingToLaptop={robotClimbingToLaptop}
         robotCutelySitting={robotCutelySitting}
         robotStandingToSitting={robotStandingToSitting}
+        basicRobotArm={basicRobotArm}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}

@@ -10,11 +10,12 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
-const POINTING_MODEL_PATH = '/models/basic_robot_arm.glb';
+const POINTING_MODEL_PATH = '/models/robot_cute_pointing_back.glb';
 const RUNNING_MODEL_PATH = '/models/robot_animation/robot_walking_while_texting copy.glb';
 const CLIMBING_TO_LAPTOP_MODEL_PATH = '/models/robot_animation/robot_climbing_to_laptop.glb';
 const CUTELY_SITTING_MODEL_PATH = '/models/robot_animation/robot_cutely_sitting.glb';
 const STANDING_TO_SITTING_MODEL_PATH = '/models/robot_animation/robot_standing_to_sitting.glb';
+const BASIC_ROBOT_ARM_MODEL_PATH = '/models/basic_robot_arm.glb';
 const FALL_START_Y = 0.30;
 const LAND_Y = -0.36;
 const ROBOT_X = 0;
@@ -40,6 +41,7 @@ type RobotHeroProps = {
   climbingToLaptopTransform?: RobotTransform;
   cutelySittingTransform?: RobotTransform;
   standingToSittingTransform?: RobotTransform;
+  basicRobotArmTransform?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   climbingStartReady?: boolean;
@@ -62,11 +64,12 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
 
 export default function RobotHero({
   fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
-  pointingTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
+  pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
   runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
   climbingToLaptopTransform = { position: [0.46, 0.26, -0.73], scale: 0.087 },
   cutelySittingTransform = { position: [0.46, 0.33, -0.69], scale: 0.087 },
   standingToSittingTransform = { position: [0.46, 0.35, -0.68], scale: 0.087 },
+  basicRobotArmTransform = { position: [0.0, -0.36, 0.56], scale: 0.03 },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   climbingStartReady = true,
@@ -79,6 +82,7 @@ export default function RobotHero({
   const climbingToLaptopGltf = useGLTF(CLIMBING_TO_LAPTOP_MODEL_PATH, DRACO_DECODER_PATH);
   const cutelySittingGltf = useGLTF(CUTELY_SITTING_MODEL_PATH, DRACO_DECODER_PATH);
   const standingToSittingGltf = useGLTF(STANDING_TO_SITTING_MODEL_PATH, DRACO_DECODER_PATH);
+  const basicRobotArmGltf = useGLTF(BASIC_ROBOT_ARM_MODEL_PATH, DRACO_DECODER_PATH);
 
   const fallingScene = useMemo(() => clone(fallingGltf.scene), [fallingGltf.scene]);
   const pointingScene = useMemo(() => clone(pointingGltf.scene), [pointingGltf.scene]);
@@ -86,6 +90,7 @@ export default function RobotHero({
   const climbingToLaptopScene = useMemo(() => clone(climbingToLaptopGltf.scene), [climbingToLaptopGltf.scene]);
   const cutelySittingScene = useMemo(() => clone(cutelySittingGltf.scene), [cutelySittingGltf.scene]);
   const standingToSittingScene = useMemo(() => clone(standingToSittingGltf.scene), [standingToSittingGltf.scene]);
+  const basicRobotArmScene = useMemo(() => clone(basicRobotArmGltf.scene), [basicRobotArmGltf.scene]);
 
   const { actions: fallingActions, mixer: fallingMixer } = useAnimations(
     fallingGltf.animations,
@@ -132,6 +137,7 @@ export default function RobotHero({
   const climbingToLaptopRef = useRef<THREE.Group>(null);
   const cutelySittingRef = useRef<THREE.Group>(null);
   const standingToSittingRef = useRef<THREE.Group>(null);
+  const basicRobotArmRef = useRef<THREE.Group>(null);
 
   const stopSceneBlendTween = () => {
     sceneBlendTweenRef.current?.kill();
@@ -455,6 +461,12 @@ export default function RobotHero({
         object.frustumCulled = false;
       }
     });
+
+    basicRobotArmScene.traverse((object) => {
+      if ((object as { isMesh?: boolean }).isMesh) {
+        object.frustumCulled = false;
+      }
+    });
   }, [
     fallingScene,
     pointingScene,
@@ -462,6 +474,7 @@ export default function RobotHero({
     climbingToLaptopScene,
     cutelySittingScene,
     standingToSittingScene,
+    basicRobotArmScene,
   ]);
 
   useEffect(() => {
@@ -663,6 +676,16 @@ export default function RobotHero({
       fallingRef.current.visible = true;
     }
 
+    if (basicRobotArmRef.current) {
+      basicRobotArmRef.current.visible = true;
+      basicRobotArmRef.current.position.set(
+        basicRobotArmTransform.position[0],
+        basicRobotArmTransform.position[1],
+        basicRobotArmTransform.position[2],
+      );
+      basicRobotArmRef.current.scale.setScalar(basicRobotArmTransform.scale);
+    }
+
     setMeshOpacity(fallingScene, 1);
     setMeshOpacity(pointingScene, 0);
     setMeshOpacity(runningScene, 0);
@@ -676,6 +699,7 @@ export default function RobotHero({
     climbingToLaptopScene,
     cutelySittingScene,
     standingToSittingScene,
+    basicRobotArmTransform,
   ]);
 
   useEffect(() => {
@@ -738,6 +762,15 @@ export default function RobotHero({
         standingToSittingTransform.position[2],
       );
       standingToSittingRef.current.scale.setScalar(standingToSittingTransform.scale);
+    }
+
+    if (basicRobotArmRef.current) {
+      basicRobotArmRef.current.position.set(
+        basicRobotArmTransform.position[0],
+        basicRobotArmTransform.position[1],
+        basicRobotArmTransform.position[2],
+      );
+      basicRobotArmRef.current.scale.setScalar(basicRobotArmTransform.scale);
     }
 
     if (!switchedRef.current && phase.current === 'landed' && fallingActionRef.current) {
@@ -847,6 +880,22 @@ export default function RobotHero({
       >
         <primitive object={standingToSittingScene} />
       </group>
+
+      <group
+        ref={basicRobotArmRef}
+        position={[
+          basicRobotArmTransform.position[0],
+          basicRobotArmTransform.position[1],
+          basicRobotArmTransform.position[2],
+        ]}
+        scale={[
+          basicRobotArmTransform.scale,
+          basicRobotArmTransform.scale,
+          basicRobotArmTransform.scale,
+        ]}
+      >
+        <primitive object={basicRobotArmScene} />
+      </group>
     </>
   );
 }
@@ -858,3 +907,4 @@ useGLTF.preload(RUNNING_MODEL_PATH);
 useGLTF.preload(CLIMBING_TO_LAPTOP_MODEL_PATH);
 useGLTF.preload(CUTELY_SITTING_MODEL_PATH);
 useGLTF.preload(STANDING_TO_SITTING_MODEL_PATH);
+useGLTF.preload(BASIC_ROBOT_ARM_MODEL_PATH);
