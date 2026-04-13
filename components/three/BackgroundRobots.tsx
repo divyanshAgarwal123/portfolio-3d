@@ -8,6 +8,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 type BackgroundRobotProps = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
 };
 
 type BackgroundRobotsProps = {
@@ -29,7 +30,7 @@ const ROBOT_TELLING_SECRET_PATH = '/models/robot_telling_secret.glb';
 const ROBOT_PUSHUP_PATH = '/models/robot_pushup.glb';
 const ROBOT_NERVOUS_LOOK_AROUND_PATH = '/models/robot_nervous_look_around.glb';
 
-function BaseBackgroundRobot({ modelPath, label, position, scale }: BaseBackgroundRobotProps) {
+function BaseBackgroundRobot({ modelPath, label, position, scale, rotation }: BaseBackgroundRobotProps) {
   const gltf = useGLTF(modelPath, DRACO_DECODER_PATH);
   const scene = useMemo(() => clone(gltf.scene), [gltf.scene]);
   const { actions } = useAnimations(gltf.animations, scene);
@@ -64,7 +65,7 @@ function BaseBackgroundRobot({ modelPath, label, position, scale }: BaseBackgrou
   }, [actions, gltf.animations, label]);
 
   return (
-    <group position={position} scale={[scale, scale, scale]}>
+    <group position={position} rotation={rotation} scale={[scale, scale, scale]}>
       <primitive object={scene} />
     </group>
   );
@@ -117,10 +118,10 @@ export function RobotNervousLookAround(props: BackgroundRobotProps) {
 }
 
 export default function BackgroundRobots({
-  thinkingTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
-  tellingSecretTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
-  pushupTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
-  nervousLookAroundTransform = { position: [0, -0.36, 0.56], scale: 0.03 },
+  thinkingTransform = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
+  tellingSecretTransform = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
+  pushupTransform = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
+  nervousLookAroundTransform = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
 }: BackgroundRobotsProps) {
   return (
     <>

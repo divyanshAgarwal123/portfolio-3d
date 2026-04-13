@@ -21,6 +21,7 @@ type LaptopTestTransform = {
 type RobotTransform = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
 };
 
 type ScrollDrivenLaptopProps = {
@@ -51,13 +52,13 @@ function ScrollDrivenLaptop({
   onScrollDirectionChange,
   testMode = false,
   testTransform,
-  robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03 },
-  robotFalling = { position: [0, 0.3, 0.49], scale: 0.03 },
-  robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03 },
-  robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087 },
-  robotCutelySitting = { position: [0.46, 0.33, -0.69], scale: 0.087 },
-  robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087 },
-  backgroundRobotArm = { position: [0.9, -0.36, -0.44], scale: 0.0003 },
+  robotPointingBackwords = { position: [0, -0.36, 0.49], scale: 0.03, rotation: [0, 0, 0] },
+  robotFalling = { position: [0, 0.3, 0.49], scale: 0.03, rotation: [0, 0, 0] },
+  robotWalking = { position: [0.004, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
+  robotClimbingToLaptop = { position: [0.46, 0.26, -0.73], scale: 0.087, rotation: [0, 0, 0] },
+  robotCutelySitting = { position: [0.46, 0.33, -0.69], scale: 0.087, rotation: [0, 0, 0] },
+  robotStandingToSitting = { position: [0.46, 0.35, -0.68], scale: 0.087, rotation: [0, 0, 0] },
+  backgroundRobotArm = { position: [0.9, -0.36, -0.44], scale: 0.0003, rotation: [0, 0, 0] },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   laptopScale = 0.04,

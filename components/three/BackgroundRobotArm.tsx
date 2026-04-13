@@ -11,6 +11,7 @@ const ROBOT_ARM_MODEL_PATH = '/models/basic_robot_arm.glb';
 type RobotArmTransform = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
 };
 
 type BackgroundRobotArmProps = {
@@ -18,7 +19,7 @@ type BackgroundRobotArmProps = {
 };
 
 export default function BackgroundRobotArm({
-  transform = { position: [0.9, -0.36, -0.44], scale: 0.0003 },
+  transform = { position: [0.9, -0.36, -0.44], scale: 0.0003, rotation: [0, 0, 0] },
 }: BackgroundRobotArmProps) {
   const gltf = useGLTF(ROBOT_ARM_MODEL_PATH, DRACO_DECODER_PATH);
   const armScene = useMemo(() => clone(gltf.scene), [gltf.scene]);
@@ -58,7 +59,7 @@ export default function BackgroundRobotArm({
     <group
       position={[transform.position[0], transform.position[1], transform.position[2]]}
       scale={[transform.scale, transform.scale, transform.scale]}
-      rotation={[0, 0, 0]}
+      rotation={[transform.rotation[0], transform.rotation[1], transform.rotation[2]]}
     >
       <primitive object={armScene} />
     </group>

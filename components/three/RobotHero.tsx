@@ -31,6 +31,7 @@ type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'runn
 type RobotTransform = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
 };
 
 type RobotHeroProps = {
@@ -61,12 +62,12 @@ function setMeshOpacity(root: THREE.Object3D, opacity: number) {
 }
 
 export default function RobotHero({
-  fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE },
-  pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE },
-  runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE },
-  climbingToLaptopTransform = { position: [0.46, 0.26, -0.73], scale: 0.087 },
-  cutelySittingTransform = { position: [0.46, 0.33, -0.69], scale: 0.087 },
-  standingToSittingTransform = { position: [0.46, 0.35, -0.68], scale: 0.087 },
+  fallingTransform = { position: [ROBOT_X, FALL_START_Y, ROBOT_Z], scale: ROBOT_SCALE, rotation: [0, 0, 0] },
+  pointingTransform = { position: [ROBOT_X, LAND_Y, ROBOT_Z], scale: ROBOT_SCALE, rotation: [0, 0, 0] },
+  runningTransform = { position: RUNNING_START_POSITION, scale: RUNNING_SCALE, rotation: [0, 0, 0] },
+  climbingToLaptopTransform = { position: [0.46, 0.26, -0.73], scale: 0.087, rotation: [0, 0, 0] },
+  cutelySittingTransform = { position: [0.46, 0.33, -0.69], scale: 0.087, rotation: [0, 0, 0] },
+  standingToSittingTransform = { position: [0.46, 0.35, -0.68], scale: 0.087, rotation: [0, 0, 0] },
   manualClimbingSequence = false,
   climbingSequenceStep = 0,
   climbingStartReady = true,
@@ -612,6 +613,11 @@ export default function RobotHero({
         fallingTransform.position[1],
         fallingTransform.position[2],
       );
+      fallingRef.current.rotation.set(
+        fallingTransform.rotation[0],
+        fallingTransform.rotation[1],
+        fallingTransform.rotation[2],
+      );
       fallingRef.current.scale.setScalar(fallingTransform.scale);
     }
 
@@ -626,6 +632,11 @@ export default function RobotHero({
         RUNNING_START_POSITION[1],
         RUNNING_START_POSITION[2],
       );
+      runningRef.current.rotation.set(
+        runningTransform.rotation[0],
+        runningTransform.rotation[1],
+        runningTransform.rotation[2],
+      );
       runningRef.current.scale.setScalar(RUNNING_SCALE);
     }
 
@@ -635,6 +646,11 @@ export default function RobotHero({
         climbingToLaptopTransform.position[0],
         climbingToLaptopTransform.position[1],
         climbingToLaptopTransform.position[2],
+      );
+      climbingToLaptopRef.current.rotation.set(
+        climbingToLaptopTransform.rotation[0],
+        climbingToLaptopTransform.rotation[1],
+        climbingToLaptopTransform.rotation[2],
       );
       climbingToLaptopRef.current.scale.setScalar(climbingToLaptopTransform.scale);
     }
@@ -646,6 +662,11 @@ export default function RobotHero({
         cutelySittingTransform.position[1],
         cutelySittingTransform.position[2],
       );
+      cutelySittingRef.current.rotation.set(
+        cutelySittingTransform.rotation[0],
+        cutelySittingTransform.rotation[1],
+        cutelySittingTransform.rotation[2],
+      );
       cutelySittingRef.current.scale.setScalar(cutelySittingTransform.scale);
     }
 
@@ -655,6 +676,11 @@ export default function RobotHero({
         standingToSittingTransform.position[0],
         standingToSittingTransform.position[1],
         standingToSittingTransform.position[2],
+      );
+      standingToSittingRef.current.rotation.set(
+        standingToSittingTransform.rotation[0],
+        standingToSittingTransform.rotation[1],
+        standingToSittingTransform.rotation[2],
       );
       standingToSittingRef.current.scale.setScalar(standingToSittingTransform.scale);
     }
@@ -692,6 +718,11 @@ export default function RobotHero({
     if (fallingRef.current) {
       fallingRef.current.position.x = fallingTransform.position[0];
       fallingRef.current.position.z = fallingTransform.position[2];
+      fallingRef.current.rotation.set(
+        fallingTransform.rotation[0],
+        fallingTransform.rotation[1],
+        fallingTransform.rotation[2],
+      );
       fallingRef.current.scale.setScalar(fallingTransform.scale);
     }
 
@@ -701,10 +732,20 @@ export default function RobotHero({
         pointingTransform.position[1],
         pointingTransform.position[2],
       );
+      pointingRef.current.rotation.set(
+        pointingTransform.rotation[0],
+        pointingTransform.rotation[1],
+        pointingTransform.rotation[2],
+      );
       pointingRef.current.scale.setScalar(pointingTransform.scale);
     }
 
     if (runningRef.current) {
+      runningRef.current.rotation.set(
+        runningTransform.rotation[0],
+        runningTransform.rotation[1],
+        runningTransform.rotation[2],
+      );
       if (phase.current !== 'running') {
         runningRef.current.position.x = RUNNING_START_POSITION[0];
         runningRef.current.position.y = RUNNING_START_POSITION[1];
@@ -719,6 +760,11 @@ export default function RobotHero({
         climbingToLaptopTransform.position[1],
         climbingToLaptopTransform.position[2],
       );
+      climbingToLaptopRef.current.rotation.set(
+        climbingToLaptopTransform.rotation[0],
+        climbingToLaptopTransform.rotation[1],
+        climbingToLaptopTransform.rotation[2],
+      );
       climbingToLaptopRef.current.scale.setScalar(climbingToLaptopTransform.scale);
     }
 
@@ -728,6 +774,11 @@ export default function RobotHero({
         cutelySittingTransform.position[1],
         cutelySittingTransform.position[2],
       );
+      cutelySittingRef.current.rotation.set(
+        cutelySittingTransform.rotation[0],
+        cutelySittingTransform.rotation[1],
+        cutelySittingTransform.rotation[2],
+      );
       cutelySittingRef.current.scale.setScalar(cutelySittingTransform.scale);
     }
 
@@ -736,6 +787,11 @@ export default function RobotHero({
         standingToSittingTransform.position[0],
         standingToSittingTransform.position[1],
         standingToSittingTransform.position[2],
+      );
+      standingToSittingRef.current.rotation.set(
+        standingToSittingTransform.rotation[0],
+        standingToSittingTransform.rotation[1],
+        standingToSittingTransform.rotation[2],
       );
       standingToSittingRef.current.scale.setScalar(standingToSittingTransform.scale);
     }
@@ -795,6 +851,7 @@ export default function RobotHero({
       <group
         ref={pointingRef}
         position={[pointingTransform.position[0], pointingTransform.position[1], pointingTransform.position[2]]}
+        rotation={[pointingTransform.rotation[0], pointingTransform.rotation[1], pointingTransform.rotation[2]]}
         scale={[pointingTransform.scale, pointingTransform.scale, pointingTransform.scale]}
       >
         <primitive object={pointingScene} />
@@ -803,6 +860,7 @@ export default function RobotHero({
       <group
         ref={runningRef}
         position={[runningTransform.position[0], runningTransform.position[1], runningTransform.position[2]]}
+        rotation={[runningTransform.rotation[0], runningTransform.rotation[1], runningTransform.rotation[2]]}
         scale={[runningTransform.scale, runningTransform.scale, runningTransform.scale]}
       >
         <primitive object={runningScene} />
@@ -814,6 +872,11 @@ export default function RobotHero({
           climbingToLaptopTransform.position[0],
           climbingToLaptopTransform.position[1],
           climbingToLaptopTransform.position[2],
+        ]}
+        rotation={[
+          climbingToLaptopTransform.rotation[0],
+          climbingToLaptopTransform.rotation[1],
+          climbingToLaptopTransform.rotation[2],
         ]}
         scale={[
           climbingToLaptopTransform.scale,
@@ -827,6 +890,7 @@ export default function RobotHero({
       <group
         ref={cutelySittingRef}
         position={[cutelySittingTransform.position[0], cutelySittingTransform.position[1], cutelySittingTransform.position[2]]}
+        rotation={[cutelySittingTransform.rotation[0], cutelySittingTransform.rotation[1], cutelySittingTransform.rotation[2]]}
         scale={[cutelySittingTransform.scale, cutelySittingTransform.scale, cutelySittingTransform.scale]}
       >
         <primitive object={cutelySittingScene} />
@@ -838,6 +902,11 @@ export default function RobotHero({
           standingToSittingTransform.position[0],
           standingToSittingTransform.position[1],
           standingToSittingTransform.position[2],
+        ]}
+        rotation={[
+          standingToSittingTransform.rotation[0],
+          standingToSittingTransform.rotation[1],
+          standingToSittingTransform.rotation[2],
         ]}
         scale={[
           standingToSittingTransform.scale,

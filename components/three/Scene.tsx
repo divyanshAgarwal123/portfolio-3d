@@ -12,6 +12,7 @@ type CameraPOVSyncProps = {
 type RobotTransform = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
 };
 
 function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
@@ -247,6 +248,96 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
           })
         }
       />
+
+      <p className="mt-2">Rot X: {value.rotation[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Y: {value.rotation[1].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Z: {value.rotation[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
     </>
   );
 }
@@ -379,6 +470,96 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
           })
         }
       />
+
+      <p className="mt-2">Rot X: {value.rotation[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Y: {value.rotation[1].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Z: {value.rotation[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-3.14}
+        max={3.14}
+        step={0.01}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
     </>
   );
 }
@@ -388,43 +569,57 @@ export default function Scene() {
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
     position: [0.004, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
-  const [robotFalling, setRobotFalling] = useState<RobotTransform>({ position: [0, 0.3, 0.49], scale: 0.03 });
+  const [robotFalling, setRobotFalling] = useState<RobotTransform>({
+    position: [0, 0.3, 0.49],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
   const [robotWalking, setRobotWalking] = useState<RobotTransform>({
     position: [0.004, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
   const [robotClimbingToLaptop, setRobotClimbingToLaptop] = useState<RobotTransform>({
     position: [0.46, 0.26, -0.73],
     scale: 0.087,
+    rotation: [0, 0, 0],
   });
   const [robotCutelySitting, setRobotCutelySitting] = useState<RobotTransform>({
     position: [0.46, 0.33, -0.69],
     scale: 0.087,
+    rotation: [0, 0, 0],
   });
   const [robotStandingToSitting, setRobotStandingToSitting] = useState<RobotTransform>({
     position: [0.46, 0.35, -0.68],
     scale: 0.087,
+    rotation: [0, 0, 0],
   });
   const [backgroundRobotArm, setBackgroundRobotArm] = useState<RobotTransform>({
     position: [0.9, -0.36, -0.44],
     scale: 0.0003,
+    rotation: [0, 0, 0],
   });
   const [backgroundRobotThinking, setBackgroundRobotThinking] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
   const [backgroundRobotTellingSecret, setBackgroundRobotTellingSecret] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
   const [backgroundRobotPushup, setBackgroundRobotPushup] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
   const [backgroundRobotNervousLookAround, setBackgroundRobotNervousLookAround] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
+    rotation: [0, 0, 0],
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
