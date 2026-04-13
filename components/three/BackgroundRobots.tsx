@@ -28,7 +28,7 @@ const DRACO_DECODER_PATH = '/draco-gltf/';
 const ROBOT_THINKING_PATH = '/models/robot_thinking.glb';
 const ROBOT_TELLING_SECRET_PATH = '/models/robot_telling_secret.glb';
 const ROBOT_PUSHUP_PATH = '/models/robot_pushup.glb';
-const ROBOT_NERVOUS_LOOK_AROUND_PATH = '/models/robot_nervous_look_around.glb';
+const ROBOT_NERVOUS_LOOK_AROUND_PATH = '/models/robot_nervous_look_around_2.glb';
 
 function BaseBackgroundRobot({ modelPath, label, position, scale, rotation }: BaseBackgroundRobotProps) {
   const gltf = useGLTF(modelPath, DRACO_DECODER_PATH);
