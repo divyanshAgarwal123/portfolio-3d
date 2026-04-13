@@ -567,8 +567,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
-    position: [0.004, -0.36, 0.56],
-    scale: 0.03,
+    position: [0, -0.36, 0.56],
+    scale: 0.036,
     rotation: [0, 0, 0],
   });
   const [robotFalling, setRobotFalling] = useState<RobotTransform>({
@@ -577,8 +577,8 @@ export default function Scene() {
     rotation: [0, 0, 0],
   });
   const [robotWalking, setRobotWalking] = useState<RobotTransform>({
-    position: [0.004, -0.36, 0.56],
-    scale: 0.03,
+    position: [0, -0.36, 0.56],
+    scale: 0.035,
     rotation: [0, 0, 0],
   });
   const [robotClimbingToLaptop, setRobotClimbingToLaptop] = useState<RobotTransform>({
@@ -618,7 +618,7 @@ export default function Scene() {
   });
   const [backgroundRobotNervousLookAround, setBackgroundRobotNervousLookAround] = useState<RobotTransform>({
     position: [-0.25, -0.36, 0.52],
-    scale: 0.041,
+    scale: 0.035,
     rotation: [0, 0, 0],
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
