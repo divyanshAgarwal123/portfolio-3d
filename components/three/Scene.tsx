@@ -253,8 +253,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
@@ -267,8 +267,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
@@ -283,8 +283,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
@@ -297,8 +297,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
@@ -313,8 +313,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
@@ -327,8 +327,8 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
@@ -475,8 +475,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
@@ -489,8 +489,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
@@ -505,8 +505,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
@@ -519,8 +519,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
@@ -535,8 +535,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
         type="number"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
@@ -549,8 +549,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
       <input
         className="mt-1 w-44"
         type="range"
-        min={-3.14}
-        max={3.14}
+        min={-6.28}
+        max={6.28}
         step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
@@ -602,23 +602,23 @@ export default function Scene() {
     rotation: [0, 0, 0],
   });
   const [backgroundRobotThinking, setBackgroundRobotThinking] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [0.66, -0.36, 0.08],
+    scale: 0.053,
+    rotation: [0, -3.14, 0],
   });
   const [backgroundRobotTellingSecret, setBackgroundRobotTellingSecret] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [0.63, -0.36, 0],
+    scale: 0.053,
+    rotation: [0, -4.14, 0],
   });
   const [backgroundRobotPushup, setBackgroundRobotPushup] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.29, -0.36, 0.56],
+    scale: 0.035,
+    rotation: [0, 1.88, 0],
   });
   const [backgroundRobotNervousLookAround, setBackgroundRobotNervousLookAround] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
+    position: [-0.25, -0.36, 0.52],
+    scale: 0.041,
     rotation: [0, 0, 0],
   });
   const [laptopScale, setLaptopScale] = useState(0.04);
