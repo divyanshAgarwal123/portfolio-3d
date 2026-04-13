@@ -1,0 +1,9 @@
+[   56731ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[   57045ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[   57378ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:422
+[   57380ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:460
+[   57381ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:475
+[   57381ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[   57382ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[   57382ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[   57572ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:50

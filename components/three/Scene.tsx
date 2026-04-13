@@ -54,6 +54,10 @@ type SceneContentProps = {
   robotCutelySitting: RobotTransform;
   robotStandingToSitting: RobotTransform;
   backgroundRobotArm: RobotTransform;
+  backgroundRobotThinking: RobotTransform;
+  backgroundRobotTellingSecret: RobotTransform;
+  backgroundRobotPushup: RobotTransform;
+  backgroundRobotNervousLookAround: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
@@ -71,6 +75,10 @@ function SceneContent({
   robotCutelySitting,
   robotStandingToSitting,
   backgroundRobotArm,
+  backgroundRobotThinking,
+  backgroundRobotTellingSecret,
+  backgroundRobotPushup,
+  backgroundRobotNervousLookAround,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -91,6 +99,10 @@ function SceneContent({
         robotCutelySitting={robotCutelySitting}
         robotStandingToSitting={robotStandingToSitting}
         backgroundRobotArm={backgroundRobotArm}
+        backgroundRobotThinking={backgroundRobotThinking}
+        backgroundRobotTellingSecret={backgroundRobotTellingSecret}
+        backgroundRobotPushup={backgroundRobotPushup}
+        backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
@@ -398,6 +410,22 @@ export default function Scene() {
     position: [0.9, -0.36, -0.44],
     scale: 0.0003,
   });
+  const [backgroundRobotThinking, setBackgroundRobotThinking] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+  });
+  const [backgroundRobotTellingSecret, setBackgroundRobotTellingSecret] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+  });
+  const [backgroundRobotPushup, setBackgroundRobotPushup] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+  });
+  const [backgroundRobotNervousLookAround, setBackgroundRobotNervousLookAround] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+  });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
@@ -433,6 +461,22 @@ export default function Scene() {
           value={robotStandingToSitting}
           onChange={setRobotStandingToSitting}
         />
+        <RobotControlPanel
+          label="RobotThinking"
+          value={backgroundRobotThinking}
+          onChange={setBackgroundRobotThinking}
+        />
+        <RobotControlPanel
+          label="RobotTellingSecret"
+          value={backgroundRobotTellingSecret}
+          onChange={setBackgroundRobotTellingSecret}
+        />
+        <RobotControlPanel label="RobotPushup" value={backgroundRobotPushup} onChange={setBackgroundRobotPushup} />
+        <RobotControlPanel
+          label="RobotNervousLookAround"
+          value={backgroundRobotNervousLookAround}
+          onChange={setBackgroundRobotNervousLookAround}
+        />
         <BackgroundRobotArmControlPanel value={backgroundRobotArm} onChange={setBackgroundRobotArm} />
       </div>
       <Suspense fallback={<LoadingFallback />}>
@@ -452,6 +496,10 @@ export default function Scene() {
             robotCutelySitting={robotCutelySitting}
             robotStandingToSitting={robotStandingToSitting}
             backgroundRobotArm={backgroundRobotArm}
+            backgroundRobotThinking={backgroundRobotThinking}
+            backgroundRobotTellingSecret={backgroundRobotTellingSecret}
+            backgroundRobotPushup={backgroundRobotPushup}
+            backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}

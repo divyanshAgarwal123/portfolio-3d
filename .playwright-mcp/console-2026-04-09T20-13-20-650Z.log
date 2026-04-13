@@ -16,3 +16,24 @@
 [   36352ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:392
 [   36353ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:407
 [   36353ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:422
+[ 2478865ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 2479109ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 2479311ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/public/models/laptop.glb:0
+[ 2479517ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:422
+[ 2479519ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:460
+[ 2479520ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:475
+[ 2479520ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 2479521ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 2479521ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 2492905ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 2493181ms] [LOG] [Fast Refresh] done in 277ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 2493205ms] [LOG] [Fast Refresh] done in 300ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 2493220ms] [LOG] [Fast Refresh] done in 315ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 2525499ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 2525721ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 2526039ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:422
+[ 2526041ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:460
+[ 2526042ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:475
+[ 2526042ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 2526043ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 2526043ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520

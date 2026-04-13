@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import BackgroundRobotArm from './BackgroundRobotArm';
+import BackgroundRobots from './BackgroundRobots';
 import Laptop from './Laptop';
 import RobotHero from './RobotHero';
 
@@ -34,6 +35,10 @@ type ScrollDrivenLaptopProps = {
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
   backgroundRobotArm?: RobotTransform;
+  backgroundRobotThinking?: RobotTransform;
+  backgroundRobotTellingSecret?: RobotTransform;
+  backgroundRobotPushup?: RobotTransform;
+  backgroundRobotNervousLookAround?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -163,6 +168,10 @@ type LaptopSceneProps = {
   robotCutelySitting?: RobotTransform;
   robotStandingToSitting?: RobotTransform;
   backgroundRobotArm?: RobotTransform;
+  backgroundRobotThinking?: RobotTransform;
+  backgroundRobotTellingSecret?: RobotTransform;
+  backgroundRobotPushup?: RobotTransform;
+  backgroundRobotNervousLookAround?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -182,6 +191,10 @@ export default function LaptopScene({
   robotCutelySitting,
   robotStandingToSitting,
   backgroundRobotArm,
+  backgroundRobotThinking,
+  backgroundRobotTellingSecret,
+  backgroundRobotPushup,
+  backgroundRobotNervousLookAround,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -192,6 +205,14 @@ export default function LaptopScene({
     <>
       <Suspense fallback={null}>
         <BackgroundRobotArm transform={backgroundRobotArm} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <BackgroundRobots
+          thinkingTransform={backgroundRobotThinking}
+          tellingSecretTransform={backgroundRobotTellingSecret}
+          pushupTransform={backgroundRobotPushup}
+          nervousLookAroundTransform={backgroundRobotNervousLookAround}
+        />
       </Suspense>
       <ScrollControls pages={4} damping={0.3}>
         <ScrollDrivenLaptop
