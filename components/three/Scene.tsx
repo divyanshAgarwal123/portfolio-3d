@@ -125,6 +125,228 @@ type RobotControlPanelProps = {
   onChange: (next: RobotTransform) => void;
 };
 
+type LaptopControlPanelProps = {
+  value: RobotTransform;
+  onChange: (next: RobotTransform) => void;
+};
+
+function LaptopControlPanel({ value, onChange }: LaptopControlPanelProps) {
+  return (
+    <>
+      <p className="mt-3 font-semibold">Laptop</p>
+      <p className="mt-1">Scale: {value.scale.toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={0.003}
+        max={0.2}
+        step={0.001}
+        value={value.scale}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            scale: Number(event.target.value),
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={0.003}
+        max={0.2}
+        step={0.001}
+        value={value.scale}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            scale: Number(event.target.value),
+          })
+        }
+      />
+
+      <p className="mt-2">X: {value.position[0].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [Number(event.target.value), value.position[1], value.position[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [Number(event.target.value), value.position[1], value.position[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Y: {value.position[1].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], Number(event.target.value), value.position[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], Number(event.target.value), value.position[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Z: {value.position[2].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], value.position[1], Number(event.target.value)],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-8}
+        max={8}
+        step={0.001}
+        value={value.position[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            position: [value.position[0], value.position[1], Number(event.target.value)],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot X: {value.rotation[0].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[0]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Y: {value.rotation[1].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[1]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
+          })
+        }
+      />
+
+      <p className="mt-2">Rot Z: {value.rotation[2].toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.001}
+        value={value.rotation[2]}
+        onChange={(event) =>
+          onChange({
+            ...value,
+            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
+          })
+        }
+      />
+    </>
+  );
+}
+
 function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   return (
     <>
@@ -690,6 +912,18 @@ export default function Scene() {
         >
           Robots (drag me)
         </div>
+        <LaptopControlPanel
+          value={{
+            position: laptopPosition,
+            scale: laptopScale,
+            rotation: laptopRotation,
+          }}
+          onChange={(next) => {
+            setLaptopPosition(next.position);
+            setLaptopScale(next.scale);
+            setLaptopRotation(next.rotation);
+          }}
+        />
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
           label="RobotPointingBackwords"
