@@ -165,7 +165,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-8}
         max={8}
-        step={0.01}
+        step={0.001}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -179,7 +179,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-8}
         max={8}
-        step={0.01}
+        step={0.001}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -195,7 +195,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-5}
         max={6}
-        step={0.01}
+        step={0.001}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -209,7 +209,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-5}
         max={6}
-        step={0.01}
+        step={0.001}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -225,7 +225,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-8}
         max={4}
-        step={0.01}
+        step={0.001}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -239,7 +239,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-8}
         max={4}
-        step={0.01}
+        step={0.001}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -255,7 +255,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -269,7 +269,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -285,7 +285,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -299,7 +299,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -315,7 +315,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -329,7 +329,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -387,7 +387,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -401,7 +401,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -417,7 +417,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -431,7 +431,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -447,7 +447,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -461,7 +461,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.01}
+        step={0.001}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -477,7 +477,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -491,7 +491,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -507,7 +507,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -521,7 +521,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -537,7 +537,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -551,7 +551,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.01}
+        step={0.001}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -566,6 +566,10 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
 
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
+  const controlPanelRef = useRef<HTMLDivElement>(null);
+  const dragOffsetRef = useRef({ x: 0, y: 0 });
+  const [panelPosition, setPanelPosition] = useState({ x: 16, y: 16 });
+  const [isPanelDragging, setIsPanelDragging] = useState(false);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.036,
@@ -627,6 +631,16 @@ export default function Scene() {
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
+  const startPanelDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    dragOffsetRef.current = {
+      x: event.clientX - panelPosition.x,
+      y: event.clientY - panelPosition.y,
+    };
+    setIsPanelDragging(true);
+  };
+
   useEffect(() => {
     if (!canvasWrapRef.current) return;
     canvasWrapRef.current.style.opacity = '0';
@@ -634,10 +648,48 @@ export default function Scene() {
     canvasWrapRef.current.style.opacity = '1';
   }, []);
 
+  useEffect(() => {
+    if (!isPanelDragging) return;
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const panelWidth = controlPanelRef.current?.offsetWidth ?? 320;
+      const panelHeight = controlPanelRef.current?.offsetHeight ?? 320;
+      const nextX = event.clientX - dragOffsetRef.current.x;
+      const nextY = event.clientY - dragOffsetRef.current.y;
+      const clampedX = Math.min(Math.max(nextX, 0), Math.max(window.innerWidth - panelWidth, 0));
+      const clampedY = Math.min(Math.max(nextY, 0), Math.max(window.innerHeight - panelHeight, 0));
+
+      setPanelPosition({ x: clampedX, y: clampedY });
+    };
+
+    const handlePointerUp = () => {
+      setIsPanelDragging(false);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+    document.body.style.userSelect = 'none';
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      document.body.style.userSelect = '';
+    };
+  }, [isPanelDragging]);
+
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
-      <div className="pointer-events-auto fixed left-4 top-4 z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm">
-        <p className="font-semibold">Robots</p>
+      <div
+        ref={controlPanelRef}
+        className="pointer-events-auto fixed z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm"
+        style={{ left: `${panelPosition.x}px`, top: `${panelPosition.y}px` }}
+      >
+        <div
+          className={`-mx-3 -mt-3 mb-2 cursor-move select-none rounded-t-lg border-b border-neutral-300 px-3 py-2 font-semibold ${isPanelDragging ? 'bg-neutral-200' : 'bg-neutral-100'}`}
+          onPointerDown={startPanelDrag}
+        >
+          Robots (drag me)
+        </div>
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
           label="RobotPointingBackwords"
