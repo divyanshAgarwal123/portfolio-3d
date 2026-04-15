@@ -59,6 +59,12 @@ type SceneContentProps = {
   backgroundRobotTellingSecret: RobotTransform;
   backgroundRobotPushup: RobotTransform;
   backgroundRobotNervousLookAround: RobotTransform;
+  celebrationRobotCheering: RobotTransform;
+  celebrationRobotCheering2: RobotTransform;
+  celebrationRobotClapping: RobotTransform;
+  celebrationRobotCrazyDancing: RobotTransform;
+  celebrationRobotExcited: RobotTransform;
+  celebrationRobotRallying: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
@@ -80,6 +86,12 @@ function SceneContent({
   backgroundRobotTellingSecret,
   backgroundRobotPushup,
   backgroundRobotNervousLookAround,
+  celebrationRobotCheering,
+  celebrationRobotCheering2,
+  celebrationRobotClapping,
+  celebrationRobotCrazyDancing,
+  celebrationRobotExcited,
+  celebrationRobotRallying,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -104,6 +116,12 @@ function SceneContent({
         backgroundRobotTellingSecret={backgroundRobotTellingSecret}
         backgroundRobotPushup={backgroundRobotPushup}
         backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
+        celebrationRobotCheering={celebrationRobotCheering}
+        celebrationRobotCheering2={celebrationRobotCheering2}
+        celebrationRobotClapping={celebrationRobotClapping}
+        celebrationRobotCrazyDancing={celebrationRobotCrazyDancing}
+        celebrationRobotExcited={celebrationRobotExcited}
+        celebrationRobotRallying={celebrationRobotRallying}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
@@ -124,228 +142,6 @@ type RobotControlPanelProps = {
   value: RobotTransform;
   onChange: (next: RobotTransform) => void;
 };
-
-type LaptopControlPanelProps = {
-  value: RobotTransform;
-  onChange: (next: RobotTransform) => void;
-};
-
-function LaptopControlPanel({ value, onChange }: LaptopControlPanelProps) {
-  return (
-    <>
-      <p className="mt-3 font-semibold">Laptop</p>
-      <p className="mt-1">Scale: {value.scale.toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={0.003}
-        max={0.2}
-        step={0.001}
-        value={value.scale}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            scale: Number(event.target.value),
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={0.003}
-        max={0.2}
-        step={0.001}
-        value={value.scale}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            scale: Number(event.target.value),
-          })
-        }
-      />
-
-      <p className="mt-2">X: {value.position[0].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[0]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [Number(event.target.value), value.position[1], value.position[2]],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[0]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [Number(event.target.value), value.position[1], value.position[2]],
-          })
-        }
-      />
-
-      <p className="mt-2">Y: {value.position[1].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[1]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [value.position[0], Number(event.target.value), value.position[2]],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[1]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [value.position[0], Number(event.target.value), value.position[2]],
-          })
-        }
-      />
-
-      <p className="mt-2">Z: {value.position[2].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[2]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [value.position[0], value.position[1], Number(event.target.value)],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-8}
-        max={8}
-        step={0.001}
-        value={value.position[2]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            position: [value.position[0], value.position[1], Number(event.target.value)],
-          })
-        }
-      />
-
-      <p className="mt-2">Rot X: {value.rotation[0].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[0]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[0]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [Number(event.target.value), value.rotation[1], value.rotation[2]],
-          })
-        }
-      />
-
-      <p className="mt-2">Rot Y: {value.rotation[1].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[1]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[1]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [value.rotation[0], Number(event.target.value), value.rotation[2]],
-          })
-        }
-      />
-
-      <p className="mt-2">Rot Z: {value.rotation[2].toFixed(3)}</p>
-      <input
-        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
-        type="number"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[2]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
-          })
-        }
-      />
-      <input
-        className="mt-1 w-44"
-        type="range"
-        min={-6.28}
-        max={6.28}
-        step={0.001}
-        value={value.rotation[2]}
-        onChange={(event) =>
-          onChange({
-            ...value,
-            rotation: [value.rotation[0], value.rotation[1], Number(event.target.value)],
-          })
-        }
-      />
-    </>
-  );
-}
 
 function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   return (
@@ -847,6 +643,36 @@ export default function Scene() {
     scale: 0.035,
     rotation: [0, 0, 0],
   });
+  const [celebrationRobotCheering, setCelebrationRobotCheering] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
+  const [celebrationRobotCheering2, setCelebrationRobotCheering2] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
+  const [celebrationRobotClapping, setCelebrationRobotClapping] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
+  const [celebrationRobotCrazyDancing, setCelebrationRobotCrazyDancing] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
+  const [celebrationRobotExcited, setCelebrationRobotExcited] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
+  const [celebrationRobotRallying, setCelebrationRobotRallying] = useState<RobotTransform>({
+    position: [0, -0.36, 0.56],
+    scale: 0.03,
+    rotation: [0, 0, 0],
+  });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
@@ -912,18 +738,6 @@ export default function Scene() {
         >
           Robots (drag me)
         </div>
-        <LaptopControlPanel
-          value={{
-            position: laptopPosition,
-            scale: laptopScale,
-            rotation: laptopRotation,
-          }}
-          onChange={(next) => {
-            setLaptopPosition(next.position);
-            setLaptopScale(next.scale);
-            setLaptopRotation(next.rotation);
-          }}
-        />
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
           label="RobotPointingBackwords"
@@ -958,6 +772,36 @@ export default function Scene() {
           value={backgroundRobotNervousLookAround}
           onChange={setBackgroundRobotNervousLookAround}
         />
+        <RobotControlPanel
+          label="RobotCheering"
+          value={celebrationRobotCheering}
+          onChange={setCelebrationRobotCheering}
+        />
+        <RobotControlPanel
+          label="RobotCheering2"
+          value={celebrationRobotCheering2}
+          onChange={setCelebrationRobotCheering2}
+        />
+        <RobotControlPanel
+          label="RobotClappingCelebration"
+          value={celebrationRobotClapping}
+          onChange={setCelebrationRobotClapping}
+        />
+        <RobotControlPanel
+          label="RobotCrazyDancing"
+          value={celebrationRobotCrazyDancing}
+          onChange={setCelebrationRobotCrazyDancing}
+        />
+        <RobotControlPanel
+          label="RobotExcited"
+          value={celebrationRobotExcited}
+          onChange={setCelebrationRobotExcited}
+        />
+        <RobotControlPanel
+          label="RobotRallying"
+          value={celebrationRobotRallying}
+          onChange={setCelebrationRobotRallying}
+        />
         <BackgroundRobotArmControlPanel value={backgroundRobotArm} onChange={setBackgroundRobotArm} />
       </div>
       <Suspense fallback={<LoadingFallback />}>
@@ -981,6 +825,12 @@ export default function Scene() {
             backgroundRobotTellingSecret={backgroundRobotTellingSecret}
             backgroundRobotPushup={backgroundRobotPushup}
             backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
+            celebrationRobotCheering={celebrationRobotCheering}
+            celebrationRobotCheering2={celebrationRobotCheering2}
+            celebrationRobotClapping={celebrationRobotClapping}
+            celebrationRobotCrazyDancing={celebrationRobotCrazyDancing}
+            celebrationRobotExcited={celebrationRobotExcited}
+            celebrationRobotRallying={celebrationRobotRallying}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
