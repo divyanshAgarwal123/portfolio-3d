@@ -66,7 +66,6 @@ type SceneContentProps = {
   blushingGirl: RobotTransform;
   kissyGirl: RobotTransform;
   goofyRunningGirl: RobotTransform;
-  activeGirlModelIndex: GirlModelIndex;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
@@ -93,7 +92,6 @@ function SceneContent({
   blushingGirl,
   kissyGirl,
   goofyRunningGirl,
-  activeGirlModelIndex,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -123,8 +121,7 @@ function SceneContent({
         blushingTransform={blushingGirl}
         kissyTransform={kissyGirl}
         goofyRunningTransform={goofyRunningGirl}
-        girlCalibrationMode
-        activeGirlModelIndex={activeGirlModelIndex}
+        girlCalibrationMode={false}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
@@ -645,31 +642,30 @@ export default function Scene() {
     rotation: [0, 0, 0],
   });
   const [talkingGirl, setTalkingGirl] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.67, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, 1.11, 0],
   });
   const [surprisedGirl, setSurprisedGirl] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.67, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, 1.69, 0],
   });
   const [blushingGirl, setBlushingGirl] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.67, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, 1.69, 0],
   });
   const [kissyGirl, setKissyGirl] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.67, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, 1.69, 0],
   });
   const [goofyRunningGirl, setGoofyRunningGirl] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
+    position: [-0.67, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, 1.17, 0],
   });
-  const [activeGirlModelIndex, setActiveGirlModelIndex] = useState<GirlModelIndex>(0);
   const [controlPanelPos, setControlPanelPos] = useState({ x: 16, y: 16 });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
@@ -705,21 +701,6 @@ export default function Scene() {
       window.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
-
-  const activeGirlModel =
-    activeGirlModelIndex === 0
-      ? { label: 'talking_girl.glb', value: talkingGirl, setValue: setTalkingGirl }
-      : activeGirlModelIndex === 1
-        ? { label: 'surprised.glb', value: surprisedGirl, setValue: setSurprisedGirl }
-        : activeGirlModelIndex === 2
-          ? { label: 'blushing.glb', value: blushingGirl, setValue: setBlushingGirl }
-          : activeGirlModelIndex === 3
-            ? { label: 'kissy.glb', value: kissyGirl, setValue: setKissyGirl }
-            : { label: 'goofy_running.glb', value: goofyRunningGirl, setValue: setGoofyRunningGirl };
-
-  const handleNextGirlModel = () => {
-    setActiveGirlModelIndex((prev) => ((prev + 1) % 5) as GirlModelIndex);
-  };
 
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
@@ -778,18 +759,14 @@ export default function Scene() {
 
         <div className="mt-4 border-t border-neutral-200 pt-3">
           <p className="font-semibold">Girl Sequence Precision</p>
-          <p className="mt-1">Current: {activeGirlModel.label}</p>
-          <button
-            type="button"
-            className="mt-2 rounded border border-neutral-300 px-2 py-1 text-xs font-medium hover:bg-neutral-100"
-            onClick={handleNextGirlModel}
-          >
-            Next Model
-          </button>
+          <RobotControlPanel label="talking_girl.glb" value={talkingGirl} onChange={setTalkingGirl} />
+          <RobotControlPanel label="surprised.glb" value={surprisedGirl} onChange={setSurprisedGirl} />
+          <RobotControlPanel label="blushing.glb" value={blushingGirl} onChange={setBlushingGirl} />
+          <RobotControlPanel label="kissy.glb" value={kissyGirl} onChange={setKissyGirl} />
           <RobotControlPanel
-            label={activeGirlModel.label}
-            value={activeGirlModel.value}
-            onChange={activeGirlModel.setValue}
+            label="goofy_running.glb"
+            value={goofyRunningGirl}
+            onChange={setGoofyRunningGirl}
           />
         </div>
       </div>
@@ -819,7 +796,6 @@ export default function Scene() {
             blushingGirl={blushingGirl}
             kissyGirl={kissyGirl}
             goofyRunningGirl={goofyRunningGirl}
-            activeGirlModelIndex={activeGirlModelIndex}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}

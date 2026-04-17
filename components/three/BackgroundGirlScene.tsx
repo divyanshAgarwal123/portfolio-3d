@@ -1,6 +1,7 @@
 'use client';
 
 import { useAnimations, useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
@@ -17,6 +18,8 @@ const SHARED_POSITION: [number, number, number] = [0.0, -0.36, 0.56];
 const SHARED_SCALE = 0.03;
 const LOOP_ONCE_FADE = 0.25;
 const APPEAR_FADE = 0.2;
+const GOOFY_RUN_SPEED = 1.1;
+const GOOFY_HIDE_X = 2.4;
 
 type SequencePhase = 0 | 1 | 2 | 3 | 4 | 5;
 type ModelIndex = 0 | 1 | 2 | 3 | 4;
@@ -67,6 +70,7 @@ export default function BackgroundGirlScene({
   activeModelIndex = 0,
 }: BackgroundGirlSceneProps) {
   const phase = useRef<SequencePhase>(0);
+  const goofyRunOutRef = useRef(false);
 
   const talkingGirlGltf = useGLTF(TALKING_GIRL_PATH, DRACO_DECODER_PATH);
   const surprisedGltf = useGLTF(SURPRISED_PATH, DRACO_DECODER_PATH);
@@ -117,6 +121,22 @@ export default function BackgroundGirlScene({
   const blushingActionRef = useRef<THREE.AnimationAction | null>(null);
   const kissyActionRef = useRef<THREE.AnimationAction | null>(null);
   const goofyRunningActionRef = useRef<THREE.AnimationAction | null>(null);
+
+  useFrame((_, delta) => {
+    if (calibrationMode) return;
+    if (phase.current !== 5) return;
+    if (!goofyRunOutRef.current) return;
+    if (!goofyRunningRef.current || !goofyRunningRef.current.visible) return;
+
+    goofyRunningRef.current.position.x += GOOFY_RUN_SPEED * delta;
+
+    if (goofyRunningRef.current.position.x >= GOOFY_HIDE_X) {
+      goofyRunOutRef.current = false;
+      goofyRunningRef.current.visible = false;
+      goofyRunningActionRef.current?.fadeOut(0.2);
+      goofyRunningActionRef.current?.stop();
+    }
+  });
 
   useEffect(() => {
     talkingGirlActionRef.current = getFirstAction(talkingGirlActions, talkingGirlGltf.animations);
@@ -173,6 +193,7 @@ export default function BackgroundGirlScene({
     blushingRef.current.visible = false;
     kissyRef.current.visible = false;
     goofyRunningRef.current.visible = false;
+    goofyRunOutRef.current = false;
 
     talkingGirlAction.stop();
     surprisedAction.stop();
@@ -248,10 +269,16 @@ export default function BackgroundGirlScene({
 
       kissyAction.fadeOut(LOOP_ONCE_FADE);
       goofyRunningRef.current!.visible = true;
+      goofyRunningRef.current!.position.set(
+        goofyRunningTransform.position[0],
+        goofyRunningTransform.position[1],
+        goofyRunningTransform.position[2],
+      );
       goofyRunningAction.enabled = true;
       goofyRunningAction.setLoop(THREE.LoopRepeat, Infinity);
       goofyRunningAction.clampWhenFinished = false;
       goofyRunningAction.reset().fadeIn(LOOP_ONCE_FADE).play();
+      goofyRunOutRef.current = true;
     };
 
     talkingGirlMixer.addEventListener('finished', onTalkingFinished);
@@ -270,8 +297,17 @@ export default function BackgroundGirlScene({
       blushingAction.fadeOut(0.1);
       kissyAction.fadeOut(0.1);
       goofyRunningAction.fadeOut(0.1);
+      goofyRunOutRef.current = false;
     };
-  }, [talkingGirlMixer, surprisedMixer, blushingMixer, kissyMixer, calibrationMode, activeModelIndex]);
+  }, [
+    talkingGirlMixer,
+    surprisedMixer,
+    blushingMixer,
+    kissyMixer,
+    calibrationMode,
+    activeModelIndex,
+    goofyRunningTransform.position,
+  ]);
 
   return (
     <>
