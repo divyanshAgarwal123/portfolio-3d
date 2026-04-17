@@ -1,0 +1,28 @@
+[     311ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[     551ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[     895ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[     898ms] [LOG] talking_girl clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:105
+[     898ms] [LOG] surprised clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:108
+[     899ms] [LOG] blushing clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:111
+[     899ms] [LOG] kissy clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:114
+[     899ms] [LOG] goofy_running clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:117
+[     964ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[     965ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[     966ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[     966ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[     966ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[     966ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[    1093ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[    1701ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    2499ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    3300ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  338411ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  339756ms] [LOG] talking_girl clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:146
+[  339756ms] [LOG] surprised clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:149
+[  339756ms] [LOG] blushing clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:152
+[  339756ms] [LOG] kissy clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:155
+[  339756ms] [LOG] goofy_running clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:158
+[  339757ms] [LOG] [Fast Refresh] done in 1346ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  346688ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  346877ms] [LOG] [Fast Refresh] done in 188ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  380441ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186

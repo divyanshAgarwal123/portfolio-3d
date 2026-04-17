@@ -15,6 +15,8 @@ type RobotTransform = {
   rotation: [number, number, number];
 };
 
+type GirlModelIndex = 0 | 1 | 2 | 3 | 4;
+
 function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
   const camera = useThree((state) => state.camera);
 
@@ -59,12 +61,12 @@ type SceneContentProps = {
   backgroundRobotTellingSecret: RobotTransform;
   backgroundRobotPushup: RobotTransform;
   backgroundRobotNervousLookAround: RobotTransform;
-  celebrationRobotCheering: RobotTransform;
-  celebrationRobotCheering2: RobotTransform;
-  celebrationRobotClapping: RobotTransform;
-  celebrationRobotCrazyDancing: RobotTransform;
-  celebrationRobotExcited: RobotTransform;
-  celebrationRobotRallying: RobotTransform;
+  talkingGirl: RobotTransform;
+  surprisedGirl: RobotTransform;
+  blushingGirl: RobotTransform;
+  kissyGirl: RobotTransform;
+  goofyRunningGirl: RobotTransform;
+  activeGirlModelIndex: GirlModelIndex;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
@@ -86,12 +88,12 @@ function SceneContent({
   backgroundRobotTellingSecret,
   backgroundRobotPushup,
   backgroundRobotNervousLookAround,
-  celebrationRobotCheering,
-  celebrationRobotCheering2,
-  celebrationRobotClapping,
-  celebrationRobotCrazyDancing,
-  celebrationRobotExcited,
-  celebrationRobotRallying,
+  talkingGirl,
+  surprisedGirl,
+  blushingGirl,
+  kissyGirl,
+  goofyRunningGirl,
+  activeGirlModelIndex,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -116,12 +118,13 @@ function SceneContent({
         backgroundRobotTellingSecret={backgroundRobotTellingSecret}
         backgroundRobotPushup={backgroundRobotPushup}
         backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
-        celebrationRobotCheering={celebrationRobotCheering}
-        celebrationRobotCheering2={celebrationRobotCheering2}
-        celebrationRobotClapping={celebrationRobotClapping}
-        celebrationRobotCrazyDancing={celebrationRobotCrazyDancing}
-        celebrationRobotExcited={celebrationRobotExcited}
-        celebrationRobotRallying={celebrationRobotRallying}
+        talkingGirlTransform={talkingGirl}
+        surprisedTransform={surprisedGirl}
+        blushingTransform={blushingGirl}
+        kissyTransform={kissyGirl}
+        goofyRunningTransform={goofyRunningGirl}
+        girlCalibrationMode
+        activeGirlModelIndex={activeGirlModelIndex}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
@@ -183,7 +186,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-8}
         max={8}
-        step={0.001}
+        step={0.01}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -197,7 +200,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-8}
         max={8}
-        step={0.001}
+        step={0.01}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -213,7 +216,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-5}
         max={6}
-        step={0.001}
+        step={0.01}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -227,7 +230,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-5}
         max={6}
-        step={0.001}
+        step={0.01}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -243,7 +246,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-8}
         max={4}
-        step={0.001}
+        step={0.01}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -257,7 +260,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-8}
         max={4}
-        step={0.001}
+        step={0.01}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -273,7 +276,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -287,7 +290,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -303,7 +306,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -317,7 +320,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -333,7 +336,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -347,7 +350,7 @@ function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -405,7 +408,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -419,7 +422,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[0]}
         onChange={(event) =>
           onChange({
@@ -435,7 +438,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -449,7 +452,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[1]}
         onChange={(event) =>
           onChange({
@@ -465,7 +468,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -479,7 +482,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-20}
         max={20}
-        step={0.001}
+        step={0.01}
         value={value.position[2]}
         onChange={(event) =>
           onChange({
@@ -495,7 +498,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -509,7 +512,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[0]}
         onChange={(event) =>
           onChange({
@@ -525,7 +528,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -539,7 +542,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[1]}
         onChange={(event) =>
           onChange({
@@ -555,7 +558,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="number"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -569,7 +572,7 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
         type="range"
         min={-6.28}
         max={6.28}
-        step={0.001}
+        step={0.01}
         value={value.rotation[2]}
         onChange={(event) =>
           onChange({
@@ -584,10 +587,8 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
 
 export default function Scene() {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const controlPanelRef = useRef<HTMLDivElement>(null);
   const dragOffsetRef = useRef({ x: 0, y: 0 });
-  const [panelPosition, setPanelPosition] = useState({ x: 16, y: 16 });
-  const [isPanelDragging, setIsPanelDragging] = useState(false);
+  const draggingRef = useRef(false);
   const [robotPointingBackwords, setRobotPointingBackwords] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.036,
@@ -643,51 +644,38 @@ export default function Scene() {
     scale: 0.035,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotCheering, setCelebrationRobotCheering] = useState<RobotTransform>({
+  const [talkingGirl, setTalkingGirl] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotCheering2, setCelebrationRobotCheering2] = useState<RobotTransform>({
+  const [surprisedGirl, setSurprisedGirl] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotClapping, setCelebrationRobotClapping] = useState<RobotTransform>({
+  const [blushingGirl, setBlushingGirl] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotCrazyDancing, setCelebrationRobotCrazyDancing] = useState<RobotTransform>({
+  const [kissyGirl, setKissyGirl] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotExcited, setCelebrationRobotExcited] = useState<RobotTransform>({
+  const [goofyRunningGirl, setGoofyRunningGirl] = useState<RobotTransform>({
     position: [0, -0.36, 0.56],
     scale: 0.03,
     rotation: [0, 0, 0],
   });
-  const [celebrationRobotRallying, setCelebrationRobotRallying] = useState<RobotTransform>({
-    position: [0, -0.36, 0.56],
-    scale: 0.03,
-    rotation: [0, 0, 0],
-  });
+  const [activeGirlModelIndex, setActiveGirlModelIndex] = useState<GirlModelIndex>(0);
+  const [controlPanelPos, setControlPanelPos] = useState({ x: 16, y: 16 });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
-
-  const startPanelDrag = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.button !== 0) return;
-    event.preventDefault();
-    dragOffsetRef.current = {
-      x: event.clientX - panelPosition.x,
-      y: event.clientY - panelPosition.y,
-    };
-    setIsPanelDragging(true);
-  };
 
   useEffect(() => {
     if (!canvasWrapRef.current) return;
@@ -697,47 +685,61 @@ export default function Scene() {
   }, []);
 
   useEffect(() => {
-    if (!isPanelDragging) return;
-
     const handlePointerMove = (event: PointerEvent) => {
-      const panelWidth = controlPanelRef.current?.offsetWidth ?? 320;
-      const panelHeight = controlPanelRef.current?.offsetHeight ?? 320;
-      const nextX = event.clientX - dragOffsetRef.current.x;
-      const nextY = event.clientY - dragOffsetRef.current.y;
-      const clampedX = Math.min(Math.max(nextX, 0), Math.max(window.innerWidth - panelWidth, 0));
-      const clampedY = Math.min(Math.max(nextY, 0), Math.max(window.innerHeight - panelHeight, 0));
-
-      setPanelPosition({ x: clampedX, y: clampedY });
+      if (!draggingRef.current) return;
+      setControlPanelPos({
+        x: Math.max(8, event.clientX - dragOffsetRef.current.x),
+        y: Math.max(8, event.clientY - dragOffsetRef.current.y),
+      });
     };
 
     const handlePointerUp = () => {
-      setIsPanelDragging(false);
+      draggingRef.current = false;
     };
 
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', handlePointerUp);
-    document.body.style.userSelect = 'none';
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
-      document.body.style.userSelect = '';
     };
-  }, [isPanelDragging]);
+  }, []);
+
+  const activeGirlModel =
+    activeGirlModelIndex === 0
+      ? { label: 'talking_girl.glb', value: talkingGirl, setValue: setTalkingGirl }
+      : activeGirlModelIndex === 1
+        ? { label: 'surprised.glb', value: surprisedGirl, setValue: setSurprisedGirl }
+        : activeGirlModelIndex === 2
+          ? { label: 'blushing.glb', value: blushingGirl, setValue: setBlushingGirl }
+          : activeGirlModelIndex === 3
+            ? { label: 'kissy.glb', value: kissyGirl, setValue: setKissyGirl }
+            : { label: 'goofy_running.glb', value: goofyRunningGirl, setValue: setGoofyRunningGirl };
+
+  const handleNextGirlModel = () => {
+    setActiveGirlModelIndex((prev) => ((prev + 1) % 5) as GirlModelIndex);
+  };
 
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
       <div
-        ref={controlPanelRef}
         className="pointer-events-auto fixed z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm"
-        style={{ left: `${panelPosition.x}px`, top: `${panelPosition.y}px` }}
+        style={{ left: controlPanelPos.x, top: controlPanelPos.y }}
       >
         <div
-          className={`-mx-3 -mt-3 mb-2 cursor-move select-none rounded-t-lg border-b border-neutral-300 px-3 py-2 font-semibold ${isPanelDragging ? 'bg-neutral-200' : 'bg-neutral-100'}`}
-          onPointerDown={startPanelDrag}
+          className="-mx-3 -mt-3 mb-2 cursor-move rounded-t-lg border-b border-neutral-200 bg-neutral-50 px-3 py-2 font-semibold"
+          onPointerDown={(event) => {
+            draggingRef.current = true;
+            dragOffsetRef.current = {
+              x: event.clientX - controlPanelPos.x,
+              y: event.clientY - controlPanelPos.y,
+            };
+          }}
         >
-          Robots (drag me)
+          Movable Slider Tab
         </div>
+        <p className="font-semibold">Robots</p>
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
           label="RobotPointingBackwords"
@@ -772,37 +774,24 @@ export default function Scene() {
           value={backgroundRobotNervousLookAround}
           onChange={setBackgroundRobotNervousLookAround}
         />
-        <RobotControlPanel
-          label="RobotCheering"
-          value={celebrationRobotCheering}
-          onChange={setCelebrationRobotCheering}
-        />
-        <RobotControlPanel
-          label="RobotCheering2"
-          value={celebrationRobotCheering2}
-          onChange={setCelebrationRobotCheering2}
-        />
-        <RobotControlPanel
-          label="RobotClappingCelebration"
-          value={celebrationRobotClapping}
-          onChange={setCelebrationRobotClapping}
-        />
-        <RobotControlPanel
-          label="RobotCrazyDancing"
-          value={celebrationRobotCrazyDancing}
-          onChange={setCelebrationRobotCrazyDancing}
-        />
-        <RobotControlPanel
-          label="RobotExcited"
-          value={celebrationRobotExcited}
-          onChange={setCelebrationRobotExcited}
-        />
-        <RobotControlPanel
-          label="RobotRallying"
-          value={celebrationRobotRallying}
-          onChange={setCelebrationRobotRallying}
-        />
         <BackgroundRobotArmControlPanel value={backgroundRobotArm} onChange={setBackgroundRobotArm} />
+
+        <div className="mt-4 border-t border-neutral-200 pt-3">
+          <p className="font-semibold">Girl Sequence Precision</p>
+          <p className="mt-1">Current: {activeGirlModel.label}</p>
+          <button
+            type="button"
+            className="mt-2 rounded border border-neutral-300 px-2 py-1 text-xs font-medium hover:bg-neutral-100"
+            onClick={handleNextGirlModel}
+          >
+            Next Model
+          </button>
+          <RobotControlPanel
+            label={activeGirlModel.label}
+            value={activeGirlModel.value}
+            onChange={activeGirlModel.setValue}
+          />
+        </div>
       </div>
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
@@ -825,12 +814,12 @@ export default function Scene() {
             backgroundRobotTellingSecret={backgroundRobotTellingSecret}
             backgroundRobotPushup={backgroundRobotPushup}
             backgroundRobotNervousLookAround={backgroundRobotNervousLookAround}
-            celebrationRobotCheering={celebrationRobotCheering}
-            celebrationRobotCheering2={celebrationRobotCheering2}
-            celebrationRobotClapping={celebrationRobotClapping}
-            celebrationRobotCrazyDancing={celebrationRobotCrazyDancing}
-            celebrationRobotExcited={celebrationRobotExcited}
-            celebrationRobotRallying={celebrationRobotRallying}
+            talkingGirl={talkingGirl}
+            surprisedGirl={surprisedGirl}
+            blushingGirl={blushingGirl}
+            kissyGirl={kissyGirl}
+            goofyRunningGirl={goofyRunningGirl}
+            activeGirlModelIndex={activeGirlModelIndex}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}

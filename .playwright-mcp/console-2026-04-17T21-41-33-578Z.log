@@ -1,0 +1,162 @@
+[     258ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/models/talking_girl.glb:0
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/models/surprised.glb:0
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/models/blushing.glb:0
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/models/kissy.glb:0
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/models/goofy_running.glb:0
+[     634ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     638ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     659ms] [ERROR] The above error occurred in the <BackgroundGirlScene> component:
+
+    at BackgroundGirlScene (webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:50:64)
+    at Suspense
+    at LaptopScene (webpack-internal:///(app-pages-browser)/./components/three/LaptopScene.tsx:227:11)
+    at SceneContent (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:140:11)
+    at Suspense
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:451:5)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at Provider (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:2102:3)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[     662ms] [ERROR] Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload ForwardRef(Canvas) ForwardRef(Canvas) 
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:929:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (Server)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11) @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[     663ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     664ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     664ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     664ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     664ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     664ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     665ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     665ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     665ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     666ms] Error: Could not load /models/talking_girl.glb: fetch for "http://localhost:3001/models/talking_girl.glb" responded with 404: Not Found
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:1733:36)
+    at Object._onError [as onError] (webpack-internal:///(app-pages-browser)/./node_modules/three-stdlib/loaders/GLTFLoader.js:90:9)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:45426:39)
+[     665ms] [ERROR] The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:929:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (Server)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[    1293ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:29947
+[  104099ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  104421ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[  104741ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  104960ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  105437ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  105720ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  105721ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  105721ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  105721ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  105722ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  105722ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  105980ms] [LOG] talking_girl clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:105
+[  105980ms] [LOG] surprised clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:108
+[  105980ms] [LOG] blushing clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:111
+[  105980ms] [LOG] kissy clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:114
+[  105980ms] [LOG] goofy_running clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundGirlScene.tsx:117
+[  106034ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[  106299ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  107041ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  107840ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49

@@ -4,14 +4,7 @@ import { ScrollControls, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import {
-  RobotCheering,
-  RobotCheering2,
-  RobotClapping,
-  RobotCrazyDancing,
-  RobotExcited,
-  RobotRallying,
-} from './BackgroundCelebration';
+import BackgroundGirlScene from './BackgroundGirlScene';
 import BackgroundRobotArm from './BackgroundRobotArm';
 import BackgroundRobots from './BackgroundRobots';
 import Laptop from './Laptop';
@@ -32,6 +25,8 @@ type RobotTransform = {
   rotation: [number, number, number];
 };
 
+type GirlModelIndex = 0 | 1 | 2 | 3 | 4;
+
 type ScrollDrivenLaptopProps = {
   onScrollChange?: (offset: number) => void;
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
@@ -48,12 +43,13 @@ type ScrollDrivenLaptopProps = {
   backgroundRobotTellingSecret?: RobotTransform;
   backgroundRobotPushup?: RobotTransform;
   backgroundRobotNervousLookAround?: RobotTransform;
-  celebrationRobotCheering?: RobotTransform;
-  celebrationRobotCheering2?: RobotTransform;
-  celebrationRobotClapping?: RobotTransform;
-  celebrationRobotCrazyDancing?: RobotTransform;
-  celebrationRobotExcited?: RobotTransform;
-  celebrationRobotRallying?: RobotTransform;
+  talkingGirlTransform?: RobotTransform;
+  surprisedTransform?: RobotTransform;
+  blushingTransform?: RobotTransform;
+  kissyTransform?: RobotTransform;
+  goofyRunningTransform?: RobotTransform;
+  girlCalibrationMode?: boolean;
+  activeGirlModelIndex?: GirlModelIndex;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -187,12 +183,6 @@ type LaptopSceneProps = {
   backgroundRobotTellingSecret?: RobotTransform;
   backgroundRobotPushup?: RobotTransform;
   backgroundRobotNervousLookAround?: RobotTransform;
-  celebrationRobotCheering?: RobotTransform;
-  celebrationRobotCheering2?: RobotTransform;
-  celebrationRobotClapping?: RobotTransform;
-  celebrationRobotCrazyDancing?: RobotTransform;
-  celebrationRobotExcited?: RobotTransform;
-  celebrationRobotRallying?: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -216,12 +206,13 @@ export default function LaptopScene({
   backgroundRobotTellingSecret,
   backgroundRobotPushup,
   backgroundRobotNervousLookAround,
-  celebrationRobotCheering = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
-  celebrationRobotCheering2 = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
-  celebrationRobotClapping = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
-  celebrationRobotCrazyDancing = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
-  celebrationRobotExcited = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
-  celebrationRobotRallying = { position: [0, -0.36, 0.56], scale: 0.03, rotation: [0, 0, 0] },
+  talkingGirlTransform,
+  surprisedTransform,
+  blushingTransform,
+  kissyTransform,
+  goofyRunningTransform,
+  girlCalibrationMode,
+  activeGirlModelIndex,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
@@ -242,35 +233,14 @@ export default function LaptopScene({
         />
       </Suspense>
       <Suspense fallback={null}>
-        <RobotCheering
-          position={celebrationRobotCheering.position}
-          scale={celebrationRobotCheering.scale}
-          rotation={celebrationRobotCheering.rotation}
-        />
-        <RobotCheering2
-          position={celebrationRobotCheering2.position}
-          scale={celebrationRobotCheering2.scale}
-          rotation={celebrationRobotCheering2.rotation}
-        />
-        <RobotClapping
-          position={celebrationRobotClapping.position}
-          scale={celebrationRobotClapping.scale}
-          rotation={celebrationRobotClapping.rotation}
-        />
-        <RobotCrazyDancing
-          position={celebrationRobotCrazyDancing.position}
-          scale={celebrationRobotCrazyDancing.scale}
-          rotation={celebrationRobotCrazyDancing.rotation}
-        />
-        <RobotExcited
-          position={celebrationRobotExcited.position}
-          scale={celebrationRobotExcited.scale}
-          rotation={celebrationRobotExcited.rotation}
-        />
-        <RobotRallying
-          position={celebrationRobotRallying.position}
-          scale={celebrationRobotRallying.scale}
-          rotation={celebrationRobotRallying.rotation}
+        <BackgroundGirlScene
+          talkingGirlTransform={talkingGirlTransform}
+          surprisedTransform={surprisedTransform}
+          blushingTransform={blushingTransform}
+          kissyTransform={kissyTransform}
+          goofyRunningTransform={goofyRunningTransform}
+          calibrationMode={girlCalibrationMode}
+          activeModelIndex={activeGirlModelIndex}
         />
       </Suspense>
       <ScrollControls pages={4} damping={0.3}>
