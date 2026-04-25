@@ -1,6 +1,7 @@
 'use client';
 
 import { PerspectiveCamera, RenderTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import GlitchStartup from './GlitchStartup';
@@ -67,8 +68,12 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
 
 export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
-  const originalMaterialRef = useRef<THREE.Material | THREE.Material[] | null>(null);
   const hasLoggedLidNames = useRef(false);
+  const overlayRef = useRef<THREE.Mesh>(null);
+
+  const worldPosition = useRef(new THREE.Vector3());
+  const worldQuaternion = useRef(new THREE.Quaternion());
+  const worldScale = useRef(new THREE.Vector3());
 
   // In this scene, lid angle animates from about -1.59 (closed) to -0.23 (open).
   // Activate the laptop screen only when nearly open.
@@ -116,38 +121,38 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
     console.log('[LaptopScreen] lidAngle:', lidAngle.toFixed(3), 'active:', isScreenActive);
   }, [lidAngle, isScreenActive]);
 
-  useEffect(() => {
-    if (!screenMesh) return;
+  useFrame(() => {
+    if (!screenMesh || !overlayRef.current) return;
 
-    if (!isScreenActive && originalMaterialRef.current) {
-      screenMesh.material = originalMaterialRef.current;
-    }
-  }, [isScreenActive, screenMesh]);
+    screenMesh.updateWorldMatrix(true, false);
+    screenMesh.matrixWorld.decompose(
+      worldPosition.current,
+      worldQuaternion.current,
+      worldScale.current
+    );
 
-  useEffect(() => {
-    return () => {
-      if (screenMesh && originalMaterialRef.current) {
-        screenMesh.material = originalMaterialRef.current;
-      }
-    };
-  }, [screenMesh]);
+    overlayRef.current.position.copy(worldPosition.current);
+    overlayRef.current.quaternion.copy(worldQuaternion.current);
+    overlayRef.current.scale.copy(worldScale.current);
+  });
 
   if (!screenMesh || !isScreenActive) {
     return null;
   }
 
-  if (!originalMaterialRef.current) {
-    originalMaterialRef.current = screenMesh.material;
-  }
-
   return (
-    <primitive object={screenMesh}>
+    <mesh
+      ref={overlayRef}
+      geometry={screenMesh.geometry}
+      renderOrder={20}
+      frustumCulled={false}
+    >
       <meshBasicMaterial toneMapped={false}>
         <RenderTexture attach="map" frames={Infinity}>
           <PerspectiveCamera makeDefault position={[0, 0, 1]} fov={45} />
           <GlitchStartup triggered={isScreenActive} />
         </RenderTexture>
       </meshBasicMaterial>
-    </primitive>
+    </mesh>
   );
 }
