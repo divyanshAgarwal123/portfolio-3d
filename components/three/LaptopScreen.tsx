@@ -11,6 +11,9 @@ type LaptopScreenProps = {
   lidAngle: number;
   screenScaleX?: number;
   screenScaleY?: number;
+  overlayPosition?: [number, number, number];
+  overlayRotation?: [number, number, number];
+  overlayScaleZ?: number;
 };
 
 function findLidGroup(root: THREE.Object3D): THREE.Object3D | null {
@@ -95,6 +98,9 @@ export default function LaptopScreen({
   lidAngle,
   screenScaleX = 0.985,
   screenScaleY = 0.985,
+  overlayPosition = [0, 0, 0],
+  overlayRotation = [0, 0, 0],
+  overlayScaleZ = 0.985,
 }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
   const hasLoggedLidNames = useRef(false);
@@ -160,13 +166,22 @@ export default function LaptopScreen({
       worldScale.current
     );
 
+    // Start with mesh-following transform
     overlayRef.current.position.copy(worldPosition.current);
     overlayRef.current.quaternion.copy(worldQuaternion.current);
     overlayRef.current.scale.set(
       worldScale.current.x * screenScaleX,
       worldScale.current.y * screenScaleY,
-      worldScale.current.z * 0.985
+      worldScale.current.z * overlayScaleZ
     );
+
+    // Apply user overlay transform
+    overlayRef.current.position.x += overlayPosition[0];
+    overlayRef.current.position.y += overlayPosition[1];
+    overlayRef.current.position.z += overlayPosition[2];
+    overlayRef.current.rotation.x += overlayRotation[0];
+    overlayRef.current.rotation.y += overlayRotation[1];
+    overlayRef.current.rotation.z += overlayRotation[2];
   });
 
   if (!screenMesh || !isScreenActive) {
