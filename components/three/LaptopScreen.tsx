@@ -25,6 +25,7 @@ function findLidGroup(root: THREE.Object3D): THREE.Object3D | null {
 
 function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
   let namedScreen: THREE.Mesh | null = null;
+  let namedDisplay: THREE.Mesh | null = null;
   let areaFallback: THREE.Mesh | null = null;
   let maxArea = -Infinity;
 
@@ -39,6 +40,10 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
     if (lowerName.includes('screen')) {
       namedScreen = mesh;
       return;
+    }
+
+    if (!namedDisplay && (lowerName.includes('display') || lowerName.includes('monitor') || lowerName.includes('panel'))) {
+      namedDisplay = mesh;
     }
 
     const geometry = mesh.geometry;
@@ -57,7 +62,7 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
     }
   });
 
-  return namedScreen ?? areaFallback;
+  return namedScreen ?? namedDisplay ?? areaFallback;
 }
 
 export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProps) {
@@ -65,7 +70,9 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
   const originalMaterialRef = useRef<THREE.Material | THREE.Material[] | null>(null);
   const hasLoggedLidNames = useRef(false);
 
-  const isScreenActive = lidAngle <= -2.0;
+  // In this scene, lid angle animates from about -1.59 (closed) to -0.23 (open).
+  // Activate the laptop screen only when nearly open.
+  const isScreenActive = lidAngle >= -0.3;
 
   const lidGroup = useMemo(() => {
     if (!laptopScene) return null;
@@ -94,8 +101,20 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
     }
 
     const targetRoot = lidGroup ?? laptopScene;
-    setScreenMesh(findScreenMesh(targetRoot));
+    const foundScreenMesh = findScreenMesh(targetRoot);
+
+    if (foundScreenMesh) {
+      console.log('[LaptopScreen] Using screen mesh:', foundScreenMesh.name || '(unnamed-mesh)');
+    } else {
+      console.warn('[LaptopScreen] No dedicated screen mesh found in lid group/scene.');
+    }
+
+    setScreenMesh(foundScreenMesh);
   }, [laptopScene, lidGroup]);
+
+  useEffect(() => {
+    console.log('[LaptopScreen] lidAngle:', lidAngle.toFixed(3), 'active:', isScreenActive);
+  }, [lidAngle, isScreenActive]);
 
   useEffect(() => {
     if (!screenMesh) return;
