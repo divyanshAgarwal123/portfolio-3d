@@ -49,6 +49,8 @@ type ScrollDrivenLaptopProps = {
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
+  laptopScreenScaleX?: number;
+  laptopScreenScaleY?: number;
 };
 
 function ScrollDrivenLaptop({
@@ -68,6 +70,8 @@ function ScrollDrivenLaptop({
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
+  laptopScreenScaleX = 0.985,
+  laptopScreenScaleY = 0.985,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(-1.59);
@@ -145,7 +149,12 @@ function ScrollDrivenLaptop({
         modelScale={laptopScale}
         onSceneReady={setLaptopScene}
       />
-      <LaptopScreen laptopScene={laptopScene} lidAngle={lidAngle} />
+      <LaptopScreen
+        laptopScene={laptopScene}
+        lidAngle={lidAngle}
+        screenScaleX={laptopScreenScaleX}
+        screenScaleY={laptopScreenScaleY}
+      />
       <Suspense fallback={null}>
         <RobotHero
           fallingTransform={robotFalling}
@@ -185,6 +194,8 @@ type LaptopSceneProps = {
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
+  laptopScreenScaleX?: number;
+  laptopScreenScaleY?: number;
   talkingBoyTransform?: RobotTransform;
   kneelingDownTransform?: RobotTransform;
   kneelingDownProposeTransform?: RobotTransform;
@@ -223,6 +234,8 @@ export default function LaptopScene({
   laptopScale,
   laptopPosition,
   laptopRotation,
+  laptopScreenScaleX,
+  laptopScreenScaleY,
   talkingBoyTransform,
   kneelingDownTransform,
   kneelingDownProposeTransform,
@@ -307,6 +320,8 @@ export default function LaptopScene({
           laptopScale={laptopScale}
           laptopPosition={laptopPosition}
           laptopRotation={laptopRotation}
+          laptopScreenScaleX={laptopScreenScaleX}
+          laptopScreenScaleY={laptopScreenScaleY}
         />
       </ScrollControls>
     </>

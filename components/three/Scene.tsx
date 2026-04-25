@@ -78,6 +78,8 @@ type SceneContentProps = {
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
+  laptopScreenScaleX: number;
+  laptopScreenScaleY: number;
   cameraPosition: [number, number, number];
   cameraFov: number;
 };
@@ -110,6 +112,8 @@ function SceneContent({
   laptopScale,
   laptopPosition,
   laptopRotation,
+  laptopScreenScaleX,
+  laptopScreenScaleY,
   cameraPosition,
   cameraFov,
 }: SceneContentProps) {
@@ -145,6 +149,8 @@ function SceneContent({
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
+        laptopScreenScaleX={laptopScreenScaleX}
+        laptopScreenScaleY={laptopScreenScaleY}
       />
       <CameraPOVSync position={cameraPosition} fov={cameraFov} />
     </>
@@ -720,6 +726,8 @@ export default function Scene() {
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
+  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.985);
+  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.985);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
@@ -859,6 +867,50 @@ export default function Scene() {
             onChange={activeMaleModel.setValue}
           />
         </div>
+
+        <div className="mt-4 border-t border-neutral-200 pt-3">
+          <p className="font-semibold">Laptop Screen Precision</p>
+
+          <p className="mt-2">Length (X): {laptopScreenScaleX.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.1}
+            step={0.001}
+            value={laptopScreenScaleX}
+            onChange={(event) => setLaptopScreenScaleX(Number(event.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.1}
+            step={0.001}
+            value={laptopScreenScaleX}
+            onChange={(event) => setLaptopScreenScaleX(Number(event.target.value))}
+          />
+
+          <p className="mt-2">Breadth (Y): {laptopScreenScaleY.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.1}
+            step={0.001}
+            value={laptopScreenScaleY}
+            onChange={(event) => setLaptopScreenScaleY(Number(event.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.1}
+            step={0.001}
+            value={laptopScreenScaleY}
+            onChange={(event) => setLaptopScreenScaleY(Number(event.target.value))}
+          />
+        </div>
       </div>
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
@@ -895,6 +947,8 @@ export default function Scene() {
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
+            laptopScreenScaleX={laptopScreenScaleX}
+            laptopScreenScaleY={laptopScreenScaleY}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}
           />

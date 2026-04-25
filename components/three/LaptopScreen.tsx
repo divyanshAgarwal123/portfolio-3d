@@ -9,6 +9,8 @@ import GlitchStartup from './GlitchStartup';
 type LaptopScreenProps = {
   laptopScene: THREE.Object3D | null;
   lidAngle: number;
+  screenScaleX?: number;
+  screenScaleY?: number;
 };
 
 function findLidGroup(root: THREE.Object3D): THREE.Object3D | null {
@@ -88,7 +90,12 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
   return selected;
 }
 
-export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProps) {
+export default function LaptopScreen({
+  laptopScene,
+  lidAngle,
+  screenScaleX = 0.985,
+  screenScaleY = 0.985,
+}: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
   const hasLoggedLidNames = useRef(false);
   const overlayRef = useRef<THREE.Mesh>(null);
@@ -155,8 +162,11 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
 
     overlayRef.current.position.copy(worldPosition.current);
     overlayRef.current.quaternion.copy(worldQuaternion.current);
-    overlayRef.current.scale.copy(worldScale.current);
-    overlayRef.current.scale.multiplyScalar(0.985);
+    overlayRef.current.scale.set(
+      worldScale.current.x * screenScaleX,
+      worldScale.current.y * screenScaleY,
+      worldScale.current.z * 0.985
+    );
   });
 
   if (!screenMesh || !isScreenActive) {
