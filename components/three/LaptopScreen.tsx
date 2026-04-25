@@ -27,23 +27,29 @@ function findLidGroup(root: THREE.Object3D): THREE.Object3D | null {
 function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
   let namedScreen: THREE.Mesh | null = null;
   let namedDisplay: THREE.Mesh | null = null;
-  let areaFallback: THREE.Mesh | null = null;
-  let maxArea = -Infinity;
+  let bestHeuristic: THREE.Mesh | null = null;
+  let bestHeuristicArea = -Infinity;
 
   const size = new THREE.Vector3();
+  const positiveKeywords = ['screen', 'display', 'monitor', 'panel'];
+  const negativeKeywords = ['lid', 'base', 'body', 'keyboard', 'hinge', 'frame'];
 
   searchRoot.traverse((object) => {
     if (!(object as THREE.Mesh).isMesh) return;
 
     const mesh = object as THREE.Mesh;
-    const lowerName = mesh.name.toLowerCase();
+    const lowerName = (mesh.name || '').toLowerCase();
+    const materialName = Array.isArray(mesh.material)
+      ? mesh.material.map((m) => (m?.name || '').toLowerCase()).join(' ')
+      : (mesh.material?.name || '').toLowerCase();
+    const combinedName = `${lowerName} ${materialName}`;
 
-    if (lowerName.includes('screen')) {
+    if (positiveKeywords.some((keyword) => combinedName.includes(keyword))) {
       namedScreen = mesh;
       return;
     }
 
-    if (!namedDisplay && (lowerName.includes('display') || lowerName.includes('monitor') || lowerName.includes('panel'))) {
+    if (!namedDisplay && (combinedName.includes('display') || combinedName.includes('monitor') || combinedName.includes('panel'))) {
       namedDisplay = mesh;
     }
 
@@ -57,13 +63,29 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
 
     box.getSize(size);
     const area = size.x * size.y;
-    if (area > maxArea) {
-      maxArea = area;
-      areaFallback = mesh;
+
+    const minDimension = Math.min(size.x, size.y, size.z);
+    const maxDimension = Math.max(size.x, size.y, size.z);
+    const aspect = maxDimension > 0 ? Math.max(size.x, size.y) / Math.min(size.x, size.y || 1e-6) : 1;
+    const hasNegativeKeyword = negativeKeywords.some((keyword) => combinedName.includes(keyword));
+
+    // Heuristic for unnamed screen plane: thin rectangular surface, but not obvious lid/body parts.
+    if (!hasNegativeKeyword && minDimension < 0.2 && aspect > 1.15 && area > bestHeuristicArea) {
+      bestHeuristicArea = area;
+      bestHeuristic = mesh;
     }
   });
 
-  return namedScreen ?? namedDisplay ?? areaFallback;
+  const selected = namedScreen ?? namedDisplay ?? bestHeuristic;
+
+  if (!selected) return null;
+
+  const selectedName = (selected.name || '').toLowerCase();
+  if (selectedName.includes('lid') || selectedName.includes('base')) {
+    return null;
+  }
+
+  return selected;
 }
 
 export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProps) {
@@ -134,6 +156,7 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
     overlayRef.current.position.copy(worldPosition.current);
     overlayRef.current.quaternion.copy(worldQuaternion.current);
     overlayRef.current.scale.copy(worldScale.current);
+    overlayRef.current.scale.multiplyScalar(0.985);
   });
 
   if (!screenMesh || !isScreenActive) {
