@@ -1,9 +1,9 @@
 'use client';
 
-import { Text } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
+import IntroContent from '../screen/IntroContent';
 
 type GlitchStartupProps = {
   triggered: boolean;
@@ -175,23 +175,7 @@ export default function GlitchStartup({ triggered }: GlitchStartupProps) {
   });
 
   if (isComplete) {
-    return (
-      <group>
-        <mesh position={[0, 0, -0.01]}>
-          <planeGeometry args={[2, 2]} />
-          <meshBasicMaterial color="white" toneMapped={false} />
-        </mesh>
-        <Text
-          position={[0, 0, 0]}
-          fontSize={0.4}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-        >
-          NAME
-        </Text>
-      </group>
-    );
+    return <IntroContent />;
   }
 
   return (
