@@ -1,0 +1,287 @@
+[     275ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[     936ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[     937ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:110
+[     937ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[     937ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[     937ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[     937ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[     939ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[     940ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[    1433ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[    1435ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[    1435ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[    1435ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[    1436ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[    1436ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[    1741ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    2543ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    3342ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  410362ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  411172ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[  411172ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[  411172ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[  411172ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[  411172ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[  411176ms] [LOG] [Fast Refresh] done in 814ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  436454ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  436760ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  437458ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[  437459ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[  437459ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[  437459ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[  437459ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[  437463ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  437553ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[  437553ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  437555ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  437555ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  437556ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  437556ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  437557ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  438266ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  439069ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  439868ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  460708ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  460926ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  461259ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  461525ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[  461526ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[  461526ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[  461526ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[  461526ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[  461526ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[  461824ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  461825ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  461826ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  461827ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  461827ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  461827ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  462063ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  462863ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  463666ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  491275ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:194
+[  929331ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  930322ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:187
+[  930323ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:188
+[  930323ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:189
+[  930323ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:190
+[  930323ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:191
+[  930328ms] [LOG] [Fast Refresh] done in 997ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  945203ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  946261ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:186
+[  946262ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:187
+[  946262ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:188
+[  946262ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:189
+[  946262ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:190
+[  946265ms] [LOG] [Fast Refresh] done in 1061ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  974301ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  974567ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  975627ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[  975628ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:186
+[  975628ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:187
+[  975628ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:188
+[  975628ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:189
+[  975628ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:190
+[  975630ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  975631ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  975632ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  975632ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  975632ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  975632ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  975633ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  976432ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  977233ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  978035ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1009845ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:275
+[ 1088576ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 1088851ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1089174ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:186
+[ 1089174ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:187
+[ 1089174ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:188
+[ 1089174ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:189
+[ 1089175ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:190
+[ 1089177ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1089240ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 1089241ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 1089242ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 1089242ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 1089243ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 1089243ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 1089374ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 1089982ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1090781ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1091582ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1123395ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:275
+[ 1342964ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 1343595ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:174
+[ 1343596ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:175
+[ 1343596ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:176
+[ 1343596ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:177
+[ 1343596ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:178
+[ 1343599ms] [LOG] [Fast Refresh] done in 635ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 1370252ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 1370497ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1371508ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:174
+[ 1371508ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:175
+[ 1371508ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:176
+[ 1371508ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:177
+[ 1371508ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:178
+[ 1371511ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1371512ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 1371513ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 1371513ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 1371514ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 1371514ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 1371515ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 1371662ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 1372313ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1373114ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1373915ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1405825ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:263
+[ 3673707ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 3673811ms] [ERROR] ./store/sceneStore.ts
+Error: Failed to read source code from /Volumes/MacTech/portfolio_new3/store/sceneStore.ts
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./store/sceneStore.ts
+./components/three/BackgroundProposalScene.tsx
+./components/three/LaptopScene.tsx
+./components/three/Scene.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 3673959ms] [ERROR] ./store/sceneStore.ts
+Error: Failed to read source code from /Volumes/MacTech/portfolio_new3/store/sceneStore.ts
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./store/sceneStore.ts
+./components/three/BackgroundProposalScene.tsx
+./components/three/LaptopScene.tsx
+./components/three/Scene.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 3674350ms] [ERROR] ./store/sceneStore.ts
+Error: Failed to read source code from /Volumes/MacTech/portfolio_new3/store/sceneStore.ts
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./store/sceneStore.ts
+./components/three/BackgroundProposalScene.tsx
+./components/three/LaptopScene.tsx
+./components/three/Scene.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 3674352ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 3674575ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 3674575ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 3674575ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 3674576ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 3674576ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[ 3674578ms] [LOG] [Fast Refresh] done in 226ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 3704325ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:194
+[ 8726664ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 8726807ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 8726807ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 8726807ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 8726807ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 8726807ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[ 8726807ms] [LOG] [Fast Refresh] done in 144ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 8754859ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 8755064ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 8755769ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 8755770ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 8755770ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 8755770ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 8755770ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 8755770ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:116
+[ 8755772ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 8755776ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 8755778ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 8755778ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 8755778ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 8755779ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 8755779ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 8756575ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 8757374ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 8758175ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 8838527ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 8838803ms] [LOG] [Fast Refresh] done in 277ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 8838842ms] [LOG] [Fast Refresh] done in 315ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 9453212ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 9453396ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:110
+[ 9453396ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9453396ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9453396ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9453396ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9453398ms] [LOG] [Fast Refresh] done in 186ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 9590081ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 9590389ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9590389ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9590389ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9590389ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9590389ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 9590391ms] [LOG] [Fast Refresh] done in 310ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 9614073ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 9614497ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 9615116ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9615116ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9615116ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9615116ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9615116ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 9615120ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9615255ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 9615256ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 9615257ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 9615258ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 9615258ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 9615259ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 9615259ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 9615924ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9616724ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9617524ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9627636ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 9627912ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 9628221ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9628221ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9628221ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9628221ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9628221ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 9628332ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9628334ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 9628335ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 9628335ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 9628336ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 9628336ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 9628336ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 9628531ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 9629136ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9629935ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9630736ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9652957ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 9655583ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9655583ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9655583ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9655584ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9655584ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 9655584ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:138
+[ 9655585ms] [LOG] [Fast Refresh] done in 2627ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[ 9682969ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 9683565ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 9684158ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9684598ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 9684598ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:111
+[ 9684598ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:112
+[ 9684598ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:113
+[ 9684598ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:114
+[ 9684598ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:115
+[ 9684601ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:138
+[ 9684602ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 9684604ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 9684604ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 9684605ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 9684605ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 9684606ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 9684963ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9685763ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 9686700ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49

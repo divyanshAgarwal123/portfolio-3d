@@ -1,13 +1,16 @@
 'use client';
 
-import { ScrollControls, useScroll } from '@react-three/drei';
+import { ScrollControls, Sparkles, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import BackgroundGirlScene from './BackgroundGirlScene';
+import BackgroundMaleScene, { type MaleModelIndex } from './BackgroundMaleScene';
+import BackgroundProposalScene, { type FemaleSyncCue } from './BackgroundProposalScene';
 import BackgroundRobotArm from './BackgroundRobotArm';
 import BackgroundRobots from './BackgroundRobots';
+import Effects from './Effects';
 import Laptop from './Laptop';
+import LaptopScreen from './LaptopScreen';
 import RobotHero from './RobotHero';
 
 const SCROLL_MOTION_MAX = 0.431;
@@ -25,8 +28,6 @@ type RobotTransform = {
   rotation: [number, number, number];
 };
 
-type GirlModelIndex = 0 | 1 | 2 | 3 | 4;
-
 type ScrollDrivenLaptopProps = {
   onScrollChange?: (offset: number) => void;
   onScrollDirectionChange?: (direction: 'up' | 'down' | 'idle', delta: number) => void;
@@ -43,13 +44,6 @@ type ScrollDrivenLaptopProps = {
   backgroundRobotTellingSecret?: RobotTransform;
   backgroundRobotPushup?: RobotTransform;
   backgroundRobotNervousLookAround?: RobotTransform;
-  talkingGirlTransform?: RobotTransform;
-  surprisedTransform?: RobotTransform;
-  blushingTransform?: RobotTransform;
-  kissyTransform?: RobotTransform;
-  goofyRunningTransform?: RobotTransform;
-  girlCalibrationMode?: boolean;
-  activeGirlModelIndex?: GirlModelIndex;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale?: number;
@@ -84,6 +78,7 @@ function ScrollDrivenLaptop({
   const lidOpenDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lidOpenArmedRef = useRef(false);
   const climbingReadyRef = useRef(false);
+  const [laptopScene, setLaptopScene] = useState<THREE.Group | null>(null);
 
   useEffect(() => {
     return () => {
@@ -148,7 +143,9 @@ function ScrollDrivenLaptop({
         position={laptopPosition}
         rotation={laptopRotation}
         modelScale={laptopScale}
+        onSceneReady={setLaptopScene}
       />
+      <LaptopScreen laptopScene={laptopScene} lidAngle={lidAngle} />
       <Suspense fallback={null}>
         <RobotHero
           fallingTransform={robotFalling}
@@ -188,6 +185,21 @@ type LaptopSceneProps = {
   laptopScale?: number;
   laptopPosition?: [number, number, number];
   laptopRotation?: [number, number, number];
+  talkingBoyTransform?: RobotTransform;
+  kneelingDownTransform?: RobotTransform;
+  kneelingDownProposeTransform?: RobotTransform;
+  sittingToStandingTransform?: RobotTransform;
+  kissyMaleTransform?: RobotTransform;
+  cheeringTransform?: RobotTransform;
+  maleCalibrationMode?: boolean;
+  activeMaleModelIndex?: MaleModelIndex;
+  talkingGirlTransform?: RobotTransform;
+  surprisedTransform?: RobotTransform;
+  blushingTransform?: RobotTransform;
+  kissyTransform?: RobotTransform;
+  goofyRunningTransform?: RobotTransform;
+  girlCalibrationMode?: boolean;
+  activeGirlModelIndex?: 0 | 1 | 2 | 3 | 4;
 };
 
 export default function LaptopScene({
@@ -206,6 +218,19 @@ export default function LaptopScene({
   backgroundRobotTellingSecret,
   backgroundRobotPushup,
   backgroundRobotNervousLookAround,
+  manualClimbingSequence,
+  climbingSequenceStep,
+  laptopScale,
+  laptopPosition,
+  laptopRotation,
+  talkingBoyTransform,
+  kneelingDownTransform,
+  kneelingDownProposeTransform,
+  sittingToStandingTransform,
+  kissyMaleTransform,
+  cheeringTransform,
+  maleCalibrationMode,
+  activeMaleModelIndex,
   talkingGirlTransform,
   surprisedTransform,
   blushingTransform,
@@ -213,16 +238,38 @@ export default function LaptopScene({
   goofyRunningTransform,
   girlCalibrationMode,
   activeGirlModelIndex,
-  manualClimbingSequence,
-  climbingSequenceStep,
-  laptopScale,
-  laptopPosition,
-  laptopRotation,
 }: LaptopSceneProps) {
+  const [femaleSyncCue, setFemaleSyncCue] = useState<FemaleSyncCue>(null);
+
   return (
     <>
       <Suspense fallback={null}>
         <BackgroundRobotArm transform={backgroundRobotArm} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <BackgroundMaleScene
+          talkingBoyTransform={talkingBoyTransform}
+          kneelingDownTransform={kneelingDownTransform}
+          kneelingDownProposeTransform={kneelingDownProposeTransform}
+          sittingToStandingTransform={sittingToStandingTransform}
+          kissyTransform={kissyMaleTransform}
+          cheeringTransform={cheeringTransform}
+          calibrationMode={maleCalibrationMode}
+          activeModelIndex={activeMaleModelIndex}
+          onSyncCue={setFemaleSyncCue}
+        />
+      </Suspense>
+      <Suspense fallback={null}>
+        <BackgroundProposalScene
+          talkingGirlTransform={talkingGirlTransform}
+          surprisedTransform={surprisedTransform}
+          blushingTransform={blushingTransform}
+          kissyTransform={kissyTransform}
+          goofyRunningTransform={goofyRunningTransform}
+          calibrationMode={girlCalibrationMode}
+          activeModelIndex={activeGirlModelIndex}
+          syncCue={femaleSyncCue}
+        />
       </Suspense>
       <Suspense fallback={null}>
         <BackgroundRobots
@@ -232,17 +279,16 @@ export default function LaptopScene({
           nervousLookAroundTransform={backgroundRobotNervousLookAround}
         />
       </Suspense>
-      <Suspense fallback={null}>
-        <BackgroundGirlScene
-          talkingGirlTransform={talkingGirlTransform}
-          surprisedTransform={surprisedTransform}
-          blushingTransform={blushingTransform}
-          kissyTransform={kissyTransform}
-          goofyRunningTransform={goofyRunningTransform}
-          calibrationMode={girlCalibrationMode}
-          activeModelIndex={activeGirlModelIndex}
-        />
-      </Suspense>
+      <Sparkles
+        count={40}
+        scale={4}
+        size={1}
+        speed={0.3}
+        opacity={0.12}
+        color="#e8f4ff"
+        position={[0, 1, 0]}
+      />
+      <Effects />
       <ScrollControls pages={4} damping={0.3}>
         <ScrollDrivenLaptop
           onScrollChange={onScrollChange}

@@ -14,6 +14,7 @@ type LaptopProps = {
   rotation?: [number, number, number];
   rotationY?: number;
   modelScale?: number;
+  onSceneReady?: (scene: THREE.Group) => void;
 };
 
 export default function Laptop({
@@ -23,6 +24,7 @@ export default function Laptop({
   rotation,
   rotationY = -0.01,
   modelScale = 0.04,
+  onSceneReady,
 }: LaptopProps) {
   const { scene } = useGLTF(MODEL_PATH, DRACO_DECODER_PATH);
   const hasLoggedMeshNames = useRef(false);
@@ -60,6 +62,12 @@ export default function Laptop({
       lidMesh.rotation.x = lidAngle;
     }
   }, [lidMesh, lidAngle]);
+
+  useEffect(() => {
+    if (onSceneReady) {
+      onSceneReady(scene);
+    }
+  }, [onSceneReady, scene]);
 
   return (
     <group
