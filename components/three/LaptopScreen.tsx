@@ -3,6 +3,7 @@
 import { PerspectiveCamera, RenderTexture } from '@react-three/drei';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
+import GlitchStartup from './GlitchStartup';
 
 type LaptopScreenProps = {
   laptopScene: THREE.Object3D | null;
@@ -123,12 +124,9 @@ export default function LaptopScreen({ laptopScene, lidAngle }: LaptopScreenProp
   return (
     <primitive object={screenMesh}>
       <meshBasicMaterial toneMapped={false}>
-        <RenderTexture attach="map" frames={1}>
+        <RenderTexture attach="map" frames={Infinity}>
           <PerspectiveCamera makeDefault position={[0, 0, 1]} fov={45} />
-          <mesh>
-            <planeGeometry args={[2, 2]} />
-            <meshBasicMaterial color="black" toneMapped={false} />
-          </mesh>
+          <GlitchStartup triggered={isScreenActive} />
         </RenderTexture>
       </meshBasicMaterial>
     </primitive>
