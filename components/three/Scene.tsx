@@ -729,9 +729,9 @@ export default function Scene() {
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
-  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.957);
-  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.930);
-  const [laptopScreenScaleZ, setLaptopScreenScaleZ] = useState(1.129);
+  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.968);
+  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.956);
+  const [laptopScreenScaleZ, setLaptopScreenScaleZ] = useState(1.11);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 

@@ -94,9 +94,9 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
 export default function LaptopScreen({
   laptopScene,
   lidAngle,
-  screenScaleX = 0.985,
-  screenScaleY = 0.985,
-  screenScaleZ = 0.985,
+  screenScaleX = 0.968,
+  screenScaleY = 0.956,
+  screenScaleZ = 1.11,
 }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
   const hasLoggedLidNames = useRef(false);

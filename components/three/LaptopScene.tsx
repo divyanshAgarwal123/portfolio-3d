@@ -71,9 +71,9 @@ function ScrollDrivenLaptop({
   laptopScale = 0.04,
   laptopPosition = [0.01, -0.43, -0.42],
   laptopRotation = [0, -0.01, 0],
-  laptopScreenScaleX = 0.985,
-  laptopScreenScaleY = 0.985,
-  laptopScreenScaleZ = 0.985,
+  laptopScreenScaleX = 0.968,
+  laptopScreenScaleY = 0.956,
+  laptopScreenScaleZ = 1.11,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
   const [lidAngle, setLidAngle] = useState(-1.59);
