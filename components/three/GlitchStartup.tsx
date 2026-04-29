@@ -14,16 +14,27 @@ export default function GlitchStartup({ triggered }: GlitchStartupProps) {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [isComplete, setIsComplete] = useState(false);
   const prevTriggeredRef = useRef(false);
+  const hasLoggedStartRef = useRef(false);
+  const hasLoggedCompleteRef = useRef(false);
 
   useEffect(() => {
     const wasTriggered = prevTriggeredRef.current;
     if (!wasTriggered && triggered) {
       setStartTime(null);
       setIsComplete(false);
+      hasLoggedStartRef.current = false;
+      hasLoggedCompleteRef.current = false;
     }
 
     prevTriggeredRef.current = triggered;
   }, [triggered]);
+
+  useEffect(() => {
+    if (triggered && !isComplete && !hasLoggedStartRef.current) {
+      console.log('[GlitchStartup] start');
+      hasLoggedStartRef.current = true;
+    }
+  }, [triggered, isComplete]);
 
   useFrame((state) => {
     if (!triggered || isComplete) return;
@@ -36,28 +47,19 @@ export default function GlitchStartup({ triggered }: GlitchStartupProps) {
     const elapsed = state.clock.elapsedTime - startTime;
     if (elapsed >= GLITCH_DURATION) {
       setIsComplete(true);
+      if (!hasLoggedCompleteRef.current) {
+        console.log('[GlitchStartup] complete');
+        hasLoggedCompleteRef.current = true;
+      }
     }
   });
 
-  if (!triggered) {
+  if (!triggered || isComplete) {
     return null;
-  }
-
-  if (isComplete) {
-    return (
-      <mesh>
-        <planeGeometry args={[2, 2]} />
-        <meshBasicMaterial color="black" toneMapped={false} />
-      </mesh>
-    );
   }
 
   return (
     <group>
-      <mesh>
-        <planeGeometry args={[2, 2]} />
-        <meshBasicMaterial color="black" toneMapped={false} />
-      </mesh>
       <Html transform center position={[0, 0, 0.001]}>
         <div className="glitch-screen bg-black text-emerald-400">
           <div className="glitch" data-text="SYSTEM GLITCH">
@@ -75,6 +77,7 @@ export default function GlitchStartup({ triggered }: GlitchStartupProps) {
             letter-spacing: 8px;
             position: relative;
             overflow: hidden;
+            pointer-events: none;
           }
 
           .glitch {

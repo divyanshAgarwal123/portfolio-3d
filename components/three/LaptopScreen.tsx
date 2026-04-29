@@ -1,6 +1,5 @@
 'use client';
 
-import { PerspectiveCamera, RenderTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -100,7 +99,7 @@ export default function LaptopScreen({
 }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
   const hasLoggedLidNames = useRef(false);
-  const overlayRef = useRef<THREE.Mesh>(null);
+  const overlayRef = useRef<THREE.Group>(null);
 
   const worldPosition = useRef(new THREE.Vector3());
   const worldQuaternion = useRef(new THREE.Quaternion());
@@ -176,18 +175,11 @@ export default function LaptopScreen({
   }
 
   return (
-    <mesh
-      ref={overlayRef}
-      geometry={screenMesh.geometry}
-      renderOrder={20}
-      frustumCulled={false}
-    >
-      <meshBasicMaterial toneMapped={false}>
-        <RenderTexture attach="map" frames={Infinity}>
-          <PerspectiveCamera makeDefault position={[0, 0, 1]} fov={45} />
-          <GlitchStartup triggered={isScreenActive} />
-        </RenderTexture>
-      </meshBasicMaterial>
-    </mesh>
+    <group ref={overlayRef} renderOrder={20}>
+      <mesh geometry={screenMesh.geometry} frustumCulled={false}>
+        <meshBasicMaterial color="black" toneMapped={false} />
+      </mesh>
+      <GlitchStartup triggered={isScreenActive} />
+    </group>
   );
 }
