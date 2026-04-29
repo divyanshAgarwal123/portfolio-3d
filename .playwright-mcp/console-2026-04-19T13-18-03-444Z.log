@@ -1,0 +1,26 @@
+[     288ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[     929ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:120
+[     929ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:121
+[     929ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:122
+[     929ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:123
+[     929ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:124
+[     929ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:125
+[     932ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[    1426ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:121
+[    1426ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:122
+[    1426ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:123
+[    1426ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:124
+[    1426ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:125
+[    1428ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:148
+[    1429ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:151
+[    1429ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    1473ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[    1474ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[    1474ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[    1475ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[    1475ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[    1475ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[    1616ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[    2234ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    3033ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[    3833ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49

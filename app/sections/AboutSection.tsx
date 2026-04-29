@@ -1,75 +1,94 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-const titleText = '> WHO_AM_I.exe';
+const headingTarget = '> WHO_AM_I.exe';
+
 const bioLines = [
-  'I build immersive interfaces where code feels tactile and stories unfold through motion.',
-  'My focus is high-performance frontend systems, 3D interaction, and product experiences that feel alive.',
-  'I care about elegant architecture, clear DX, and details users can feel before they can explain.',
+  'I build immersive interfaces where storytelling, motion, and code feel like one language.',
+  'My focus is crafting premium web experiences with precise interaction design and clean architecture.',
+  'I care about details that users feel before they notice: rhythm, depth, and atmosphere.',
 ];
 
-const skills = ['TypeScript', 'Next.js', 'React Three Fiber', 'GSAP', 'Framer Motion', 'Tailwind CSS'];
-const tickerItems = ['▲ Next.js', '⚛ React', '◉ Three.js', '▣ Framer Motion', '◎ Tailwind', '✦ GSAP'];
+const skills = [
+  'React',
+  'Next.js',
+  'TypeScript',
+  'Three.js',
+  'Tailwind CSS',
+  'Framer Motion',
+  'GSAP',
+  'Node.js',
+];
+
+const stackTicker = [
+  '⚛ React',
+  '▲ Next.js',
+  '🟦 TypeScript',
+  '🎨 Tailwind',
+  '🧠 Framer Motion',
+  '🧩 Three.js',
+  '🎬 GSAP',
+  '🛠 GitHub',
+];
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const [typedTitle, setTypedTitle] = useState('');
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const inView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [typedHeading, setTypedHeading] = useState('');
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!inView) return;
+
     let index = 0;
-    const interval = setInterval(() => {
+    const timer = window.setInterval(() => {
       index += 1;
-      setTypedTitle(titleText.slice(0, index));
-      if (index >= titleText.length) {
-        clearInterval(interval);
-      }
-    }, 70);
-    return () => clearInterval(interval);
-  }, [isInView]);
+      setTypedHeading(headingTarget.slice(0, index));
+      if (index >= headingTarget.length) window.clearInterval(timer);
+    }, 80);
+
+    return () => window.clearInterval(timer);
+  }, [inView]);
+
+  const tickerItems = useMemo(() => [...stackTicker, ...stackTicker], []);
 
   return (
-    <motion.div
+    <motion.section
+      ref={sectionRef}
+      className="relative min-h-screen bg-[#0a0a0a] px-6 py-20 text-zinc-100 md:px-12 lg:px-20"
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.75, ease: 'easeOut' }}
+      transition={{ duration: 0.9, ease: 'easeOut' }}
     >
-      <section ref={sectionRef} className="min-h-screen bg-[#0a0a0a] px-6 py-20 text-zinc-100 md:px-12 lg:px-20">
-        <div className="mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col justify-center gap-12">
-          <h2 className="font-mono text-4xl font-semibold tracking-tight text-[#00ff88] md:text-6xl">
-            {typedTitle}
-            <span className="ml-1 animate-pulse text-zinc-300">|</span>
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-between gap-14">
+        <div className="space-y-10">
+          <h2 className="font-mono text-3xl font-semibold tracking-wide text-[#00ff88] md:text-5xl">
+            {typedHeading}
+            <span className="ml-1 inline-block h-8 w-[2px] animate-pulse bg-[#00ff88] align-middle md:h-10" />
           </h2>
 
-          <div className="grid gap-10 md:grid-cols-2">
-            <div className="space-y-4">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+            <div className="space-y-5">
               {bioLines.map((line, lineIndex) => (
-                <motion.p
-                  key={line}
-                  initial="hidden"
-                  animate={isInView ? 'visible' : 'hidden'}
-                  variants={{
-                    visible: {
-                      transition: { delayChildren: lineIndex * 0.24, staggerChildren: 0.045 },
-                    },
-                  }}
-                  className="text-base leading-relaxed text-zinc-300 md:text-lg"
-                >
-                  {line.split(' ').map((word) => (
+                <p key={line} className="font-mono text-base leading-8 text-zinc-300 md:text-lg">
+                  {line.split(' ').map((word, wordIndex) => (
                     <motion.span
-                      key={`${line}-${word}`}
-                      className="mr-1 inline-block"
-                      variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-                      transition={{ duration: 0.32, ease: 'easeOut' }}
+                      key={`${lineIndex}-${word}`}
+                      className="mr-2 inline-block"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{
+                        duration: 0.45,
+                        delay: lineIndex * 0.35 + wordIndex * 0.04,
+                        ease: 'easeOut',
+                      }}
                     >
                       {word}
                     </motion.span>
                   ))}
-                </motion.p>
+                </p>
               ))}
             </div>
 
@@ -77,10 +96,16 @@ export default function AboutSection() {
               {skills.map((skill, index) => (
                 <motion.span
                   key={skill}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-                  transition={{ duration: 0.4, delay: index * 0.1, ease: 'easeOut' }}
-                  className="rounded-md border border-[#00ff88]/40 bg-[#0f0f0f] px-4 py-2 font-mono text-sm text-[#00ff88] shadow-[0_0_18px_rgba(0,255,136,0.18)]"
+                  className="rounded-md border border-[#00ff88]/45 bg-[#00ff88]/10 px-4 py-2 font-mono text-sm text-[#b9ffd6] shadow-[0_0_0px_rgba(0,255,136,0)]"
+                  initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                    boxShadow: '0 0 22px rgba(0,255,136,0.26)',
+                  }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
                 >
                   {skill}
                 </motion.span>
@@ -89,20 +114,18 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="mt-12 overflow-hidden border-t border-[#00ff88]/30">
+        <div className="relative overflow-hidden rounded-md border border-[#00ff88]/30 bg-black/30 py-3">
           <motion.div
+            className="flex w-max gap-10 whitespace-nowrap px-5 font-mono text-sm text-zinc-300"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className="flex w-max items-center gap-8 py-4 font-mono text-sm text-zinc-300"
+            transition={{ duration: 24, ease: 'linear', repeat: Infinity }}
           >
-            {[...tickerItems, ...tickerItems].map((item, idx) => (
-              <span key={`${item}-${idx}`} className="whitespace-nowrap">
-                {item}
-              </span>
+            {tickerItems.map((item, index) => (
+              <span key={`${item}-${index}`}>{item}</span>
             ))}
           </motion.div>
         </div>
-      </section>
-    </motion.div>
+      </div>
+    </motion.section>
   );
 }

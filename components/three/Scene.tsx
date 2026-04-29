@@ -16,6 +16,7 @@ type RobotTransform = {
 };
 
 type GirlModelIndex = 0 | 1 | 2 | 3 | 4;
+type MaleModelIndex = 0 | 1 | 2 | 3 | 4 | 5;
 
 function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
   const camera = useThree((state) => state.camera);
@@ -66,11 +67,20 @@ type SceneContentProps = {
   blushingGirl: RobotTransform;
   kissyGirl: RobotTransform;
   goofyRunningGirl: RobotTransform;
+  talkingBoy: RobotTransform;
+  kneelingDownBoy: RobotTransform;
+  kneelingDownProposeBoy: RobotTransform;
+  sittingToStandingBoy: RobotTransform;
+  kissyBoy: RobotTransform;
+  cheeringBoy: RobotTransform;
   manualClimbingSequence?: boolean;
   climbingSequenceStep?: number;
   laptopScale: number;
   laptopPosition: [number, number, number];
   laptopRotation: [number, number, number];
+  laptopScreenScaleX: number;
+  laptopScreenScaleY: number;
+  laptopScreenScaleZ: number;
   cameraPosition: [number, number, number];
   cameraFov: number;
 };
@@ -92,11 +102,20 @@ function SceneContent({
   blushingGirl,
   kissyGirl,
   goofyRunningGirl,
+  talkingBoy,
+  kneelingDownBoy,
+  kneelingDownProposeBoy,
+  sittingToStandingBoy,
+  kissyBoy,
+  cheeringBoy,
   manualClimbingSequence,
   climbingSequenceStep,
   laptopScale,
   laptopPosition,
   laptopRotation,
+  laptopScreenScaleX,
+  laptopScreenScaleY,
+  laptopScreenScaleZ,
   cameraPosition,
   cameraFov,
 }: SceneContentProps) {
@@ -121,12 +140,20 @@ function SceneContent({
         blushingTransform={blushingGirl}
         kissyTransform={kissyGirl}
         goofyRunningTransform={goofyRunningGirl}
-        girlCalibrationMode={false}
+        talkingBoyTransform={talkingBoy}
+        kneelingDownTransform={kneelingDownBoy}
+        kneelingDownProposeTransform={kneelingDownProposeBoy}
+        sittingToStandingTransform={sittingToStandingBoy}
+        kissyMaleTransform={kissyBoy}
+        cheeringTransform={cheeringBoy}
         manualClimbingSequence={manualClimbingSequence}
         climbingSequenceStep={climbingSequenceStep}
         laptopScale={laptopScale}
         laptopPosition={laptopPosition}
         laptopRotation={laptopRotation}
+        laptopScreenScaleX={laptopScreenScaleX}
+        laptopScreenScaleY={laptopScreenScaleY}
+        laptopScreenScaleZ={laptopScreenScaleZ}
       />
       <CameraPOVSync position={cameraPosition} fov={cameraFov} />
     </>
@@ -664,12 +691,47 @@ export default function Scene() {
   const [goofyRunningGirl, setGoofyRunningGirl] = useState<RobotTransform>({
     position: [-0.67, -0.36, 0.14],
     scale: 0.053,
-    rotation: [0, 1.17, 0],
+    rotation: [0, -1.69, 0],
   });
+  const [activeGirlModelIndex, setActiveGirlModelIndex] = useState<GirlModelIndex>(0);
+  const [talkingBoy, setTalkingBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [kneelingDownBoy, setKneelingDownBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [kneelingDownProposeBoy, setKneelingDownProposeBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [sittingToStandingBoy, setSittingToStandingBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [kissyBoy, setKissyBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [cheeringBoy, setCheeringBoy] = useState<RobotTransform>({
+    position: [-0.61, -0.36, 0.14],
+    scale: 0.053,
+    rotation: [0, -1.11, 0],
+  });
+  const [activeMaleModelIndex, setActiveMaleModelIndex] = useState<MaleModelIndex>(0);
   const [controlPanelPos, setControlPanelPos] = useState({ x: 16, y: 16 });
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
+  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.968);
+  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.956);
+  const [laptopScreenScaleZ, setLaptopScreenScaleZ] = useState(1.11);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
@@ -701,6 +763,39 @@ export default function Scene() {
       window.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
+
+  const activeGirlModel =
+    activeGirlModelIndex === 0
+      ? { label: 'talking_girl.glb', value: talkingGirl, setValue: setTalkingGirl }
+      : activeGirlModelIndex === 1
+        ? { label: 'surprised.glb', value: surprisedGirl, setValue: setSurprisedGirl }
+        : activeGirlModelIndex === 2
+          ? { label: 'blushing.glb', value: blushingGirl, setValue: setBlushingGirl }
+          : activeGirlModelIndex === 3
+            ? { label: 'kissy.glb', value: kissyGirl, setValue: setKissyGirl }
+            : { label: 'goofy_running.glb', value: goofyRunningGirl, setValue: setGoofyRunningGirl };
+
+
+  const activeMaleModel =
+    activeMaleModelIndex === 0
+      ? { label: 'talking_boy.glb', value: talkingBoy, setValue: setTalkingBoy }
+      : activeMaleModelIndex === 1
+        ? { label: 'kneeling_down.glb', value: kneelingDownBoy, setValue: setKneelingDownBoy }
+        : activeMaleModelIndex === 2
+          ? {
+              label: 'kneeling_down_propose.glb',
+              value: kneelingDownProposeBoy,
+              setValue: setKneelingDownProposeBoy,
+            }
+          : activeMaleModelIndex === 3
+            ? {
+                label: 'sitting_to_standing.glb',
+                value: sittingToStandingBoy,
+                setValue: setSittingToStandingBoy,
+              }
+            : activeMaleModelIndex === 4
+              ? { label: 'kissy.glb', value: kissyBoy, setValue: setKissyBoy }
+              : { label: 'cheering2.glb', value: cheeringBoy, setValue: setCheeringBoy };
 
   return (
     <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
@@ -759,14 +854,234 @@ export default function Scene() {
 
         <div className="mt-4 border-t border-neutral-200 pt-3">
           <p className="font-semibold">Girl Sequence Precision</p>
-          <RobotControlPanel label="talking_girl.glb" value={talkingGirl} onChange={setTalkingGirl} />
-          <RobotControlPanel label="surprised.glb" value={surprisedGirl} onChange={setSurprisedGirl} />
-          <RobotControlPanel label="blushing.glb" value={blushingGirl} onChange={setBlushingGirl} />
-          <RobotControlPanel label="kissy.glb" value={kissyGirl} onChange={setKissyGirl} />
+          <p className="mt-1">Current: {activeGirlModel.label} (auto sequence)</p>
           <RobotControlPanel
-            label="goofy_running.glb"
-            value={goofyRunningGirl}
-            onChange={setGoofyRunningGirl}
+            label={activeGirlModel.label}
+            value={activeGirlModel.value}
+            onChange={activeGirlModel.setValue}
+          />
+        </div>
+
+        <div className="mt-4 border-t border-neutral-200 pt-3">
+          <p className="font-semibold">Male Sequence Precision</p>
+          <p className="mt-1">Current: {activeMaleModel.label} (auto sequence)</p>
+          <RobotControlPanel
+            label={activeMaleModel.label}
+            value={activeMaleModel.value}
+            onChange={activeMaleModel.setValue}
+          />
+        </div>
+
+        <div className="mt-4 border-t border-neutral-200 pt-3">
+          <p className="font-semibold">Laptop Precision</p>
+
+          {/* Scale */}
+          <p className="mt-2">Scale: {laptopScale.toFixed(4)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.005}
+            max={0.15}
+            step={0.001}
+            value={laptopScale}
+            onChange={(e) => setLaptopScale(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.005}
+            max={0.15}
+            step={0.001}
+            value={laptopScale}
+            onChange={(e) => setLaptopScale(Number(e.target.value))}
+          />
+
+          {/* Position X */}
+          <p className="mt-2">Pos X: {laptopPosition[0].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[0]}
+            onChange={(e) => setLaptopPosition([Number(e.target.value), laptopPosition[1], laptopPosition[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[0]}
+            onChange={(e) => setLaptopPosition([Number(e.target.value), laptopPosition[1], laptopPosition[2]])}
+          />
+
+          {/* Position Y */}
+          <p className="mt-2">Pos Y: {laptopPosition[1].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[1]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], Number(e.target.value), laptopPosition[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[1]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], Number(e.target.value), laptopPosition[2]])}
+          />
+
+          {/* Position Z */}
+          <p className="mt-2">Pos Z: {laptopPosition[2].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[2]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], laptopPosition[1], Number(e.target.value)])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[2]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], laptopPosition[1], Number(e.target.value)])}
+          />
+
+          {/* Rotation X */}
+          <p className="mt-2">Rot X: {laptopRotation[0].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[0]}
+            onChange={(e) => setLaptopRotation([Number(e.target.value), laptopRotation[1], laptopRotation[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[0]}
+            onChange={(e) => setLaptopRotation([Number(e.target.value), laptopRotation[1], laptopRotation[2]])}
+          />
+
+          {/* Rotation Y */}
+          <p className="mt-2">Rot Y: {laptopRotation[1].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[1]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], Number(e.target.value), laptopRotation[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[1]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], Number(e.target.value), laptopRotation[2]])}
+          />
+
+          {/* Rotation Z */}
+          <p className="mt-2">Rot Z: {laptopRotation[2].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[2]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], laptopRotation[1], Number(e.target.value)])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[2]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], laptopRotation[1], Number(e.target.value)])}
+          />
+
+          {/* Screen Scale X */}
+          <p className="mt-2">Screen Scale X: {laptopScreenScaleX.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleX}
+            onChange={(e) => setLaptopScreenScaleX(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleX}
+            onChange={(e) => setLaptopScreenScaleX(Number(e.target.value))}
+          />
+
+          {/* Screen Scale Y */}
+          <p className="mt-2">Screen Scale Y: {laptopScreenScaleY.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleY}
+            onChange={(e) => setLaptopScreenScaleY(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleY}
+            onChange={(e) => setLaptopScreenScaleY(Number(e.target.value))}
+          />
+          {/* Screen Scale Z */}
+          <p className="mt-2">Screen Scale Z: {laptopScreenScaleZ.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleZ}
+            onChange={(e) => setLaptopScreenScaleZ(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleZ}
+            onChange={(e) => setLaptopScreenScaleZ(Number(e.target.value))}
           />
         </div>
       </div>
@@ -796,9 +1111,18 @@ export default function Scene() {
             blushingGirl={blushingGirl}
             kissyGirl={kissyGirl}
             goofyRunningGirl={goofyRunningGirl}
+            talkingBoy={talkingBoy}
+            kneelingDownBoy={kneelingDownBoy}
+            kneelingDownProposeBoy={kneelingDownProposeBoy}
+            sittingToStandingBoy={sittingToStandingBoy}
+            kissyBoy={kissyBoy}
+            cheeringBoy={cheeringBoy}
             laptopScale={laptopScale}
             laptopPosition={laptopPosition}
             laptopRotation={laptopRotation}
+            laptopScreenScaleX={laptopScreenScaleX}
+            laptopScreenScaleY={laptopScreenScaleY}
+            laptopScreenScaleZ={laptopScreenScaleZ}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}
           />

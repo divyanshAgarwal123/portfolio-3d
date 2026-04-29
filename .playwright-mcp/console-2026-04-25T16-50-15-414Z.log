@@ -1,0 +1,708 @@
+[   32758ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[   33166ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[   33847ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:142
+[   33847ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:143
+[   33847ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:144
+[   33848ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:145
+[   33848ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:146
+[   33848ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:147
+[   33850ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:163
+[   33850ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:164
+[   33850ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:165
+[   33850ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:166
+[   33850ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:167
+[   33852ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:257
+[   33852ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:260
+[   33852ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   34015ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[   34016ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[   34016ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[   34017ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[   34017ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[   34017ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[   34267ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[   34656ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   35457ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   36256ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   42939ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[   43148ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[   43563ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:142
+[   43563ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:143
+[   43563ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:144
+[   43563ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:145
+[   43563ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:146
+[   43563ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:147
+[   43653ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:163
+[   43653ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:164
+[   43653ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:165
+[   43653ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:166
+[   43653ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:167
+[   43655ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:257
+[   43655ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:260
+[   43655ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   43729ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[   43730ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[   43731ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[   43731ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[   43731ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[   43732ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[   43732ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[   44458ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   45258ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   46057ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   69360ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[   69593ms] [LOG] [Fast Refresh] done in 233ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[   69641ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[   69641ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:142
+[   69641ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:143
+[   69642ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:144
+[   69642ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:145
+[   69642ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:146
+[   69642ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:147
+[   69643ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:163
+[   69643ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:164
+[   69643ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:165
+[   69643ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:166
+[   69643ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:167
+[   69645ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:257
+[   69645ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:260
+[   69645ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   69645ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[   69646ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[   69646ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[   69646ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[   69646ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[   69647ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[   69647ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[   70148ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:29947
+[   70447ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   71247ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[   72047ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[  454226ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  454700ms] [LOG] [Fast Refresh] done in 474ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  454921ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  454921ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  454922ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  454922ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  454923ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  454923ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  454923ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  546119ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  546437ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  546437ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  546438ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  546438ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  546439ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  546439ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  546439ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  546440ms] [LOG] [Fast Refresh] done in 321ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  562560ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  562638ms] [LOG] [Fast Refresh] done in 79ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  939892ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  940222ms] [LOG] [Fast Refresh] done in 329ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  978294ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  978374ms] [LOG] [Fast Refresh] done in 79ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  978542ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  978607ms] [LOG] [Fast Refresh] done in 66ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  993711ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  994382ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994382ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[  994383ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[  994384ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[  994384ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[  994384ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[  994385ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[  994385ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[  994386ms] [ERROR] The above error occurred in the <ForwardRef> component:
+
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:1165)
+    at Effects
+    at LaptopScene (webpack-internal:///(app-pages-browser)/./components/three/LaptopScene.tsx:232:11)
+    at SceneContent (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:140:11)
+    at Suspense
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:451:5)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at Provider (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:2102:3)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  994387ms] [LOG] [Fast Refresh] done in 675ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  994391ms] [ERROR] Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload ForwardRef(Canvas) ForwardRef(Canvas) 
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:940:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (webpack-internal:///(app-pages-browser)/./app/layout.tsx:21:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11) @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  994391ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994391ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994391ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994392ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994392ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994392ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994392ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994393ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994393ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994393ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at commitLayoutEffectOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14776:17)
+    at commitLayoutMountEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16285:9)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16271:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16253:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+    at performSyncWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18210:3)
+    at flushSyncCallbacks (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:2936:22)
+    at flushSync (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18307:7)
+    at Object.scheduleRefresh (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:19870:5)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:265:17)
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-refresh/cjs/react-refresh-runtime.development.js:254:26)
+    at applyUpdate (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:139:31)
+    at statusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/@next/react-refresh-utils/dist/internal/helpers.js:156:13)
+    at setStatus (http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:508:55)
+    at http://localhost:3000/_next/static/chunks/webpack.js?v=1777135858072:678:21
+[  994394ms] [ERROR] The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:940:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (webpack-internal:///(app-pages-browser)/./app/layout.tsx:21:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  994946ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:29947
+[ 1139213ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 1139513ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139515ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1139516ms] [ERROR] The above error occurred in the <ForwardRef> component:
+
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:1165)
+    at Effects
+    at LaptopScene (webpack-internal:///(app-pages-browser)/./components/three/LaptopScene.tsx:232:11)
+    at SceneContent (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:140:11)
+    at Suspense
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:451:5)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at Provider (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/events-321b05fb.esm.js:2102:3)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 1139522ms] [ERROR] Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload ForwardRef(Canvas) ForwardRef(Canvas) 
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:940:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (webpack-internal:///(app-pages-browser)/./app/layout.tsx:21:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11) @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 1139523ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139523ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139523ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139523ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139523ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139524ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139524ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139524ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139524ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139524ms] TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/postprocessing/dist/index.js:58:2521)
+    at commitHookEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14664:26)
+    at safelyCallCommitHookLayoutEffectListMount (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:14390:5)
+    at reappearLayoutEffectsOnFiber (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:15027:13)
+    at reappearLayoutEffects_complete (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16436:7)
+    at reappearLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16424:7)
+    at commitLayoutEffects_begin (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16246:11)
+    at commitLayoutEffects (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:16209:3)
+    at commitRootImpl (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18940:5)
+    at commitRoot (webpack-internal:///(app-pages-browser)/./node_modules/react-reconciler/cjs/react-reconciler.development.js:18806:5)
+[ 1139526ms] [ERROR] The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at Canvas (webpack-internal:///(app-pages-browser)/./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js:256:3)
+    at FiberProvider (webpack-internal:///(app-pages-browser)/./node_modules/its-fine/dist/index.js:80:1)
+    at CanvasWrapper
+    at Suspense
+    at div
+    at Scene (webpack-internal:///(app-pages-browser)/./components/three/Scene.tsx:940:72)
+    at main
+    at Home (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (webpack-internal:///(app-pages-browser)/./app/layout.tsx:21:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[ 1140037ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/./node_modules/three/build/three.module.js:29947
+[ 1174179ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 1174338ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[ 1174737ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 1174931ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1175550ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:142
+[ 1175550ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:143
+[ 1175550ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:144
+[ 1175550ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:145
+[ 1175550ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:146
+[ 1175550ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:147
+[ 1175553ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1175652ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:163
+[ 1175652ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:164
+[ 1175652ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:165
+[ 1175652ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:166
+[ 1175652ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:167
+[ 1175654ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:257
+[ 1175654ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:260
+[ 1175654ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 1175655ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 1175655ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 1175655ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 1175656ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 1175656ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 1175802ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 1176356ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1177155ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1177955ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1203703ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[ 1203929ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1204375ms] [LOG] RobotThinking clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1204482ms] [LOG] BackgroundMaleScene talking_boy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:142
+[ 1204482ms] [LOG] BackgroundMaleScene kneeling_down clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:143
+[ 1204482ms] [LOG] BackgroundMaleScene kneeling_down_propose clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:144
+[ 1204483ms] [LOG] BackgroundMaleScene sitting_to_standing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:145
+[ 1204483ms] [LOG] BackgroundMaleScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:146
+[ 1204483ms] [LOG] BackgroundMaleScene cheering2 clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundMaleScene.tsx:147
+[ 1204484ms] [LOG] BackgroundProposalScene talking_girl clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:163
+[ 1204484ms] [LOG] BackgroundProposalScene surprised clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:164
+[ 1204484ms] [LOG] BackgroundProposalScene blushing clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:165
+[ 1204485ms] [LOG] BackgroundProposalScene kissy clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:166
+[ 1204485ms] [LOG] BackgroundProposalScene goofy_running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:167
+[ 1204486ms] [LOG] BackgroundProposalScene goofy_running tracks (original -> inPlace): 147 -> 146 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:257
+[ 1204486ms] [LOG] BackgroundProposalScene goofy_running clipDuration: 0.6666666865348816 @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundProposalScene.tsx:260
+[ 1204490ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 1204491ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 1204491ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 1204491ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 1204491ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 1204492ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 1204619ms] [LOG] BackgroundRobotArm clip: arm_skeleton|ArmAction @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobotArm.tsx:55
+[ 1205178ms] [LOG] RobotTellingSecret clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1205978ms] [LOG] RobotPushup clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1206778ms] [LOG] RobotNervousLookAround clip: mixamo.com @ webpack-internal:///(app-pages-browser)/./components/three/BackgroundRobots.tsx:49
+[ 1438848ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[ 1439374ms] [LOG] [Laptop] Mesh names: [Frame_ComputerFrame_0, Screen_ComputerScreen_0] @ webpack-internal:///(app-pages-browser)/./components/three/Laptop.tsx:47
+[ 1439374ms] [LOG] Falling clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:452
+[ 1439375ms] [LOG] PointingBack clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:490
+[ 1439375ms] [LOG] Running clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:505
+[ 1439375ms] [LOG] ClimbingToLaptop clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:520
+[ 1439376ms] [LOG] CutelySitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:535
+[ 1439376ms] [LOG] StandingToSitting clips: [mixamo.com] @ webpack-internal:///(app-pages-browser)/./components/three/RobotHero.tsx:550
+[ 1439381ms] [LOG] [Fast Refresh] done in 532ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
