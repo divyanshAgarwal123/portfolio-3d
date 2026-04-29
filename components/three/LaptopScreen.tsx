@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -10,7 +10,6 @@ type LaptopScreenProps = {
   lidAngle: number;
   screenScaleX?: number;
   screenScaleY?: number;
-  screenScaleZ?: number;
 };
 
 function findLidGroup(root: THREE.Object3D): THREE.Object3D | null {
@@ -93,13 +92,12 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
 export default function LaptopScreen({
   laptopScene,
   lidAngle,
-  screenScaleX = 0.968,
-  screenScaleY = 0.956,
-  screenScaleZ = 1.11,
+  screenScaleX = 0.985,
+  screenScaleY = 0.985,
 }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
   const hasLoggedLidNames = useRef(false);
-  const overlayRef = useRef<THREE.Group>(null);
+  const overlayGroupRef = useRef<THREE.Group>(null);
 
   const worldPosition = useRef(new THREE.Vector3());
   const worldQuaternion = useRef(new THREE.Quaternion());
@@ -152,7 +150,7 @@ export default function LaptopScreen({
   }, [lidAngle, isScreenActive]);
 
   useFrame(() => {
-    if (!screenMesh || !overlayRef.current) return;
+    if (!screenMesh || !overlayGroupRef.current) return;
 
     screenMesh.updateWorldMatrix(true, false);
     screenMesh.matrixWorld.decompose(
@@ -161,12 +159,12 @@ export default function LaptopScreen({
       worldScale.current
     );
 
-    overlayRef.current.position.copy(worldPosition.current);
-    overlayRef.current.quaternion.copy(worldQuaternion.current);
-    overlayRef.current.scale.set(
+    overlayGroupRef.current.position.copy(worldPosition.current);
+    overlayGroupRef.current.quaternion.copy(worldQuaternion.current);
+    overlayGroupRef.current.scale.set(
       worldScale.current.x * screenScaleX,
       worldScale.current.y * screenScaleY,
-      worldScale.current.z * screenScaleZ
+      worldScale.current.z * 0.985
     );
   });
 
@@ -175,8 +173,8 @@ export default function LaptopScreen({
   }
 
   return (
-    <group ref={overlayRef} renderOrder={20}>
-      <mesh geometry={screenMesh.geometry} frustumCulled={false}>
+    <group ref={overlayGroupRef} renderOrder={20}>
+      <mesh geometry={screenMesh.geometry} renderOrder={20} frustumCulled={false}>
         <meshBasicMaterial color="black" toneMapped={false} />
       </mesh>
       <GlitchStartup triggered={isScreenActive} />
