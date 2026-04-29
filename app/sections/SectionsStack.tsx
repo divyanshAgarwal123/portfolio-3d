@@ -1,6 +1,7 @@
 'use client';
 
 import AboutSection from './AboutSection';
+import ContactSection from './ContactSection';
 import ProjectsSection from './ProjectsSection';
 import SkillsSection from './SkillsSection';
 
@@ -16,6 +17,8 @@ export default function SectionsStack() {
       <ProjectsSection />
       <Divider />
       <SkillsSection />
+      <Divider />
+      <ContactSection />
     </div>
   );
 }
