@@ -80,6 +80,7 @@ type SceneContentProps = {
   laptopRotation: [number, number, number];
   laptopScreenScaleX: number;
   laptopScreenScaleY: number;
+  laptopScreenScaleZ: number;
   cameraPosition: [number, number, number];
   cameraFov: number;
 };
@@ -114,6 +115,7 @@ function SceneContent({
   laptopRotation,
   laptopScreenScaleX,
   laptopScreenScaleY,
+  laptopScreenScaleZ,
   cameraPosition,
   cameraFov,
 }: SceneContentProps) {
@@ -151,6 +153,7 @@ function SceneContent({
         laptopRotation={laptopRotation}
         laptopScreenScaleX={laptopScreenScaleX}
         laptopScreenScaleY={laptopScreenScaleY}
+        laptopScreenScaleZ={laptopScreenScaleZ}
       />
       <CameraPOVSync position={cameraPosition} fov={cameraFov} />
     </>
@@ -726,12 +729,9 @@ export default function Scene() {
   const [laptopScale, setLaptopScale] = useState(0.04);
   const [laptopPosition, setLaptopPosition] = useState<[number, number, number]>([0.01, -0.43, -0.42]);
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
-  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.985);
-  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.985);
-  // Overlay transform state
-  const [laptopScreenPosition, setLaptopScreenPosition] = useState<[number, number, number]>([0, 0, 0]);
-  const [laptopScreenRotation, setLaptopScreenRotation] = useState<[number, number, number]>([0, 0, 0]);
-  const [laptopScreenScaleZ, setLaptopScreenScaleZ] = useState(0.985);
+  const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.957);
+  const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.930);
+  const [laptopScreenScaleZ, setLaptopScreenScaleZ] = useState(1.129);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
@@ -815,30 +815,6 @@ export default function Scene() {
         >
           Movable Slider Tab
         </div>
-        <div className="mt-4 border-t border-neutral-200 pt-3">
-          <p className="font-semibold">Laptop Screen Overlay Coords</p>
-          <p className="mt-2">Position X: {laptopScreenPosition[0].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-2} max={2} step={0.001} value={laptopScreenPosition[0]} onChange={e => setLaptopScreenPosition([Number(e.target.value), laptopScreenPosition[1], laptopScreenPosition[2]])} />
-          <input className="mt-1 w-44" type="range" min={-2} max={2} step={0.001} value={laptopScreenPosition[0]} onChange={e => setLaptopScreenPosition([Number(e.target.value), laptopScreenPosition[1], laptopScreenPosition[2]])} />
-          <p className="mt-2">Position Y: {laptopScreenPosition[1].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-2} max={2} step={0.001} value={laptopScreenPosition[1]} onChange={e => setLaptopScreenPosition([laptopScreenPosition[0], Number(e.target.value), laptopScreenPosition[2]])} />
-          <input className="mt-1 w-44" type="range" min={-2} max={2} step={0.001} value={laptopScreenPosition[1]} onChange={e => setLaptopScreenPosition([laptopScreenPosition[0], Number(e.target.value), laptopScreenPosition[2]])} />
-          <p className="mt-2">Position Z: {laptopScreenPosition[2].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-2} max={2} step={0.001} value={laptopScreenPosition[2]} onChange={e => setLaptopScreenPosition([laptopScreenPosition[0], laptopScreenPosition[1], Number(e.target.value)])} />
-          <input className="mt-1 w-44" type="range" min={-2} max={2} step={0.001} value={laptopScreenPosition[2]} onChange={e => setLaptopScreenPosition([laptopScreenPosition[0], laptopScreenPosition[1], Number(e.target.value)])} />
-          <p className="mt-2">Rotation X: {laptopScreenRotation[0].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-Math.PI} max={Math.PI} step={0.001} value={laptopScreenRotation[0]} onChange={e => setLaptopScreenRotation([Number(e.target.value), laptopScreenRotation[1], laptopScreenRotation[2]])} />
-          <input className="mt-1 w-44" type="range" min={-3.142} max={3.142} step={0.001} value={laptopScreenRotation[0]} onChange={e => setLaptopScreenRotation([Number(e.target.value), laptopScreenRotation[1], laptopScreenRotation[2]])} />
-          <p className="mt-2">Rotation Y: {laptopScreenRotation[1].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-Math.PI} max={Math.PI} step={0.001} value={laptopScreenRotation[1]} onChange={e => setLaptopScreenRotation([laptopScreenRotation[0], Number(e.target.value), laptopScreenRotation[2]])} />
-          <input className="mt-1 w-44" type="range" min={-3.142} max={3.142} step={0.001} value={laptopScreenRotation[1]} onChange={e => setLaptopScreenRotation([laptopScreenRotation[0], Number(e.target.value), laptopScreenRotation[2]])} />
-          <p className="mt-2">Rotation Z: {laptopScreenRotation[2].toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={-Math.PI} max={Math.PI} step={0.001} value={laptopScreenRotation[2]} onChange={e => setLaptopScreenRotation([laptopScreenRotation[0], laptopScreenRotation[1], Number(e.target.value)])} />
-          <input className="mt-1 w-44" type="range" min={-3.142} max={3.142} step={0.001} value={laptopScreenRotation[2]} onChange={e => setLaptopScreenRotation([laptopScreenRotation[0], laptopScreenRotation[1], Number(e.target.value)])} />
-          <p className="mt-2">Scale Z: {laptopScreenScaleZ.toFixed(3)}</p>
-          <input className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5" type="number" min={0.7} max={1.1} step={0.001} value={laptopScreenScaleZ} onChange={e => setLaptopScreenScaleZ(Number(e.target.value))} />
-          <input className="mt-1 w-44" type="range" min={0.7} max={1.1} step={0.001} value={laptopScreenScaleZ} onChange={e => setLaptopScreenScaleZ(Number(e.target.value))} />
-        </div>
         <p className="font-semibold">Robots</p>
         <RobotControlPanel label="RobotFalling" value={robotFalling} onChange={setRobotFalling} />
         <RobotControlPanel
@@ -897,46 +873,215 @@ export default function Scene() {
         </div>
 
         <div className="mt-4 border-t border-neutral-200 pt-3">
-          <p className="font-semibold">Laptop Screen Precision</p>
+          <p className="font-semibold">Laptop Precision</p>
 
-          <p className="mt-2">Length (X): {laptopScreenScaleX.toFixed(3)}</p>
+          {/* Scale */}
+          <p className="mt-2">Scale: {laptopScale.toFixed(4)}</p>
           <input
             className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
             type="number"
+            min={0.005}
+            max={0.15}
+            step={0.001}
+            value={laptopScale}
+            onChange={(e) => setLaptopScale(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.005}
+            max={0.15}
+            step={0.001}
+            value={laptopScale}
+            onChange={(e) => setLaptopScale(Number(e.target.value))}
+          />
+
+          {/* Position X */}
+          <p className="mt-2">Pos X: {laptopPosition[0].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[0]}
+            onChange={(e) => setLaptopPosition([Number(e.target.value), laptopPosition[1], laptopPosition[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[0]}
+            onChange={(e) => setLaptopPosition([Number(e.target.value), laptopPosition[1], laptopPosition[2]])}
+          />
+
+          {/* Position Y */}
+          <p className="mt-2">Pos Y: {laptopPosition[1].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[1]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], Number(e.target.value), laptopPosition[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[1]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], Number(e.target.value), laptopPosition[2]])}
+          />
+
+          {/* Position Z */}
+          <p className="mt-2">Pos Z: {laptopPosition[2].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[2]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], laptopPosition[1], Number(e.target.value)])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-5}
+            max={5}
+            step={0.01}
+            value={laptopPosition[2]}
+            onChange={(e) => setLaptopPosition([laptopPosition[0], laptopPosition[1], Number(e.target.value)])}
+          />
+
+          {/* Rotation X */}
+          <p className="mt-2">Rot X: {laptopRotation[0].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[0]}
+            onChange={(e) => setLaptopRotation([Number(e.target.value), laptopRotation[1], laptopRotation[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[0]}
+            onChange={(e) => setLaptopRotation([Number(e.target.value), laptopRotation[1], laptopRotation[2]])}
+          />
+
+          {/* Rotation Y */}
+          <p className="mt-2">Rot Y: {laptopRotation[1].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[1]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], Number(e.target.value), laptopRotation[2]])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[1]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], Number(e.target.value), laptopRotation[2]])}
+          />
+
+          {/* Rotation Z */}
+          <p className="mt-2">Rot Z: {laptopRotation[2].toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[2]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], laptopRotation[1], Number(e.target.value)])}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={-6.28}
+            max={6.28}
+            step={0.01}
+            value={laptopRotation[2]}
+            onChange={(e) => setLaptopRotation([laptopRotation[0], laptopRotation[1], Number(e.target.value)])}
+          />
+
+          {/* Screen Scale X */}
+          <p className="mt-2">Screen Scale X: {laptopScreenScaleX.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
+            type="number"
             min={0.7}
-            max={1.1}
+            max={1.3}
             step={0.001}
             value={laptopScreenScaleX}
-            onChange={(event) => setLaptopScreenScaleX(Number(event.target.value))}
+            onChange={(e) => setLaptopScreenScaleX(Number(e.target.value))}
           />
           <input
             className="mt-1 w-44"
             type="range"
             min={0.7}
-            max={1.1}
+            max={1.3}
             step={0.001}
             value={laptopScreenScaleX}
-            onChange={(event) => setLaptopScreenScaleX(Number(event.target.value))}
+            onChange={(e) => setLaptopScreenScaleX(Number(e.target.value))}
           />
 
-          <p className="mt-2">Breadth (Y): {laptopScreenScaleY.toFixed(3)}</p>
+          {/* Screen Scale Y */}
+          <p className="mt-2">Screen Scale Y: {laptopScreenScaleY.toFixed(3)}</p>
           <input
-            className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
             type="number"
             min={0.7}
-            max={1.1}
+            max={1.3}
             step={0.001}
             value={laptopScreenScaleY}
-            onChange={(event) => setLaptopScreenScaleY(Number(event.target.value))}
+            onChange={(e) => setLaptopScreenScaleY(Number(e.target.value))}
           />
           <input
             className="mt-1 w-44"
             type="range"
             min={0.7}
-            max={1.1}
+            max={1.3}
             step={0.001}
             value={laptopScreenScaleY}
-            onChange={(event) => setLaptopScreenScaleY(Number(event.target.value))}
+            onChange={(e) => setLaptopScreenScaleY(Number(e.target.value))}
+          />
+          {/* Screen Scale Z */}
+          <p className="mt-2">Screen Scale Z: {laptopScreenScaleZ.toFixed(3)}</p>
+          <input
+            className="mt-1 w-20 border border-neutral-300 px-1 py-0.5"
+            type="number"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleZ}
+            onChange={(e) => setLaptopScreenScaleZ(Number(e.target.value))}
+          />
+          <input
+            className="mt-1 w-44"
+            type="range"
+            min={0.7}
+            max={1.3}
+            step={0.001}
+            value={laptopScreenScaleZ}
+            onChange={(e) => setLaptopScreenScaleZ(Number(e.target.value))}
           />
         </div>
       </div>
@@ -977,11 +1122,6 @@ export default function Scene() {
             laptopRotation={laptopRotation}
             laptopScreenScaleX={laptopScreenScaleX}
             laptopScreenScaleY={laptopScreenScaleY}
-            laptopScreenPosition={laptopScreenPosition}
-            laptopScreenRotation={laptopScreenRotation}
-            laptopScreenScaleZ={laptopScreenScaleZ}
-            laptopScreenPosition={laptopScreenPosition}
-            laptopScreenRotation={laptopScreenRotation}
             laptopScreenScaleZ={laptopScreenScaleZ}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}

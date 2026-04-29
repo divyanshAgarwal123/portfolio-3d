@@ -51,8 +51,6 @@ type ScrollDrivenLaptopProps = {
   laptopRotation?: [number, number, number];
   laptopScreenScaleX?: number;
   laptopScreenScaleY?: number;
-  laptopScreenPosition?: [number, number, number];
-  laptopScreenRotation?: [number, number, number];
   laptopScreenScaleZ?: number;
 };
 
@@ -75,8 +73,6 @@ function ScrollDrivenLaptop({
   laptopRotation = [0, -0.01, 0],
   laptopScreenScaleX = 0.985,
   laptopScreenScaleY = 0.985,
-  laptopScreenPosition = [0, 0, 0],
-  laptopScreenRotation = [0, 0, 0],
   laptopScreenScaleZ = 0.985,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
@@ -160,9 +156,7 @@ function ScrollDrivenLaptop({
         lidAngle={lidAngle}
         screenScaleX={laptopScreenScaleX}
         screenScaleY={laptopScreenScaleY}
-        overlayPosition={laptopScreenPosition}
-        overlayRotation={laptopScreenRotation}
-        overlayScaleZ={laptopScreenScaleZ}
+        screenScaleZ={laptopScreenScaleZ}
       />
       <Suspense fallback={null}>
         <RobotHero
@@ -205,6 +199,7 @@ type LaptopSceneProps = {
   laptopRotation?: [number, number, number];
   laptopScreenScaleX?: number;
   laptopScreenScaleY?: number;
+  laptopScreenScaleZ?: number;
   talkingBoyTransform?: RobotTransform;
   kneelingDownTransform?: RobotTransform;
   kneelingDownProposeTransform?: RobotTransform;
@@ -220,9 +215,6 @@ type LaptopSceneProps = {
   goofyRunningTransform?: RobotTransform;
   girlCalibrationMode?: boolean;
   activeGirlModelIndex?: 0 | 1 | 2 | 3 | 4;
-  laptopScreenPosition?: [number, number, number];
-  laptopScreenRotation?: [number, number, number];
-  laptopScreenScaleZ?: number;
 };
 
 export default function LaptopScene({
@@ -248,8 +240,6 @@ export default function LaptopScene({
   laptopRotation,
   laptopScreenScaleX,
   laptopScreenScaleY,
-  laptopScreenPosition,
-  laptopScreenRotation,
   laptopScreenScaleZ,
   talkingBoyTransform,
   kneelingDownTransform,
@@ -337,8 +327,6 @@ export default function LaptopScene({
           laptopRotation={laptopRotation}
           laptopScreenScaleX={laptopScreenScaleX}
           laptopScreenScaleY={laptopScreenScaleY}
-          laptopScreenPosition={laptopScreenPosition}
-          laptopScreenRotation={laptopScreenRotation}
           laptopScreenScaleZ={laptopScreenScaleZ}
         />
       </ScrollControls>
