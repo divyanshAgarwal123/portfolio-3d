@@ -82,6 +82,7 @@ function ScrollDrivenLaptop({
   const lidOpenDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lidOpenArmedRef = useRef(false);
   const climbingReadyRef = useRef(false);
+  const lidFullyOpenRef = useRef(false);
   const [laptopScene, setLaptopScene] = useState<THREE.Group | null>(null);
 
   useEffect(() => {
@@ -97,6 +98,18 @@ function ScrollDrivenLaptop({
     const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
     const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
+    const isFullyOpen = normalized >= 0.999;
+
+    if (isFullyOpen !== lidFullyOpenRef.current) {
+      lidFullyOpenRef.current = isFullyOpen;
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent(isFullyOpen ? 'laptop-lid-open' : 'laptop-lid-close', {
+            detail: { normalized },
+          }),
+        );
+      }
+    }
 
     if (normalized >= 0.999) {
       if (!lidOpenArmedRef.current) {
