@@ -77,7 +77,7 @@ function findScreenMesh(searchRoot: THREE.Object3D): THREE.Mesh | null {
     }
   });
 
-  const selected = namedScreen ?? namedDisplay ?? bestHeuristic;
+  const selected = (namedScreen ?? namedDisplay ?? bestHeuristic) as THREE.Mesh | null;
 
   if (!selected) return null;
 
@@ -123,7 +123,6 @@ export default function LaptopScreen({
       }
     });
 
-    console.log('[LaptopScreen] Lid group mesh names:', names);
     hasLoggedLidNames.current = true;
   }, [lidGroup]);
 
@@ -136,18 +135,12 @@ export default function LaptopScreen({
     const targetRoot = lidGroup ?? laptopScene;
     const foundScreenMesh = findScreenMesh(targetRoot);
 
-    if (foundScreenMesh) {
-      console.log('[LaptopScreen] Using screen mesh:', foundScreenMesh.name || '(unnamed-mesh)');
-    } else {
-      console.warn('[LaptopScreen] No dedicated screen mesh found in lid group/scene.');
-    }
+
 
     setScreenMesh(foundScreenMesh);
   }, [laptopScene, lidGroup]);
 
-  useEffect(() => {
-    console.log('[LaptopScreen] lidAngle:', lidAngle.toFixed(3), 'active:', isScreenActive);
-  }, [lidAngle, isScreenActive]);
+
 
   useFrame(() => {
     if (!screenMesh || !overlayGroupRef.current) return;

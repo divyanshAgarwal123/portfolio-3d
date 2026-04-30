@@ -7,7 +7,7 @@ export default function Home() {
       <Scene
         htmlSections={
           <div className="relative z-10">
-            <div className="h-screen w-full" />
+            <div style={{ height: '130vh' }} className="w-full" />
             <SectionsStack />
           </div>
         }

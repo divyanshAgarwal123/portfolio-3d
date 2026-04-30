@@ -3,6 +3,7 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+import * as THREE from 'three';
 import LaptopScene from './LaptopScene';
 
 type CameraPOVSyncProps = {
@@ -24,8 +25,8 @@ function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
 
   useEffect(() => {
     camera.position.set(position[0], position[1], position[2]);
-    camera.fov = fov;
-    camera.updateProjectionMatrix();
+    (camera as THREE.PerspectiveCamera).fov = fov;
+    (camera as THREE.PerspectiveCamera).updateProjectionMatrix();
   }, [camera, position, fov]);
 
   return null;

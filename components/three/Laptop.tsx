@@ -31,7 +31,7 @@ export default function Laptop({
 
   const { lidMesh, meshNames } = useMemo(() => {
     const names: string[] = [];
-    let foundLidMesh: THREE.Mesh | null = null;
+    let foundLidMesh: THREE.Object3D | null = null;
 
     scene.children.forEach((child) => {
       child.traverse((object) => {
@@ -47,7 +47,7 @@ export default function Laptop({
       });
     });
 
-    return { lidMesh: foundLidMesh, meshNames: names };
+    return { lidMesh: foundLidMesh as THREE.Object3D | null, meshNames: names };
   }, [scene]);
 
   useEffect(() => {

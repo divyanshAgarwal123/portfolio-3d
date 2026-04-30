@@ -17,38 +17,31 @@ import RobotHero from './RobotHero';
 const SCROLL_PAGES = 5;
 const LID_OPEN_RANGE = 1 / Math.max(1, SCROLL_PAGES - 1);
 
-type ScrollHtmlLockProps = {
+type ScrollSectionGateProps = {
   children: ReactNode;
 };
 
-function ScrollHtmlLock({ children }: ScrollHtmlLockProps) {
-  const scroll = useScroll();
-  const [distance, setDistance] = useState(0);
+function ScrollSectionGate({ children }: ScrollSectionGateProps) {
+  const [lidOpen, setLidOpen] = useState(false);
 
   useEffect(() => {
-    const scrollEl = scroll.el as HTMLElement | undefined;
-    if (!scrollEl) return;
-
-    const updateDistance = () => {
-      setDistance(scrollEl.scrollHeight - scrollEl.clientHeight);
-    };
-
-    updateDistance();
-
-    const observer = new ResizeObserver(updateDistance);
-    observer.observe(scrollEl);
-    window.addEventListener('resize', updateDistance);
-
+    const handleOpen = () => setLidOpen(true);
+    const handleClose = () => setLidOpen(false);
+    window.addEventListener('laptop-lid-open', handleOpen);
+    window.addEventListener('laptop-lid-close', handleClose);
     return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', updateDistance);
+      window.removeEventListener('laptop-lid-open', handleOpen);
+      window.removeEventListener('laptop-lid-close', handleClose);
     };
-  }, [scroll]);
+  }, []);
 
-  const lockOffset = Math.min(scroll.offset, LID_OPEN_RANGE);
-  const compensation = lockOffset * distance;
+  if (!lidOpen) return null;
 
-  return <div style={{ transform: `translate3d(0, ${compensation}px, 0)` }}>{children}</div>;
+  return (
+    <div style={{ animation: 'fadeInSections 0.6s ease-out forwards' }}>
+      {children}
+    </div>
+  );
 }
 
 type LaptopTestTransform = {
@@ -388,7 +381,7 @@ export default function LaptopScene({
         />
         {htmlSections ? (
           <Scroll html>
-            <ScrollHtmlLock>{htmlSections}</ScrollHtmlLock>
+            <ScrollSectionGate>{htmlSections}</ScrollSectionGate>
           </Scroll>
         ) : null}
       </ScrollControls>
