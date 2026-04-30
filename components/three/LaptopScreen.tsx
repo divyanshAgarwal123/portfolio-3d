@@ -3,6 +3,7 @@
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
+import IntroContent from '../screen/IntroContent';
 import GlitchStartup from './GlitchStartup';
 
 type LaptopScreenProps = {
@@ -96,6 +97,7 @@ export default function LaptopScreen({
   screenScaleY = 0.985,
 }: LaptopScreenProps) {
   const [screenMesh, setScreenMesh] = useState<THREE.Mesh | null>(null);
+  const [glitchDone, setGlitchDone] = useState(false);
   const hasLoggedLidNames = useRef(false);
   const overlayGroupRef = useRef<THREE.Group>(null);
 
@@ -103,9 +105,15 @@ export default function LaptopScreen({
   const worldQuaternion = useRef(new THREE.Quaternion());
   const worldScale = useRef(new THREE.Vector3());
 
-  // In this scene, lid angle animates from about -1.59 (closed) to -0.23 (open).
   // Activate the laptop screen only when nearly open.
   const isScreenActive = lidAngle >= -0.3;
+
+  // Reset glitch state when screen deactivates
+  useEffect(() => {
+    if (!isScreenActive) {
+      setGlitchDone(false);
+    }
+  }, [isScreenActive]);
 
   const lidGroup = useMemo(() => {
     if (!laptopScene) return null;
@@ -135,12 +143,8 @@ export default function LaptopScreen({
     const targetRoot = lidGroup ?? laptopScene;
     const foundScreenMesh = findScreenMesh(targetRoot);
 
-
-
     setScreenMesh(foundScreenMesh);
   }, [laptopScene, lidGroup]);
-
-
 
   useFrame(() => {
     if (!screenMesh || !overlayGroupRef.current) return;
@@ -167,10 +171,22 @@ export default function LaptopScreen({
 
   return (
     <group ref={overlayGroupRef} renderOrder={20}>
+      {/* Black base screen */}
       <mesh geometry={screenMesh.geometry} renderOrder={20} frustumCulled={false}>
         <meshBasicMaterial color="black" toneMapped={false} />
       </mesh>
-      <GlitchStartup triggered={isScreenActive} />
+
+      {/* Phase 1: Glitch boot-up effect */}
+      {!glitchDone && (
+        <GlitchStartup
+          triggered={isScreenActive}
+          onComplete={() => setGlitchDone(true)}
+        />
+      )}
+
+      {/* Phase 2: Profile content (after glitch completes) */}
+      {glitchDone && <IntroContent />}
     </group>
   );
 }
+
