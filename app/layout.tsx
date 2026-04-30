@@ -16,19 +16,8 @@ export default function RootLayout({
   useEffect(() => {
     const lenis = new Lenis({
       prevent: (node) => {
-        if (!(node instanceof HTMLElement)) return false;
-
-        if (node.tagName === 'CANVAS') return true;
-
-        let current: HTMLElement | null = node;
-        while (current) {
-          const style = window.getComputedStyle(current);
-          if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
-            return true;
-          }
-          current = current.parentElement;
-        }
-
+        // Only prevent Lenis from intercepting scroll on the canvas itself
+        if (node instanceof HTMLCanvasElement) return true;
         return false;
       },
     });

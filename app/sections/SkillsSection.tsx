@@ -66,12 +66,7 @@ export default function SkillsSection() {
   }, [isInView, jsonSnippet]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.75, ease: 'easeOut' }}
-    >
+    <div>
       <section ref={sectionRef} className="min-h-screen bg-[#0a0a0a] px-6 py-20 text-zinc-100 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-6xl">
           <h2 className="mb-10 font-mono text-4xl font-semibold tracking-tight text-[#00ff88] md:text-6xl">
@@ -118,6 +113,6 @@ export default function SkillsSection() {
           </div>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 }

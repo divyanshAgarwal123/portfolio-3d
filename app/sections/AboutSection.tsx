@@ -54,13 +54,9 @@ export default function AboutSection() {
   const tickerItems = useMemo(() => [...stackTicker, ...stackTicker], []);
 
   return (
-    <motion.section
+    <section
       ref={sectionRef}
       className="relative min-h-screen bg-[#0a0a0a] px-6 py-20 text-zinc-100 md:px-12 lg:px-20"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.9, ease: 'easeOut' }}
     >
       <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-between gap-14">
         <div className="space-y-10">
@@ -126,6 +122,6 @@ export default function AboutSection() {
           </motion.div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnimations, useGLTF, useScroll } from '@react-three/drei';
+import { useAnimations, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { useEffect, useMemo, useRef } from 'react';
@@ -72,7 +72,7 @@ export default function RobotHero({
   climbingSequenceStep = 0,
   climbingStartReady = true,
 }: RobotHeroProps) {
-  const scroll = useScroll();
+  const scrollOffsetRef = useRef(0);
 
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
   const pointingGltf = useGLTF(POINTING_MODEL_PATH, DRACO_DECODER_PATH);
@@ -827,16 +827,22 @@ export default function RobotHero({
       }
     }
 
+    // Compute native scroll offset (0-1 range over total scrollable distance)
+    if (typeof window !== 'undefined') {
+      const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+      scrollOffsetRef.current = totalScrollable > 0 ? THREE.MathUtils.clamp(window.scrollY / totalScrollable, 0, 1) : 0;
+    }
+
     if (
       !climbingPhaseStartedRef.current
-      && scroll.offset >= CLIMBING_SCROLL_THRESHOLD
+      && scrollOffsetRef.current >= CLIMBING_SCROLL_THRESHOLD
       && phase.current === 'running'
       && climbingStartReady
     ) {
       startClimbingSequence();
     }
 
-    if (!runningSwapStartedRef.current && scroll.offset >= RUNNING_SCROLL_THRESHOLD && phase.current === 'pointing') {
+    if (!runningSwapStartedRef.current && scrollOffsetRef.current >= RUNNING_SCROLL_THRESHOLD && phase.current === 'pointing') {
       startRunningTransition();
     }
 

@@ -30,12 +30,7 @@ export default function ContactSection() {
   }, [isInView]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.75, ease: 'easeOut' }}
-    >
+    <div>
       <section ref={sectionRef} className="min-h-screen bg-[#0a0a0a] px-6 py-20 text-zinc-100 md:px-12 lg:px-20">
         <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col justify-center">
           <h2 className="mb-10 font-mono text-4xl font-semibold tracking-tight text-[#00ff88] md:text-6xl">
@@ -78,6 +73,6 @@ export default function ContactSection() {
           <p className="mt-10 font-mono text-xs tracking-widest text-zinc-500">{'> END_OF_FILE'}</p>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 }

@@ -84,7 +84,6 @@ type SceneContentProps = {
   laptopScreenScaleY: number;
   cameraPosition: [number, number, number];
   cameraFov: number;
-  htmlSections?: ReactNode;
 };
 
 function SceneContent({
@@ -119,7 +118,7 @@ function SceneContent({
   laptopScreenScaleY,
   cameraPosition,
   cameraFov,
-  htmlSections,
+
 }: SceneContentProps) {
   return (
     <>
@@ -155,7 +154,7 @@ function SceneContent({
         laptopRotation={laptopRotation}
         laptopScreenScaleX={laptopScreenScaleX}
         laptopScreenScaleY={laptopScreenScaleY}
-        htmlSections={htmlSections}
+
       />
       <CameraPOVSync position={cameraPosition} fov={cameraFov} />
     </>
@@ -611,11 +610,9 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
   );
 }
 
-type SceneProps = {
-  htmlSections?: ReactNode;
-};
+type SceneProps = Record<string, never>;
 
-export default function Scene({ htmlSections }: SceneProps) {
+export default function Scene({}: SceneProps) {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const dragOffsetRef = useRef({ x: 0, y: 0 });
   const draggingRef = useRef(false);
@@ -740,12 +737,7 @@ export default function Scene({ htmlSections }: SceneProps) {
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
-  useEffect(() => {
-    if (!canvasWrapRef.current) return;
-    canvasWrapRef.current.style.opacity = '0';
 
-    canvasWrapRef.current.style.opacity = '1';
-  }, []);
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
@@ -803,7 +795,7 @@ export default function Scene({ htmlSections }: SceneProps) {
               : { label: 'cheering2.glb', value: cheeringBoy, setValue: setCheeringBoy };
 
   return (
-    <div ref={canvasWrapRef} className="fixed left-0 top-0 h-screen w-screen" style={{ opacity: 0 }}>
+    <div ref={canvasWrapRef} className="pointer-events-none fixed left-0 top-0 z-0 h-screen w-screen">
       <div
         className="pointer-events-auto fixed z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm"
         style={{ left: controlPanelPos.x, top: controlPanelPos.y }}
@@ -924,6 +916,7 @@ export default function Scene({ htmlSections }: SceneProps) {
       <Suspense fallback={<LoadingFallback />}>
         <Canvas
           className="h-screen w-screen"
+          style={{ pointerEvents: 'none' }}
           shadows
           camera={{ fov: cameraFov, position: cameraPosition, near: 0.1, far: 100 }}
           onCreated={({ gl }) => {
@@ -960,7 +953,7 @@ export default function Scene({ htmlSections }: SceneProps) {
             laptopScreenScaleY={laptopScreenScaleY}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}
-            htmlSections={htmlSections}
+
           />
         </Canvas>
       </Suspense>

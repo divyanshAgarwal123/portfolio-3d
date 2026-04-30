@@ -1,9 +1,8 @@
 'use client';
 
-import { Scroll, ScrollControls, Sparkles, useScroll } from '@react-three/drei';
+import { Sparkles } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
 import * as THREE from 'three';
 import BackgroundMaleScene, { type MaleModelIndex } from './BackgroundMaleScene';
 import BackgroundProposalScene, { type FemaleSyncCue } from './BackgroundProposalScene';
@@ -13,36 +12,6 @@ import Effects from './Effects';
 import Laptop from './Laptop';
 import LaptopScreen from './LaptopScreen';
 import RobotHero from './RobotHero';
-
-const SCROLL_PAGES = 5;
-const LID_OPEN_RANGE = 1 / Math.max(1, SCROLL_PAGES - 1);
-
-type ScrollSectionGateProps = {
-  children: ReactNode;
-};
-
-function ScrollSectionGate({ children }: ScrollSectionGateProps) {
-  const [lidOpen, setLidOpen] = useState(false);
-
-  useEffect(() => {
-    const handleOpen = () => setLidOpen(true);
-    const handleClose = () => setLidOpen(false);
-    window.addEventListener('laptop-lid-open', handleOpen);
-    window.addEventListener('laptop-lid-close', handleClose);
-    return () => {
-      window.removeEventListener('laptop-lid-open', handleOpen);
-      window.removeEventListener('laptop-lid-close', handleClose);
-    };
-  }, []);
-
-  if (!lidOpen) return null;
-
-  return (
-    <div style={{ animation: 'fadeInSections 0.6s ease-out forwards' }}>
-      {children}
-    </div>
-  );
-}
 
 type LaptopTestTransform = {
   position: [number, number, number];
@@ -102,13 +71,10 @@ function ScrollDrivenLaptop({
   laptopScreenScaleX = 0.985,
   laptopScreenScaleY = 0.985,
 }: ScrollDrivenLaptopProps) {
-  const scroll = useScroll();
-  const { viewport } = useThree();
-  const scrollGroupRef = useRef<THREE.Group>(null);
   const [lidAngle, setLidAngle] = useState(-1.59);
   const [climbingStartReady, setClimbingStartReady] = useState(false);
   const lastReportedOffset = useRef(-1);
-  const previousOffset = useRef(0);
+  const previousScrollY = useRef(0);
   const previousLidAngle = useRef(-1.59);
   const lidOpenDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lidOpenArmedRef = useRef(false);
@@ -126,32 +92,28 @@ function ScrollDrivenLaptop({
   }, []);
 
   useFrame(() => {
-    const motionOffset = THREE.MathUtils.clamp(scroll.offset, 0, LID_OPEN_RANGE);
-    const normalized = THREE.MathUtils.clamp(motionOffset / LID_OPEN_RANGE, 0, 1);
+    if (typeof window === 'undefined') return;
+
+    // Read native browser scroll position
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+
+    // Normalize: 0 at top, 1 when scrolled exactly 1 viewport height
+    const normalized = THREE.MathUtils.clamp(scrollY / vh, 0, 1);
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
     const isFullyOpen = normalized >= 0.999;
 
-    if (scrollGroupRef.current) {
-      const postOpenProgress = THREE.MathUtils.clamp(
-        (scroll.offset - LID_OPEN_RANGE) / (1 - LID_OPEN_RANGE),
-        0,
-        1,
-      );
-      const travelY = viewport.height * 0.9;
-      scrollGroupRef.current.position.y = postOpenProgress * travelY;
-    }
-
+    // Dispatch lid open/close events
     if (isFullyOpen !== lidFullyOpenRef.current) {
       lidFullyOpenRef.current = isFullyOpen;
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent(isFullyOpen ? 'laptop-lid-open' : 'laptop-lid-close', {
-            detail: { normalized },
-          }),
-        );
-      }
+      window.dispatchEvent(
+        new CustomEvent(isFullyOpen ? 'laptop-lid-open' : 'laptop-lid-close', {
+          detail: { normalized },
+        }),
+      );
     }
 
+    // Climbing delay after lid fully opens
     if (normalized >= 0.999) {
       if (!lidOpenArmedRef.current) {
         lidOpenArmedRef.current = true;
@@ -172,20 +134,23 @@ function ScrollDrivenLaptop({
       }
     }
 
+    // Update lid angle state (with threshold to avoid excessive re-renders)
     if (Math.abs(nextAngle - previousLidAngle.current) > 0.0005) {
       previousLidAngle.current = nextAngle;
       setLidAngle(nextAngle);
     }
 
+    // Scroll direction callback
     if (onScrollDirectionChange) {
-      const delta = scroll.offset - previousOffset.current;
-      const direction = delta > 0.0005 ? 'down' : delta < -0.0005 ? 'up' : 'idle';
+      const delta = scrollY - previousScrollY.current;
+      const direction = delta > 0.5 ? 'down' : delta < -0.5 ? 'up' : 'idle';
       onScrollDirectionChange(direction, delta);
-      previousOffset.current = scroll.offset;
     }
+    previousScrollY.current = scrollY;
 
+    // Scroll offset callback
     if (onScrollChange) {
-      const roundedOffset = Number(motionOffset.toFixed(3));
+      const roundedOffset = Number(normalized.toFixed(3));
       if (roundedOffset !== lastReportedOffset.current) {
         lastReportedOffset.current = roundedOffset;
         onScrollChange(roundedOffset);
@@ -194,7 +159,7 @@ function ScrollDrivenLaptop({
   });
 
   return (
-    <group ref={scrollGroupRef}>
+    <group>
       <Laptop
         lidAngle={lidAngle}
         verticalOffset={0}
@@ -250,7 +215,6 @@ type LaptopSceneProps = {
   laptopRotation?: [number, number, number];
   laptopScreenScaleX?: number;
   laptopScreenScaleY?: number;
-  htmlSections?: ReactNode;
   talkingBoyTransform?: RobotTransform;
   kneelingDownTransform?: RobotTransform;
   kneelingDownProposeTransform?: RobotTransform;
@@ -291,7 +255,6 @@ export default function LaptopScene({
   laptopRotation,
   laptopScreenScaleX,
   laptopScreenScaleY,
-  htmlSections,
   talkingBoyTransform,
   kneelingDownTransform,
   kneelingDownProposeTransform,
@@ -358,33 +321,26 @@ export default function LaptopScene({
         position={[0, 1, 0]}
       />
       <Effects />
-      <ScrollControls pages={SCROLL_PAGES} damping={0.3}>
-        <ScrollDrivenLaptop
-          onScrollChange={onScrollChange}
-          onScrollDirectionChange={onScrollDirectionChange}
-          testMode={testMode}
-          testTransform={testTransform}
-          robotPointingBackwords={robotPointingBackwords}
-          robotFalling={robotFalling}
-          robotWalking={robotWalking}
-          robotClimbingToLaptop={robotClimbingToLaptop}
-          robotCutelySitting={robotCutelySitting}
-          robotStandingToSitting={robotStandingToSitting}
-          backgroundRobotArm={backgroundRobotArm}
-          manualClimbingSequence={manualClimbingSequence}
-          climbingSequenceStep={climbingSequenceStep}
-          laptopScale={laptopScale}
-          laptopPosition={laptopPosition}
-          laptopRotation={laptopRotation}
-          laptopScreenScaleX={laptopScreenScaleX}
-          laptopScreenScaleY={laptopScreenScaleY}
-        />
-        {htmlSections ? (
-          <Scroll html>
-            <ScrollSectionGate>{htmlSections}</ScrollSectionGate>
-          </Scroll>
-        ) : null}
-      </ScrollControls>
+      <ScrollDrivenLaptop
+        onScrollChange={onScrollChange}
+        onScrollDirectionChange={onScrollDirectionChange}
+        testMode={testMode}
+        testTransform={testTransform}
+        robotPointingBackwords={robotPointingBackwords}
+        robotFalling={robotFalling}
+        robotWalking={robotWalking}
+        robotClimbingToLaptop={robotClimbingToLaptop}
+        robotCutelySitting={robotCutelySitting}
+        robotStandingToSitting={robotStandingToSitting}
+        backgroundRobotArm={backgroundRobotArm}
+        manualClimbingSequence={manualClimbingSequence}
+        climbingSequenceStep={climbingSequenceStep}
+        laptopScale={laptopScale}
+        laptopPosition={laptopPosition}
+        laptopRotation={laptopRotation}
+        laptopScreenScaleX={laptopScreenScaleX}
+        laptopScreenScaleY={laptopScreenScaleY}
+      />
     </>
   );
 }
