@@ -22,6 +22,14 @@ export default function RootLayout({
       },
     });
 
+    // Start Lenis in a stopped state — lid animation handles scroll first
+    lenis.stop();
+
+    const onLidOpen = () => {
+      lenis.start();
+    };
+    window.addEventListener('laptop-lid-open', onLidOpen);
+
     const tick = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -29,6 +37,7 @@ export default function RootLayout({
     gsap.ticker.add(tick);
 
     return () => {
+      window.removeEventListener('laptop-lid-open', onLidOpen);
       gsap.ticker.remove(tick);
       lenis.destroy();
     };

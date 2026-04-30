@@ -74,7 +74,6 @@ function ScrollDrivenLaptop({
   const [lidAngle, setLidAngle] = useState(-1.59);
   const [climbingStartReady, setClimbingStartReady] = useState(false);
   const lastReportedOffset = useRef(-1);
-  const previousScrollY = useRef(0);
   const previousLidAngle = useRef(-1.59);
   const lidOpenDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lidOpenArmedRef = useRef(false);
@@ -82,8 +81,41 @@ function ScrollDrivenLaptop({
   const lidFullyOpenRef = useRef(false);
   const [laptopScene, setLaptopScene] = useState<THREE.Group | null>(null);
 
+  // Virtual scroll progress for the lid phase (0 = closed, 1 = fully open)
+  const virtualProgressRef = useRef(0);
+  const lidPhaseCompleteRef = useRef(false);
+  // Sensitivity: how many pixels of wheel delta equal a full lid open
+  const WHEEL_RANGE = typeof window !== 'undefined' ? window.innerHeight : 900;
+
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Once lid is fully open, stop intercepting — let normal scroll happen
+      if (lidPhaseCompleteRef.current) return;
+
+      // Prevent the page from scrolling while lid is opening
+      e.preventDefault();
+
+      // Accumulate wheel delta into virtual progress
+      const delta = e.deltaY / WHEEL_RANGE;
+      virtualProgressRef.current = THREE.MathUtils.clamp(
+        virtualProgressRef.current + delta,
+        0,
+        1,
+      );
+
+      // When progress hits 1, mark lid phase complete and stop intercepting
+      if (virtualProgressRef.current >= 0.999) {
+        lidPhaseCompleteRef.current = true;
+      }
+    };
+
+    // passive: false is required to call preventDefault on wheel events
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
     return () => {
+      window.removeEventListener('wheel', handleWheel);
       if (lidOpenDelayRef.current) {
         clearTimeout(lidOpenDelayRef.current);
         lidOpenDelayRef.current = null;
@@ -94,12 +126,7 @@ function ScrollDrivenLaptop({
   useFrame(() => {
     if (typeof window === 'undefined') return;
 
-    // Read native browser scroll position
-    const scrollY = window.scrollY;
-    const vh = window.innerHeight;
-
-    // Normalize: 0 at top, 1 when scrolled exactly 1 viewport height
-    const normalized = THREE.MathUtils.clamp(scrollY / vh, 0, 1);
+    const normalized = virtualProgressRef.current;
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
     const isFullyOpen = normalized >= 0.999;
 
@@ -140,14 +167,6 @@ function ScrollDrivenLaptop({
       setLidAngle(nextAngle);
     }
 
-    // Scroll direction callback
-    if (onScrollDirectionChange) {
-      const delta = scrollY - previousScrollY.current;
-      const direction = delta > 0.5 ? 'down' : delta < -0.5 ? 'up' : 'idle';
-      onScrollDirectionChange(direction, delta);
-    }
-    previousScrollY.current = scrollY;
-
     // Scroll offset callback
     if (onScrollChange) {
       const roundedOffset = Number(normalized.toFixed(3));
@@ -155,6 +174,14 @@ function ScrollDrivenLaptop({
         lastReportedOffset.current = roundedOffset;
         onScrollChange(roundedOffset);
       }
+    }
+
+    // Scroll direction callback (during page scroll phase)
+    if (onScrollDirectionChange && lidPhaseCompleteRef.current) {
+      const scrollY = window.scrollY;
+      const delta = scrollY - (previousLidAngle.current ?? 0);
+      const direction = delta > 0.5 ? 'down' : delta < -0.5 ? 'up' : 'idle';
+      onScrollDirectionChange(direction, delta);
     }
   });
 
