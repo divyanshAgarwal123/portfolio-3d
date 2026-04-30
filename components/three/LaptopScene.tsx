@@ -1,7 +1,7 @@
 'use client';
 
 import { Scroll, ScrollControls, Sparkles, useScroll } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import * as THREE from 'three';
@@ -76,6 +76,8 @@ function ScrollDrivenLaptop({
   laptopScreenScaleY = 0.985,
 }: ScrollDrivenLaptopProps) {
   const scroll = useScroll();
+  const { viewport } = useThree();
+  const scrollGroupRef = useRef<THREE.Group>(null);
   const [lidAngle, setLidAngle] = useState(-1.59);
   const [climbingStartReady, setClimbingStartReady] = useState(false);
   const lastReportedOffset = useRef(-1);
@@ -101,6 +103,16 @@ function ScrollDrivenLaptop({
     const normalized = THREE.MathUtils.clamp(motionOffset / LID_OPEN_RANGE, 0, 1);
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
     const isFullyOpen = normalized >= 0.999;
+
+    if (scrollGroupRef.current) {
+      const postOpenProgress = THREE.MathUtils.clamp(
+        (scroll.offset - LID_OPEN_RANGE) / (1 - LID_OPEN_RANGE),
+        0,
+        1,
+      );
+      const travelY = viewport.height * 0.9;
+      scrollGroupRef.current.position.y = postOpenProgress * travelY;
+    }
 
     if (isFullyOpen !== lidFullyOpenRef.current) {
       lidFullyOpenRef.current = isFullyOpen;
@@ -155,7 +167,7 @@ function ScrollDrivenLaptop({
   });
 
   return (
-    <>
+    <group ref={scrollGroupRef}>
       <Laptop
         lidAngle={lidAngle}
         verticalOffset={0}
@@ -183,7 +195,7 @@ function ScrollDrivenLaptop({
           climbingStartReady={climbingStartReady}
         />
       </Suspense>
-    </>
+    </group>
   );
 }
 
