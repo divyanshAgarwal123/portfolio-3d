@@ -15,7 +15,41 @@ import LaptopScreen from './LaptopScreen';
 import RobotHero from './RobotHero';
 
 const SCROLL_PAGES = 5;
-const LID_OPEN_RANGE = 1 / SCROLL_PAGES;
+const LID_OPEN_RANGE = 1 / Math.max(1, SCROLL_PAGES - 1);
+
+type ScrollHtmlLockProps = {
+  children: ReactNode;
+};
+
+function ScrollHtmlLock({ children }: ScrollHtmlLockProps) {
+  const scroll = useScroll();
+  const [distance, setDistance] = useState(0);
+
+  useEffect(() => {
+    const scrollEl = scroll.el as HTMLElement | undefined;
+    if (!scrollEl) return;
+
+    const updateDistance = () => {
+      setDistance(scrollEl.scrollHeight - scrollEl.clientHeight);
+    };
+
+    updateDistance();
+
+    const observer = new ResizeObserver(updateDistance);
+    observer.observe(scrollEl);
+    window.addEventListener('resize', updateDistance);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateDistance);
+    };
+  }, [scroll]);
+
+  const lockOffset = Math.min(scroll.offset, LID_OPEN_RANGE);
+  const compensation = lockOffset * distance;
+
+  return <div style={{ transform: `translate3d(0, ${compensation}px, 0)` }}>{children}</div>;
+}
 
 type LaptopTestTransform = {
   position: [number, number, number];
@@ -352,7 +386,11 @@ export default function LaptopScene({
           laptopScreenScaleX={laptopScreenScaleX}
           laptopScreenScaleY={laptopScreenScaleY}
         />
-        {htmlSections ? <Scroll html>{htmlSections}</Scroll> : null}
+        {htmlSections ? (
+          <Scroll html>
+            <ScrollHtmlLock>{htmlSections}</ScrollHtmlLock>
+          </Scroll>
+        ) : null}
       </ScrollControls>
     </>
   );
