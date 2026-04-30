@@ -1,8 +1,9 @@
 'use client';
 
-import { ScrollControls, Sparkles, useScroll } from '@react-three/drei';
+import { Scroll, ScrollControls, Sparkles, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import * as THREE from 'three';
 import BackgroundMaleScene, { type MaleModelIndex } from './BackgroundMaleScene';
 import BackgroundProposalScene, { type FemaleSyncCue } from './BackgroundProposalScene';
@@ -13,7 +14,8 @@ import Laptop from './Laptop';
 import LaptopScreen from './LaptopScreen';
 import RobotHero from './RobotHero';
 
-const SCROLL_MOTION_MAX = 0.431;
+const SCROLL_PAGES = 5;
+const LID_OPEN_RANGE = 1 / SCROLL_PAGES;
 
 type LaptopTestTransform = {
   position: [number, number, number];
@@ -95,8 +97,8 @@ function ScrollDrivenLaptop({
   }, []);
 
   useFrame(() => {
-    const motionOffset = THREE.MathUtils.clamp(scroll.offset * SCROLL_MOTION_MAX, 0, SCROLL_MOTION_MAX);
-    const normalized = THREE.MathUtils.clamp(motionOffset / SCROLL_MOTION_MAX, 0, 1);
+    const motionOffset = THREE.MathUtils.clamp(scroll.offset, 0, LID_OPEN_RANGE);
+    const normalized = THREE.MathUtils.clamp(motionOffset / LID_OPEN_RANGE, 0, 1);
     const nextAngle = THREE.MathUtils.lerp(-1.59, -0.23, normalized);
     const isFullyOpen = normalized >= 0.999;
 
@@ -209,6 +211,7 @@ type LaptopSceneProps = {
   laptopRotation?: [number, number, number];
   laptopScreenScaleX?: number;
   laptopScreenScaleY?: number;
+  htmlSections?: ReactNode;
   talkingBoyTransform?: RobotTransform;
   kneelingDownTransform?: RobotTransform;
   kneelingDownProposeTransform?: RobotTransform;
@@ -249,6 +252,7 @@ export default function LaptopScene({
   laptopRotation,
   laptopScreenScaleX,
   laptopScreenScaleY,
+  htmlSections,
   talkingBoyTransform,
   kneelingDownTransform,
   kneelingDownProposeTransform,
@@ -315,7 +319,7 @@ export default function LaptopScene({
         position={[0, 1, 0]}
       />
       <Effects />
-      <ScrollControls pages={4} damping={0.3}>
+      <ScrollControls pages={SCROLL_PAGES} damping={0.3}>
         <ScrollDrivenLaptop
           onScrollChange={onScrollChange}
           onScrollDirectionChange={onScrollDirectionChange}
@@ -336,6 +340,7 @@ export default function LaptopScene({
           laptopScreenScaleX={laptopScreenScaleX}
           laptopScreenScaleY={laptopScreenScaleY}
         />
+        {htmlSections ? <Scroll html>{htmlSections}</Scroll> : null}
       </ScrollControls>
     </>
   );

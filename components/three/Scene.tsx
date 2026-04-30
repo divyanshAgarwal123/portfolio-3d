@@ -2,6 +2,7 @@
 
 import { Canvas, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import LaptopScene from './LaptopScene';
 
 type CameraPOVSyncProps = {
@@ -82,6 +83,7 @@ type SceneContentProps = {
   laptopScreenScaleY: number;
   cameraPosition: [number, number, number];
   cameraFov: number;
+  htmlSections?: ReactNode;
 };
 
 function SceneContent({
@@ -116,6 +118,7 @@ function SceneContent({
   laptopScreenScaleY,
   cameraPosition,
   cameraFov,
+  htmlSections,
 }: SceneContentProps) {
   return (
     <>
@@ -151,6 +154,7 @@ function SceneContent({
         laptopRotation={laptopRotation}
         laptopScreenScaleX={laptopScreenScaleX}
         laptopScreenScaleY={laptopScreenScaleY}
+        htmlSections={htmlSections}
       />
       <CameraPOVSync position={cameraPosition} fov={cameraFov} />
     </>
@@ -606,7 +610,11 @@ function BackgroundRobotArmControlPanel({ value, onChange }: BackgroundRobotArmC
   );
 }
 
-export default function Scene() {
+type SceneProps = {
+  htmlSections?: ReactNode;
+};
+
+export default function Scene({ htmlSections }: SceneProps) {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const dragOffsetRef = useRef({ x: 0, y: 0 });
   const draggingRef = useRef(false);
@@ -951,6 +959,7 @@ export default function Scene() {
             laptopScreenScaleY={laptopScreenScaleY}
             cameraPosition={cameraPosition}
             cameraFov={cameraFov}
+            htmlSections={htmlSections}
           />
         </Canvas>
       </Suspense>
