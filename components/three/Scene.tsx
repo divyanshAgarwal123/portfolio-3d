@@ -734,10 +734,10 @@ export default function Scene({}: SceneProps) {
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
   const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.985);
   const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.985);
-  const [screenOverlayWidth, setScreenOverlayWidth] = useState(426);
-  const [screenOverlayHeight, setScreenOverlayHeight] = useState(251);
-  const [screenOverlayOffsetX, setScreenOverlayOffsetX] = useState(0);
-  const [screenOverlayOffsetY, setScreenOverlayOffsetY] = useState(-300);
+  const [screenOverlayWidth, setScreenOverlayWidth] = useState(407);
+  const [screenOverlayHeight, setScreenOverlayHeight] = useState(260);
+  const [screenOverlayOffsetX, setScreenOverlayOffsetX] = useState(-2);
+  const [screenOverlayOffsetY, setScreenOverlayOffsetY] = useState(-280);
   const [screenOverlayOffsetZ, setScreenOverlayOffsetZ] = useState(0);
   const [screenOverlayScale, setScreenOverlayScale] = useState(2);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
