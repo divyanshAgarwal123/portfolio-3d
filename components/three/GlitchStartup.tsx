@@ -108,7 +108,7 @@ export default function GlitchStartup({ triggered, onComplete }: GlitchStartupPr
       className="pointer-events-none"
       zIndexRange={[100, 0]}
     >
-      <div className="glitch-boot-shell">
+      <div className="glitch-boot-shell outline outline-1 outline-white">
         {phase === 'flash' && <div className="power-flash" />}
 
         {(phase === 'static' || phase === 'resolve') && (

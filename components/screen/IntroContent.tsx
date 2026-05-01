@@ -25,7 +25,7 @@ export default function IntroContent() {
       className="pointer-events-none"
       zIndexRange={[100, 0]}
     >
-      <div className="intro-screen">
+      <div className="intro-screen outline outline-1 outline-white">
         <div className="status-bar">
           <span className="status-text">&gt; SYSTEM ONLINE</span>
           <span className="cursor-blink">_</span>
