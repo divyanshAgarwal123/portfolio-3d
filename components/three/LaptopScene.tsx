@@ -91,14 +91,22 @@ function ScrollDrivenLaptop({
     if (typeof window === 'undefined') return;
 
     const handleWheel = (e: WheelEvent) => {
-      // Once lid is fully open, stop intercepting — let normal scroll happen
-      if (lidPhaseCompleteRef.current) return;
+      const atTop = window.scrollY <= 1;
+      const delta = e.deltaY / WHEEL_RANGE;
+      const isOpening = !lidPhaseCompleteRef.current;
+      const isClosing = lidPhaseCompleteRef.current && atTop && delta < 0;
 
-      // Prevent the page from scrolling while lid is opening
+      // When fully open, only intercept if we are closing from the top
+      if (!isOpening && !isClosing) return;
+
+      // Prevent the page from scrolling while lid is opening or closing at the top
       e.preventDefault();
 
       // Accumulate wheel delta into virtual progress
-      const delta = e.deltaY / WHEEL_RANGE;
+      if (isClosing) {
+        lidPhaseCompleteRef.current = false;
+      }
+
       virtualProgressRef.current = THREE.MathUtils.clamp(
         virtualProgressRef.current + delta,
         0,
