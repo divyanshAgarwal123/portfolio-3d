@@ -734,6 +734,12 @@ export default function Scene({}: SceneProps) {
   const [laptopRotation, setLaptopRotation] = useState<[number, number, number]>([0, -0.01, 0]);
   const [laptopScreenScaleX, setLaptopScreenScaleX] = useState(0.985);
   const [laptopScreenScaleY, setLaptopScreenScaleY] = useState(0.985);
+  const [screenOverlayWidth, setScreenOverlayWidth] = useState(426);
+  const [screenOverlayHeight, setScreenOverlayHeight] = useState(251);
+  const [screenOverlayOffsetX, setScreenOverlayOffsetX] = useState(0);
+  const [screenOverlayOffsetY, setScreenOverlayOffsetY] = useState(-300);
+  const [screenOverlayOffsetZ, setScreenOverlayOffsetZ] = useState(0);
+  const [screenOverlayScale, setScreenOverlayScale] = useState(2);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, -0.25, 1.4]);
   const [cameraFov, setCameraFov] = useState(40);
 
@@ -760,6 +766,24 @@ export default function Scene({}: SceneProps) {
       window.removeEventListener('pointerup', handlePointerUp);
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const root = document.documentElement;
+    root.style.setProperty('--laptop-screen-width', `${screenOverlayWidth}px`);
+    root.style.setProperty('--laptop-screen-height', `${screenOverlayHeight}px`);
+    root.style.setProperty('--laptop-screen-offset-x', `${screenOverlayOffsetX}px`);
+    root.style.setProperty('--laptop-screen-offset-y', `${screenOverlayOffsetY}px`);
+    root.style.setProperty('--laptop-screen-offset-z', `${screenOverlayOffsetZ}px`);
+    root.style.setProperty('--laptop-screen-scale', `${screenOverlayScale}`);
+  }, [
+    screenOverlayWidth,
+    screenOverlayHeight,
+    screenOverlayOffsetX,
+    screenOverlayOffsetY,
+    screenOverlayOffsetZ,
+    screenOverlayScale,
+  ]);
 
   const activeGirlModel =
     activeGirlModelIndex === 0
@@ -911,6 +935,130 @@ export default function Scene({}: SceneProps) {
             value={laptopScreenScaleY}
             onChange={(event) => setLaptopScreenScaleY(Number(event.target.value))}
           />
+
+          <div className="mt-3 border-t border-neutral-200 pt-3">
+            <p className="font-semibold">Laptop Screen Overlay Precision</p>
+
+            <p className="mt-2">Length (px): {screenOverlayWidth.toFixed(0)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={120}
+              max={420}
+              step={1}
+              value={screenOverlayWidth}
+              onChange={(event) => setScreenOverlayWidth(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={120}
+              max={420}
+              step={1}
+              value={screenOverlayWidth}
+              onChange={(event) => setScreenOverlayWidth(Number(event.target.value))}
+            />
+
+            <p className="mt-2">Breadth (px): {screenOverlayHeight.toFixed(0)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={80}
+              max={300}
+              step={1}
+              value={screenOverlayHeight}
+              onChange={(event) => setScreenOverlayHeight(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={80}
+              max={300}
+              step={1}
+              value={screenOverlayHeight}
+              onChange={(event) => setScreenOverlayHeight(Number(event.target.value))}
+            />
+
+            <p className="mt-2">X (px): {screenOverlayOffsetX.toFixed(0)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetX}
+              onChange={(event) => setScreenOverlayOffsetX(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetX}
+              onChange={(event) => setScreenOverlayOffsetX(Number(event.target.value))}
+            />
+
+            <p className="mt-2">Y (px): {screenOverlayOffsetY.toFixed(0)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetY}
+              onChange={(event) => setScreenOverlayOffsetY(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetY}
+              onChange={(event) => setScreenOverlayOffsetY(Number(event.target.value))}
+            />
+
+            <p className="mt-2">Z (px): {screenOverlayOffsetZ.toFixed(0)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetZ}
+              onChange={(event) => setScreenOverlayOffsetZ(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={-200}
+              max={200}
+              step={1}
+              value={screenOverlayOffsetZ}
+              onChange={(event) => setScreenOverlayOffsetZ(Number(event.target.value))}
+            />
+
+            <p className="mt-2">Scale: {screenOverlayScale.toFixed(2)}</p>
+            <input
+              className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+              type="number"
+              min={0.5}
+              max={2}
+              step={0.01}
+              value={screenOverlayScale}
+              onChange={(event) => setScreenOverlayScale(Number(event.target.value))}
+            />
+            <input
+              className="mt-1 w-44"
+              type="range"
+              min={0.5}
+              max={2}
+              step={0.01}
+              value={screenOverlayScale}
+              onChange={(event) => setScreenOverlayScale(Number(event.target.value))}
+            />
+          </div>
         </div>
       </div>
       <Suspense fallback={<LoadingFallback />}>

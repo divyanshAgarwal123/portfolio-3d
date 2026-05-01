@@ -12,35 +12,25 @@ export default function IntroContent() {
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
-
-    // Staggered reveal — name first, then role, then footer
     const t1 = setTimeout(() => setShowName(true), 200);
     const t2 = setTimeout(() => setShowRole(true), 1800);
     const t3 = setTimeout(() => setShowFooter(true), 3200);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
   return (
     <Html
-      transform
       center
       position={[0, 0, 0.001]}
-      distanceFactor={1}
       className="pointer-events-none"
+      zIndexRange={[100, 0]}
     >
       <div className="intro-screen">
-        {/* Status header */}
         <div className="status-bar">
           <span className="status-text">&gt; SYSTEM ONLINE</span>
           <span className="cursor-blink">_</span>
         </div>
 
-        {/* Profile photo ring */}
         <div className="profile-area">
           <div className="photo-ring">
             <div className="photo-glow" />
@@ -49,7 +39,6 @@ export default function IntroContent() {
               alt="Divyansh Agarwal"
               className="photo"
               onError={(e) => {
-                // Fallback: hide broken image, show initials
                 (e.target as HTMLImageElement).style.display = 'none';
                 const parent = (e.target as HTMLImageElement).parentElement;
                 if (parent) {
@@ -63,7 +52,6 @@ export default function IntroContent() {
           </div>
         </div>
 
-        {/* Name — typewriter animation */}
         <div className="name-area">
           {showName && (
             <h1 className="name-text">
@@ -72,32 +60,28 @@ export default function IntroContent() {
           )}
         </div>
 
-        {/* Role — second typewriter */}
         <div className="role-area">
           {showRole && <p className="role-text">FULL STACK DEVELOPER</p>}
         </div>
 
-        {/* Greeting line */}
         <div className="greeting-area">
           {showRole && <p className="greeting-text">Nice to meet you.</p>}
         </div>
 
-        {/* Footer */}
         {showFooter && (
           <div className="footer-bar">
             <span>&gt; PORTFOLIO_v1.0</span>
           </div>
         )}
 
-        {/* Persistent scanlines */}
         <div className="scanlines-overlay" />
       </div>
 
       <style jsx>{`
         .intro-screen {
           position: relative;
-          width: 900px;
-          height: 540px;
+          width: var(--laptop-screen-width, 280px);
+          height: var(--laptop-screen-height, 175px);
           background: #000;
           color: #00ff88;
           font-family: 'Courier New', Courier, monospace;
@@ -106,45 +90,45 @@ export default function IntroContent() {
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+          text-shadow: 0 0 4px rgba(0, 255, 136, 0.5);
           animation: crt-flicker 4s infinite;
+          border-radius: 4px;
+          transform: translate3d(
+              var(--laptop-screen-offset-x, 0px),
+              var(--laptop-screen-offset-y, 0px),
+              var(--laptop-screen-offset-z, 0px)
+            )
+            scale(var(--laptop-screen-scale, 1));
+          transform-origin: center;
         }
 
-        /* ── Status Bar ── */
         .status-bar {
           position: absolute;
-          top: 20px;
-          left: 24px;
-          font-size: 16px;
-          letter-spacing: 1.5px;
+          top: 8px;
+          left: 10px;
+          font-size: 7px;
+          letter-spacing: 0.5px;
           display: flex;
           align-items: center;
-          gap: 2px;
+          gap: 1px;
           z-index: 2;
           animation: fade-in 0.5s ease-out;
         }
 
-        .status-text {
-          opacity: 0.9;
-        }
+        .cursor-blink { animation: blink 0.85s step-end infinite; }
 
-        .cursor-blink {
-          animation: blink 0.85s step-end infinite;
-        }
-
-        /* ── Profile Photo ── */
         .profile-area {
           z-index: 2;
-          margin-bottom: 20px;
+          margin-bottom: 6px;
           animation: fade-scale-in 0.6s ease-out 0.1s both;
         }
 
         .photo-ring {
           position: relative;
-          width: 140px;
-          height: 140px;
+          width: 45px;
+          height: 45px;
           border-radius: 9999px;
-          border: 2px solid #00ff88;
+          border: 1px solid #00ff88;
           overflow: hidden;
           display: flex;
           align-items: center;
@@ -154,12 +138,10 @@ export default function IntroContent() {
 
         .photo-glow {
           position: absolute;
-          inset: -6px;
+          inset: -3px;
           border-radius: 9999px;
           border: 1px solid rgba(0, 255, 136, 0.3);
-          box-shadow: 0 0 24px rgba(0, 255, 136, 0.35),
-                      0 0 48px rgba(0, 255, 136, 0.15),
-                      inset 0 0 16px rgba(0, 255, 136, 0.1);
+          box-shadow: 0 0 8px rgba(0, 255, 136, 0.35), 0 0 16px rgba(0, 255, 136, 0.15);
           animation: glow-pulse 2.5s ease-in-out infinite;
         }
 
@@ -177,139 +159,85 @@ export default function IntroContent() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 48px;
+          font-size: 16px;
           font-weight: 700;
           color: #00ff88;
           background: linear-gradient(135deg, rgba(0,255,136,0.15), rgba(0,255,136,0.05));
           border-radius: 9999px;
         }
 
-        /* ── Name ── */
-        .name-area {
-          z-index: 2;
-          min-height: 52px;
-        }
+        .name-area { z-index: 2; min-height: 14px; }
 
         .name-text {
-          font-size: 36px;
+          font-size: 12px;
           font-weight: 400;
-          letter-spacing: 1px;
+          letter-spacing: 0.5px;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
           width: 0;
-          border-right: 2px solid #00ff88;
-          animation: type-name 1.2s steps(20, end) forwards,
-                     blink 0.85s step-end infinite;
+          border-right: 1px solid #00ff88;
+          animation: type-name 1.2s steps(20, end) forwards, blink 0.85s step-end infinite;
         }
 
         .name-highlight {
           font-weight: 700;
-          text-shadow: 0 0 12px rgba(0, 255, 136, 0.7);
+          text-shadow: 0 0 6px rgba(0, 255, 136, 0.7);
         }
 
-        /* ── Role ── */
-        .role-area {
-          z-index: 2;
-          min-height: 32px;
-          margin-top: 10px;
-        }
+        .role-area { z-index: 2; min-height: 10px; margin-top: 3px; }
 
         .role-text {
-          font-size: 22px;
-          letter-spacing: 3px;
+          font-size: 7px;
+          letter-spacing: 1.5px;
           opacity: 0.9;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
           width: 0;
-          border-right: 2px solid #00ff88;
-          animation: type-role 1.2s steps(20, end) forwards,
-                     blink 0.85s step-end infinite;
+          border-right: 1px solid #00ff88;
+          animation: type-role 1.2s steps(20, end) forwards, blink 0.85s step-end infinite;
         }
 
-        /* ── Greeting ── */
-        .greeting-area {
-          z-index: 2;
-          min-height: 24px;
-          margin-top: 14px;
-        }
+        .greeting-area { z-index: 2; min-height: 10px; margin-top: 4px; }
 
         .greeting-text {
-          font-size: 18px;
+          font-size: 7px;
           opacity: 0;
           margin: 0;
-          letter-spacing: 1px;
+          letter-spacing: 0.5px;
           color: rgba(0, 255, 136, 0.7);
           animation: fade-in 0.8s ease-out 0.6s forwards;
         }
 
-        /* ── Footer ── */
         .footer-bar {
           position: absolute;
-          right: 24px;
-          bottom: 18px;
-          font-size: 14px;
-          letter-spacing: 1.5px;
+          right: 10px;
+          bottom: 6px;
+          font-size: 6px;
+          letter-spacing: 0.5px;
           z-index: 2;
           opacity: 0.7;
           animation: fade-in 0.5s ease-out;
         }
 
-        /* ── Scanlines (persistent) ── */
         .scanlines-overlay {
           position: absolute;
           inset: 0;
           z-index: 3;
           pointer-events: none;
-          background: repeating-linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.12) 0px,
-            rgba(0, 0, 0, 0.12) 1px,
-            transparent 1px,
-            transparent 3px
-          );
+          background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 3px);
         }
 
-        /* ── Keyframes ── */
-        @keyframes blink {
-          0%, 49% { opacity: 1; }
-          50%, 100% { opacity: 0; }
-        }
-
-        @keyframes type-name {
-          from { width: 0; }
-          to { width: 20ch; }
-        }
-
-        @keyframes type-role {
-          from { width: 0; }
-          to { width: 20ch; }
-        }
-
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes fade-scale-in {
-          from { opacity: 0; transform: scale(0.85); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        @keyframes type-name { from { width: 0; } to { width: 20ch; } }
+        @keyframes type-role { from { width: 0; } to { width: 20ch; } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fade-scale-in { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
         @keyframes glow-pulse {
-          0%, 100% {
-            box-shadow: 0 0 24px rgba(0, 255, 136, 0.35),
-                        0 0 48px rgba(0, 255, 136, 0.15),
-                        inset 0 0 16px rgba(0, 255, 136, 0.1);
-          }
-          50% {
-            box-shadow: 0 0 32px rgba(0, 255, 136, 0.5),
-                        0 0 64px rgba(0, 255, 136, 0.25),
-                        inset 0 0 24px rgba(0, 255, 136, 0.15);
-          }
+          0%, 100% { box-shadow: 0 0 8px rgba(0,255,136,0.35), 0 0 16px rgba(0,255,136,0.15); }
+          50% { box-shadow: 0 0 12px rgba(0,255,136,0.5), 0 0 24px rgba(0,255,136,0.25); }
         }
-
         @keyframes crt-flicker {
           0%, 13%, 14.5%, 41%, 42.5%, 67%, 68.25%, 100% { opacity: 1; }
           13.5%, 42%, 67.5% { opacity: 0.97; }
