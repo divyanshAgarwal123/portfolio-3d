@@ -983,8 +983,11 @@ export default function Scene({}: SceneProps) {
   return (
     <div ref={canvasWrapRef} className="pointer-events-none fixed left-0 top-0 z-0 h-screen w-screen">
       <div
-        className="pointer-events-auto fixed z-50 max-h-[92vh] overflow-y-auto rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm"
+        className="pointer-events-auto fixed z-50 max-h-[92vh] overflow-y-auto overscroll-contain rounded-lg border border-neutral-300 bg-white/95 p-3 text-xs text-neutral-800 shadow-sm"
         style={{ left: controlPanelPos.x, top: controlPanelPos.y }}
+        onWheel={(event) => {
+          event.stopPropagation();
+        }}
       >
         <div
           className="-mx-3 -mt-3 mb-2 cursor-move rounded-t-lg border-b border-neutral-200 bg-neutral-50 px-3 py-2 font-semibold"
