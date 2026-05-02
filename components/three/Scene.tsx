@@ -171,6 +171,168 @@ type RobotControlPanelProps = {
   onChange: (next: RobotTransform) => void;
 };
 
+type LaptopTransformControlPanelProps = {
+  scale: number;
+  onScaleChange: (next: number) => void;
+  position: [number, number, number];
+  onPositionChange: (next: [number, number, number]) => void;
+  rotation: [number, number, number];
+  onRotationChange: (next: [number, number, number]) => void;
+};
+
+function LaptopTransformControlPanel({
+  scale,
+  onScaleChange,
+  position,
+  onPositionChange,
+  rotation,
+  onRotationChange,
+}: LaptopTransformControlPanelProps) {
+  return (
+    <>
+      <p className="mt-2">Scale: {scale.toFixed(3)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={0.01}
+        max={0.2}
+        step={0.001}
+        value={scale}
+        onChange={(event) => onScaleChange(Number(event.target.value))}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={0.01}
+        max={0.2}
+        step={0.001}
+        value={scale}
+        onChange={(event) => onScaleChange(Number(event.target.value))}
+      />
+
+      <p className="mt-2">X: {position[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[0]}
+        onChange={(event) => onPositionChange([Number(event.target.value), position[1], position[2]])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[0]}
+        onChange={(event) => onPositionChange([Number(event.target.value), position[1], position[2]])}
+      />
+
+      <p className="mt-2">Y: {position[1].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[1]}
+        onChange={(event) => onPositionChange([position[0], Number(event.target.value), position[2]])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[1]}
+        onChange={(event) => onPositionChange([position[0], Number(event.target.value), position[2]])}
+      />
+
+      <p className="mt-2">Z: {position[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[2]}
+        onChange={(event) => onPositionChange([position[0], position[1], Number(event.target.value)])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-2}
+        max={2}
+        step={0.01}
+        value={position[2]}
+        onChange={(event) => onPositionChange([position[0], position[1], Number(event.target.value)])}
+      />
+
+      <p className="mt-2">Rot X: {rotation[0].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[0]}
+        onChange={(event) => onRotationChange([Number(event.target.value), rotation[1], rotation[2]])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[0]}
+        onChange={(event) => onRotationChange([Number(event.target.value), rotation[1], rotation[2]])}
+      />
+
+      <p className="mt-2">Rot Y: {rotation[1].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[1]}
+        onChange={(event) => onRotationChange([rotation[0], Number(event.target.value), rotation[2]])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[1]}
+        onChange={(event) => onRotationChange([rotation[0], Number(event.target.value), rotation[2]])}
+      />
+
+      <p className="mt-2">Rot Z: {rotation[2].toFixed(2)}</p>
+      <input
+        className="mt-1 w-20 rounded border border-neutral-300 px-1 py-0.5"
+        type="number"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[2]}
+        onChange={(event) => onRotationChange([rotation[0], rotation[1], Number(event.target.value)])}
+      />
+      <input
+        className="mt-1 w-44"
+        type="range"
+        min={-6.28}
+        max={6.28}
+        step={0.01}
+        value={rotation[2]}
+        onChange={(event) => onRotationChange([rotation[0], rotation[1], Number(event.target.value)])}
+      />
+    </>
+  );
+}
+
 function RobotControlPanel({ label, value, onChange }: RobotControlPanelProps) {
   return (
     <>
@@ -1057,6 +1219,18 @@ export default function Scene({}: SceneProps) {
               step={0.01}
               value={screenOverlayScale}
               onChange={(event) => setScreenOverlayScale(Number(event.target.value))}
+            />
+          </div>
+
+          <div className="mt-4 border-t border-neutral-200 pt-3">
+            <p className="font-semibold">Laptop Transform Precision</p>
+            <LaptopTransformControlPanel
+              scale={laptopScale}
+              onScaleChange={setLaptopScale}
+              position={laptopPosition}
+              onPositionChange={setLaptopPosition}
+              rotation={laptopRotation}
+              onRotationChange={setLaptopRotation}
             />
           </div>
         </div>
