@@ -1,12 +1,11 @@
 'use client';
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import type { ReactNode, RefObject } from 'react';
-import gsap from 'gsap';
+import type { ReactNode } from 'react';
 import * as THREE from 'three';
+import CinematicLighting from './CinematicLighting';
 import LaptopScene from './LaptopScene';
-import { useSceneStore } from '../../store/useSceneStore';
 
 type CameraPOVSyncProps = {
   position: [number, number, number];
@@ -34,19 +33,7 @@ function CameraPOVSync({ position, fov }: CameraPOVSyncProps) {
   return null;
 }
 
-type LightingProps = {
-  ambientRef: RefObject<THREE.AmbientLight>;
-  directionalRef: RefObject<THREE.DirectionalLight>;
-};
-
-function Lighting({ ambientRef, directionalRef }: LightingProps) {
-  return (
-    <>
-      <ambientLight ref={ambientRef} intensity={0} />
-      <directionalLight ref={directionalRef} position={[5, 5, 3]} intensity={0} castShadow />
-    </>
-  );
-}
+// Lighting is now handled by CinematicLighting (dark-to-reveal sequence)
 
 function WireframeFloors() {
   return (
@@ -57,116 +44,6 @@ function WireframeFloors() {
       <gridHelper args={[160, 160, '#d4d4d4', '#e5e5e5']} position={[0, -5.5, -40]} />
     </>
   );
-}
-
-type FlashlightControllerProps = {
-  spotRef: RefObject<THREE.SpotLight>;
-  ambientRef: RefObject<THREE.AmbientLight>;
-  directionalRef: RefObject<THREE.DirectionalLight>;
-};
-
-function FlashlightController({ spotRef, ambientRef, directionalRef }: FlashlightControllerProps) {
-  const phase = useSceneStore((state) => state.phase);
-  const setPhase = useSceneStore((state) => state.setPhase);
-  const { scene } = useThree();
-  const elapsedRef = useRef(0);
-  const frameRef = useRef(0);
-  const revealStartedRef = useRef(false);
-  const revealTweensRef = useRef<gsap.core.Tween[]>([]);
-  const revealDelayRef = useRef<gsap.core.Tween | null>(null);
-
-  useEffect(() => {
-    if (phase !== 'flashlight') return;
-    elapsedRef.current = 0;
-    frameRef.current = 0;
-    revealStartedRef.current = false;
-    if (spotRef.current) {
-      spotRef.current.intensity = 0;
-    }
-  }, [phase, spotRef]);
-
-  useEffect(() => {
-    return () => {
-      revealTweensRef.current.forEach((tween) => tween.kill());
-      revealTweensRef.current = [];
-      revealDelayRef.current?.kill();
-      revealDelayRef.current = null;
-    };
-  }, []);
-
-  useFrame((_, delta) => {
-    if (phase !== 'flashlight') return;
-    if (!spotRef.current) return;
-
-    elapsedRef.current += delta;
-    frameRef.current += 1;
-
-    const time = elapsedRef.current;
-    const frame = frameRef.current;
-
-    if (time < 0.3) {
-      spotRef.current.intensity = 0;
-      return;
-    }
-    if (time < 0.5) {
-      if (frame % 3 === 0) {
-        spotRef.current.intensity = Math.random() > 0.5 ? 0.15 : 0;
-      }
-      return;
-    }
-    if (time < 0.8) {
-      spotRef.current.intensity = 0;
-      return;
-    }
-    if (time < 1.0) {
-      if (frame % 2 === 0) {
-        spotRef.current.intensity = Math.random() > 0.5 ? 0.35 : 0;
-      }
-      return;
-    }
-    if (time < 1.2) {
-      spotRef.current.intensity = 0;
-      return;
-    }
-    if (time < 1.4) {
-      spotRef.current.intensity = Math.random() > 0.5 ? 0.6 : 0;
-      return;
-    }
-
-    if (revealStartedRef.current) return;
-    revealStartedRef.current = true;
-
-    revealTweensRef.current.forEach((tween) => tween.kill());
-    revealTweensRef.current = [];
-
-    if (spotRef.current) {
-      revealTweensRef.current.push(
-        gsap.to(spotRef.current, { intensity: 2.5, duration: 0.8, ease: 'power2.out' }),
-      );
-    }
-    if (ambientRef.current) {
-      revealTweensRef.current.push(
-        gsap.to(ambientRef.current, { intensity: 0.4, duration: 1.2, ease: 'power2.out' }),
-      );
-    }
-    if (directionalRef.current) {
-      revealTweensRef.current.push(
-        gsap.to(directionalRef.current, { intensity: 0.8, duration: 1.2, ease: 'power2.out' }),
-      );
-    }
-    if (scene.fog && 'density' in scene.fog) {
-      revealTweensRef.current.push(
-        gsap.to(scene.fog, { density: 0.05, duration: 1.5, ease: 'power2.out' }),
-      );
-    }
-
-    revealDelayRef.current?.kill();
-    revealDelayRef.current = gsap.delayedCall(1.3, () => {
-      setPhase('revealed');
-    });
-  });
-
-  return null;
 }
 
 type SceneContentProps = {
@@ -237,31 +114,9 @@ function SceneContent({
   cameraFov,
 
 }: SceneContentProps) {
-  const ambientRef = useRef<THREE.AmbientLight>(null);
-  const directionalRef = useRef<THREE.DirectionalLight>(null);
-  const spotRef = useRef<THREE.SpotLight>(null);
-  const spotTargetRef = useRef<THREE.Object3D>(null);
-
-  useEffect(() => {
-    if (!spotRef.current || !spotTargetRef.current) return;
-    spotRef.current.target = spotTargetRef.current;
-  }, []);
-
   return (
     <>
-      <Lighting ambientRef={ambientRef} directionalRef={directionalRef} />
-      <fogExp2 attach="fog" args={['#000000', 0.8]} />
-      <FlashlightController spotRef={spotRef} ambientRef={ambientRef} directionalRef={directionalRef} />
-      <spotLight
-        ref={spotRef}
-        position={[0, 0, 6]}
-        angle={0.35}
-        penumbra={0.4}
-        intensity={0}
-        distance={20}
-        castShadow={false}
-      />
-      <object3D ref={spotTargetRef} position={[0, 0, 0]} />
+      <CinematicLighting />
       <WireframeFloors />
       <LaptopScene
         robotPointingBackwords={robotPointingBackwords}

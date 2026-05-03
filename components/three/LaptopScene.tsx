@@ -4,6 +4,7 @@ import { Sparkles } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { useSceneStore } from '@/store/useSceneStore';
 import BackgroundMaleScene, { type MaleModelIndex } from './BackgroundMaleScene';
 import BackgroundProposalScene, { type FemaleSyncCue } from './BackgroundProposalScene';
 import BackgroundRobotArm from './BackgroundRobotArm';
@@ -91,6 +92,13 @@ function ScrollDrivenLaptop({
     if (typeof window === 'undefined') return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Block all scroll interaction during cinematic sequence
+      const scenePhase = useSceneStore.getState().phase;
+      if (scenePhase !== 'revealed') {
+        e.preventDefault();
+        return;
+      }
+
       const atTop = window.scrollY <= 1;
       const delta = e.deltaY / WHEEL_RANGE;
       const isOpening = !lidPhaseCompleteRef.current;
@@ -346,6 +354,10 @@ export default function LaptopScene({
           nervousLookAroundTransform={backgroundRobotNervousLookAround}
         />
       </Suspense>
+      <mesh position={[0, 0, -1]}>
+        <planeGeometry args={[6, 4]} />
+        <meshStandardMaterial color="#0a0a0a" roughness={1} />
+      </mesh>
       <Sparkles
         count={40}
         scale={4}
