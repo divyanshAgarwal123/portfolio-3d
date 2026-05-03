@@ -20,7 +20,6 @@ const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
-const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
 const RUNNING_SCALE = 0.03;
 const RUNNING_TARGET_Z = 1.08;
@@ -515,10 +514,18 @@ export default function RobotHero({
 
     pointingActionRef.current = action;
     action.enabled = true;
-    action.setLoop(THREE.LoopRepeat, Infinity);
+    action.setLoop(THREE.LoopOnce, 1);
     action.clampWhenFinished = true;
 
+    const onFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
+      if (event.action !== action) return;
+      startRunningTransition();
+    };
+
+    pointingActions.mixer.addEventListener('finished', onFinished);
+
     return () => {
+      pointingActions.mixer.removeEventListener('finished', onFinished);
       action.fadeOut(0.3);
     };
   }, [pointingActions]);
@@ -840,10 +847,6 @@ export default function RobotHero({
       && climbingStartReady
     ) {
       startClimbingSequence();
-    }
-
-    if (!runningSwapStartedRef.current && scrollOffsetRef.current >= RUNNING_SCROLL_THRESHOLD && phase.current === 'pointing') {
-      startRunningTransition();
     }
 
   });
