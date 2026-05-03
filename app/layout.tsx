@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { useEffect } from 'react';
 import gsap from 'gsap';
 import './globals.css';
+import { useSceneStore } from '../store/useSceneStore';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,6 +14,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const phase = useSceneStore((state) => state.phase);
+
   useEffect(() => {
     const lenis = new Lenis({
       prevent: (node) => {
@@ -22,13 +25,10 @@ export default function RootLayout({
       },
     });
 
-    // Start Lenis in a stopped state — lid animation handles scroll first
-    lenis.stop();
+    (window as typeof window & { __lenis?: Lenis }).__lenis = lenis;
 
-    const onLidOpen = () => {
-      lenis.start();
-    };
-    window.addEventListener('laptop-lid-open', onLidOpen);
+    // Start Lenis in a stopped state — reveal sequence enables scrolling
+    lenis.stop();
 
     const tick = (time: number) => {
       lenis.raf(time * 1000);
@@ -37,11 +37,21 @@ export default function RootLayout({
     gsap.ticker.add(tick);
 
     return () => {
-      window.removeEventListener('laptop-lid-open', onLidOpen);
       gsap.ticker.remove(tick);
+      (window as typeof window & { __lenis?: Lenis }).__lenis = undefined;
       lenis.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    const lenis = (window as typeof window & { __lenis?: Lenis }).__lenis;
+    if (!lenis) return;
+    if (phase === 'revealed') {
+      lenis.start();
+    } else {
+      lenis.stop();
+    }
+  }, [phase]);
 
   return (
     <html lang="en">

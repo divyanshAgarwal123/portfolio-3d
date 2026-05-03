@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { RefObject } from 'react';
 import * as THREE from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
+import { useSceneStore } from '../../store/useSceneStore';
 
 const DRACO_DECODER_PATH = '/draco-gltf/';
 const FALLING_MODEL_PATH = '/models/robot_cute_falling.glb';
@@ -23,10 +24,10 @@ const ROBOT_SCALE = 0.03;
 const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
 const RUNNING_SCALE = 0.03;
-const RUNNING_TARGET_Z = 1.08;
+const RUNNING_TARGET_Z = 1.1;
 const CLIMBING_SCROLL_THRESHOLD = 0.60;
 
-type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running' | 'climbing';
+type HeroPhase = 'falling' | 'landed' | 'pointing' | 'runningTransition' | 'running' | 'climbing' | 'exited';
 
 type RobotTransform = {
   position: [number, number, number];
@@ -73,6 +74,7 @@ export default function RobotHero({
   climbingStartReady = true,
 }: RobotHeroProps) {
   const scrollOffsetRef = useRef(0);
+  const setScenePhase = useSceneStore((state) => state.setPhase);
 
   const fallingGltf = useGLTF(FALLING_MODEL_PATH, DRACO_DECODER_PATH);
   const pointingGltf = useGLTF(POINTING_MODEL_PATH, DRACO_DECODER_PATH);
@@ -120,6 +122,7 @@ export default function RobotHero({
   const climbingPhaseStartedRef = useRef(false);
   const manualClimbingStageRef = useRef<-1 | 0 | 1 | 2>(-1);
   const runningTweenRef = useRef<gsap.core.Tween | null>(null);
+  const runningExitTweenRef = useRef<gsap.core.Tween | null>(null);
   const pointingToRunningTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sceneBlendTweenRef = useRef<gsap.core.Tween | null>(null);
   const climbingSequenceCleanupRef = useRef<(() => void) | null>(null);
@@ -127,6 +130,7 @@ export default function RobotHero({
   const fallOpacityRef = useRef(1);
   const pointOpacityRef = useRef(0);
   const runOpacityRef = useRef(0);
+  const hasExitedRef = useRef(false);
 
   const fallingRef = useRef<THREE.Group>(null);
   const pointingRef = useRef<THREE.Group>(null);
@@ -301,6 +305,7 @@ export default function RobotHero({
     if (phase.current !== 'pointing') return;
 
     phase.current = 'running';
+    setScenePhase('walking');
     runningSwapStartedRef.current = true;
     console.debug('[RobotHero] phase -> running (threshold reached)');
 
@@ -481,6 +486,8 @@ export default function RobotHero({
     const action = fallingActions[names[0]];
     if (!action) return;
 
+    setScenePhase('falling');
+
     fallingActionRef.current = action;
     fallClipDurationRef.current = action.getClip().duration;
     action.enabled = true;
@@ -608,6 +615,9 @@ export default function RobotHero({
     climbingPhaseStartedRef.current = false;
     manualClimbingStageRef.current = -1;
     runningTweenRef.current?.kill();
+    runningExitTweenRef.current?.kill();
+    runningExitTweenRef.current = null;
+    hasExitedRef.current = false;
     if (pointingToRunningTimeoutRef.current) {
       clearTimeout(pointingToRunningTimeoutRef.current);
       pointingToRunningTimeoutRef.current = null;
@@ -720,6 +730,8 @@ export default function RobotHero({
   useEffect(() => {
     return () => {
       runningTweenRef.current?.kill();
+      runningExitTweenRef.current?.kill();
+      runningExitTweenRef.current = null;
       if (pointingToRunningTimeoutRef.current) {
         clearTimeout(pointingToRunningTimeoutRef.current);
         pointingToRunningTimeoutRef.current = null;
@@ -842,6 +854,27 @@ export default function RobotHero({
       if (pointOpacityRef.current <= 0.001 && pointingRef.current) {
         pointingRef.current.visible = false;
       }
+    }
+
+    if (
+      !hasExitedRef.current
+      && phase.current === 'running'
+      && runningRef.current
+      && runningRef.current.position.z >= 1.1
+    ) {
+      hasExitedRef.current = true;
+      phase.current = 'exited';
+      setScenePhase('flashlight');
+
+      runningActionRef.current?.fadeOut(0.2);
+      runningTweenRef.current?.kill();
+
+      runningExitTweenRef.current?.kill();
+      runningExitTweenRef.current = gsap.delayedCall(0.2, () => {
+        if (runningRef.current) {
+          runningRef.current.visible = false;
+        }
+      });
     }
 
     // Compute native scroll offset (0-1 range over total scrollable distance)
