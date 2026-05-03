@@ -20,6 +20,7 @@ const LAND_Y = -0.36;
 const ROBOT_X = 0;
 const ROBOT_Z = 0.49;
 const ROBOT_SCALE = 0.03;
+const RUNNING_SCROLL_THRESHOLD = 0.04;
 const RUNNING_START_POSITION: [number, number, number] = [0.004, -0.36, 0.56];
 const RUNNING_SCALE = 0.03;
 const RUNNING_TARGET_Z = 1.08;
@@ -119,6 +120,7 @@ export default function RobotHero({
   const climbingPhaseStartedRef = useRef(false);
   const manualClimbingStageRef = useRef<-1 | 0 | 1 | 2>(-1);
   const runningTweenRef = useRef<gsap.core.Tween | null>(null);
+  const pointingToRunningTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sceneBlendTweenRef = useRef<gsap.core.Tween | null>(null);
   const climbingSequenceCleanupRef = useRef<(() => void) | null>(null);
   const fallClipDurationRef = useRef(0);
@@ -284,6 +286,14 @@ export default function RobotHero({
     switchedRef.current = true;
     phase.current = 'pointing';
     console.debug('[RobotHero] phase -> pointing');
+
+    const pointingDuration = pointingActionRef.current?.getClip().duration ?? 2.2;
+    if (pointingToRunningTimeoutRef.current) {
+      clearTimeout(pointingToRunningTimeoutRef.current);
+    }
+    pointingToRunningTimeoutRef.current = setTimeout(() => {
+      startRunningTransition();
+    }, pointingDuration * 1000);
   };
 
   const startRunningTransition = () => {
@@ -514,18 +524,10 @@ export default function RobotHero({
 
     pointingActionRef.current = action;
     action.enabled = true;
-    action.setLoop(THREE.LoopOnce, 1);
+    action.setLoop(THREE.LoopRepeat, Infinity);
     action.clampWhenFinished = true;
 
-    const onFinished = (event: THREE.Event & { action?: THREE.AnimationAction }) => {
-      if (event.action !== action) return;
-      startRunningTransition();
-    };
-
-    pointingActions.mixer.addEventListener('finished', onFinished);
-
     return () => {
-      pointingActions.mixer.removeEventListener('finished', onFinished);
       action.fadeOut(0.3);
     };
   }, [pointingActions]);
@@ -606,6 +608,10 @@ export default function RobotHero({
     climbingPhaseStartedRef.current = false;
     manualClimbingStageRef.current = -1;
     runningTweenRef.current?.kill();
+    if (pointingToRunningTimeoutRef.current) {
+      clearTimeout(pointingToRunningTimeoutRef.current);
+      pointingToRunningTimeoutRef.current = null;
+    }
     climbingSequenceCleanupRef.current?.();
     stopSceneBlendTween();
     climbingSequenceCleanupRef.current = null;
@@ -714,6 +720,10 @@ export default function RobotHero({
   useEffect(() => {
     return () => {
       runningTweenRef.current?.kill();
+      if (pointingToRunningTimeoutRef.current) {
+        clearTimeout(pointingToRunningTimeoutRef.current);
+        pointingToRunningTimeoutRef.current = null;
+      }
       climbingSequenceCleanupRef.current?.();
       stopSceneBlendTween();
       climbingSequenceCleanupRef.current = null;
