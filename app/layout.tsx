@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import './globals.css';
 import { useSceneStore } from '../store/useSceneStore';
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export default function RootLayout({
   children,
@@ -54,7 +55,7 @@ export default function RootLayout({
   }, [phase]);
 
   return (
-    <html lang="en">
+    <html lang="en" className={cn('font-sans', inter.variable)}>
       <body className={`${inter.className} bg-white`}>{children}</body>
     </html>
   );

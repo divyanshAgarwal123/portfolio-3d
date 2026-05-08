@@ -1236,10 +1236,11 @@ export default function Scene({}: SceneProps) {
         <Canvas
           className="h-screen w-screen"
           style={{ pointerEvents: 'none' }}
+          gl={{ alpha: true }}
           shadows
           camera={{ fov: cameraFov, position: cameraPosition, near: 0.1, far: 100 }}
           onCreated={({ gl }) => {
-            gl.setClearColor('#000000', 1);
+            gl.setClearColor('#000000', 0);
           }}
         >
           <SceneContent

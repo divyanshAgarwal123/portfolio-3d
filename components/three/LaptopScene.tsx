@@ -354,10 +354,6 @@ export default function LaptopScene({
           nervousLookAroundTransform={backgroundRobotNervousLookAround}
         />
       </Suspense>
-      <mesh position={[0, 0, -1]}>
-        <planeGeometry args={[6, 4]} />
-        <meshStandardMaterial color="#0a0a0a" roughness={1} />
-      </mesh>
       <Sparkles
         count={40}
         scale={4}
